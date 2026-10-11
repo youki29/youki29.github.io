@@ -3,18 +3,114 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>StudyLog</title>
-<style>
-  body { font-family: -apple-system, "Hiragino Sans", sans-serif; line-height: 1.8; max-width: 640px; margin: 0 auto; padding: 48px 16px; color: #3A3340; background: #FDF6F9; text-align: center; }
-  h1 { font-size: 32px; margin: 8px 0; } a { color: #8E4462; }
-  @media (prefers-color-scheme: dark) { body { background: #1C1B1F; color: #eee; } a { color: #F7A1C0; } }
-</style>
+<title>youki29 のアプリ</title>
+<meta name="description" content="個人で作っているスマホアプリの一覧です。時間割・課題・勉強タイマーの StudyLog など。">
+<link rel="icon" href="img/studylog/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>StudyLog</h1>
-  <p>時間割・課題・勉強タイマー・テストまでのカウントダウン・復習リマインダーが、これひとつに。</p>
-  <p><a href="https://apps.apple.com/jp/app/id6818524607">App Store でダウンロード</a></p>
-  <p><a href="privacy.html">プライバシーポリシー</a></p>
-  <p>お問い合わせ：youki.kisimoto@gmail.com</p>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./">youki29</a>
+    <nav>
+      <a href="#apps">アプリ</a>
+      <a class="pc" href="#studylog">StudyLog</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap intro">
+    <h1>毎日の勉強に役立つアプリを、<br>ひとりで作っています。</h1>
+    <p class="lead">中学生・高校生・大学生の勉強をラクにするアプリが中心です。どれもアカウント登録なしで使えて、入力したデータはスマホの中だけに保存されます。</p>
+
+    <p class="toc-h" id="apps">アプリへ飛ぶ</p>
+    <!-- アプリを追加するときは、この <li> をコピーして並べます -->
+    <ul class="toc">
+      <li><a href="#studylog" style="--c:#2a8a70"><img src="img/studylog/icon.png" alt=""><span><b>StudyLog</b><small>時間割・勉強記録</small></span></a></li>
+    </ul>
+  </div>
+
+  <!-- いちおしのアプリ -->
+  <section class="hero" id="studylog">
+    <div class="wrap grid">
+      <div>
+        <span class="badge round">いちばん使ってほしいアプリ</span>
+        <div class="name">
+          <img src="img/studylog/icon.png" alt="StudyLog のアイコン">
+          <div>
+            <h2 class="round">StudyLog</h2>
+            <p>時間割・課題・勉強タイマー</p>
+          </div>
+        </div>
+        <ul class="tags">
+          <li class="tag live">App Store で公開中</li>
+          <li class="tag soon">無料</li>
+        </ul>
+        <p class="copy round">今日やることが、<br><em>ひと目でわかる。</em></p>
+        <p class="lead">時間割、課題の締切、勉強時間、テストまでの日数、復習のタイミングを、ひとつのアプリでまとめて管理できます。</p>
+        <ul class="points">
+          <li style="--c:#ffd3e2">ホームに今日の授業・締切が近い課題・テストまでの「あと◯日」</li>
+          <li style="--c:#ffe59a">ポモドーロとストップウォッチで勉強時間を記録、グラフで見える化</li>
+          <li style="--c:#b9e3ff">忘却曲線にあわせて、1日後〜1か月後に復習をお知らせ</li>
+          <li style="--c:#d9c8ff">ホーム画面ウィジェット、6色のテーマとダークモード</li>
+        </ul>
+        <div class="btns">
+          <a class="btn fill" href="https://apps.apple.com/jp/app/id6818524607">App Store で見る</a>
+          <a class="btn ghost" href="studylog.html">使い方とサポート</a>
+        </div>
+      </div>
+      <div class="shots">
+        <img src="img/studylog/1_home.jpg" alt="ホーム画面">
+        <img src="img/studylog/2_timetable.jpg" alt="時間割画面">
+        <img src="img/studylog/4_timer.jpg" alt="勉強タイマー画面">
+      </div>
+    </div>
+  </section>
+
+  <!--
+    ほかのアプリを出したら、ここにカードを並べます。
+  <section class="block">
+    <div class="wrap">
+      <div class="sec-h"><h2>そのほかのアプリ</h2></div>
+      <div class="cards">
+        <article class="card" id="appname" style="--c:#色">
+          <div class="pic"><img src="img/appname/1.jpg" alt=""></div>
+          <div class="body">
+            <div class="t"><img src="img/appname/icon.png" alt=""><div><h3>アプリ名</h3><p class="k">ひとこと</p></div></div>
+            <ul class="tags"><li class="tag live">App Store で公開中</li></ul>
+            <p class="d">説明文</p>
+          </div>
+          <div class="acts"><a class="btn fill" href="#">App Store で見る</a><a class="btn line" href="#">サポート</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+  -->
+
+  <section class="block" id="contact">
+    <div class="wrap">
+      <div class="sec-h">
+        <h2>お問い合わせ</h2>
+        <p>アプリの不具合やご要望は、メールでお気軽にどうぞ。</p>
+      </div>
+      <a class="btn" style="border:1.5px solid var(--line);color:var(--ink)" href="mailto:youki.kisimoto@gmail.com">youki.kisimoto@gmail.com</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 youki29</span>
+    <nav>
+      <a href="studylog.html">StudyLog</a>
+      <a href="privacy.html">プライバシーポリシー</a>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
