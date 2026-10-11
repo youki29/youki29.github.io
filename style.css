@@ -176,3 +176,16 @@ footer.site a { color: var(--sub); }
 
 /* アプリ名は途中で折り返さない */
 .toc b, .hero .name h1, .hero .name h2, .card h3, .logo { overflow-wrap: normal; word-break: keep-all; }
+
+/* カードが1枚だけのとき（横長） */
+.cards.one { grid-template-columns: 1fr; max-width: 720px; }
+.cards.one .card { display: grid; grid-template-columns: 220px 1fr; grid-template-rows: 1fr auto; }
+.cards.one .pic { grid-row: 1 / 3; aspect-ratio: auto; height: 100%; min-height: 320px; }
+.cards.one .acts { grid-column: 2; flex-direction: row; flex-wrap: wrap; }
+.cards.one .acts .btn { width: auto; flex: 1 1 180px; }
+@media (max-width: 560px) {
+  .cards.one .card { grid-template-columns: 112px 1fr; grid-template-rows: auto; }
+  .cards.one .pic { grid-row: auto; min-height: 200px; }
+  .cards.one .acts { grid-column: 1 / -1; flex-direction: column; }
+  .cards.one .acts .btn { width: 100%; flex: none; }
+}
