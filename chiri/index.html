@@ -1,0 +1,428 @@
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>地理総合 2学期中間考査</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=BIZ+UDPMincho:wght@400;700&family=Klee+One:wght@600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: 1枚の答案用紙を大問ごとの「用紙」に分け、上に固定の採点バー。赤ペンで丸つけ */
+:root{
+  --bg:#e8edf0;
+  --paper:#ffffff;
+  --plate:#ffffff;      /* スキャン図版の台紙 */
+  --ink:#1b2a33;
+  --muted:#5f707a;
+  --line:#cfd8dd;
+  --soft:#f1f5f7;
+  --accent:#24597a;     /* 選択肢の青 */
+  --accent-soft:#dde9f0;
+  --red:#d2352a;        /* 赤ペン */
+  --red-soft:#fbe3e0;
+  --ok-soft:#e1f0e6;
+  --f-q:"BIZ UDPMincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-ui:"BIZ UDPGothic","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-pen:"Klee One","Hiragino Maru Gothic ProN",cursive;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11191e;--paper:#1a252c;--plate:#e6eaec;--ink:#e4ecf0;--muted:#97a8b1;--line:#30414b;--soft:#22313a;
+  --accent:#8cc0de;--accent-soft:#213a4a;--red:#ff7a6c;--red-soft:#43231f;--ok-soft:#1f3a2a;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11191e;--paper:#1a252c;--plate:#e6eaec;--ink:#e4ecf0;--muted:#97a8b1;--line:#30414b;--soft:#22313a;
+  --accent:#8cc0de;--accent-soft:#213a4a;--red:#ff7a6c;--red-soft:#43231f;--ok-soft:#1f3a2a;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.8;
+  padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px));padding-block:0 80px}
+@media (min-width:600px){body{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+.wrap{max-width:860px;margin:0 auto}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* Bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar .t{font-weight:700;font-size:14px;margin-right:auto;min-width:0}
+.bar .t small{display:block;font-family:var(--f-mono);font-size:11px;color:var(--muted);font-weight:500}
+.btn{border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:7px 14px;font-weight:700;font-size:13px}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.idx{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;width:100%}
+.idx::-webkit-scrollbar{display:none}
+.idx a{flex:none;width:32px;height:30px;display:grid;place-items:center;border:1px solid var(--line);border-radius:6px;
+  background:var(--paper);color:var(--ink);text-decoration:none;font-family:var(--f-mono);font-size:12px}
+.idx a.done{border-color:var(--accent);color:var(--accent)}
+
+/* Cover */
+.cover{background:var(--paper);border-radius:12px;margin-top:20px;padding:24px clamp(16px,4vw,32px);display:grid;gap:10px}
+.cover h1{margin:0;font-family:var(--f-q);font-size:clamp(24px,5vw,34px);line-height:1.3;text-wrap:balance}
+.cover .meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+.cover p{margin:0;font-size:14px;color:var(--muted);max-width:62ch}
+.score{display:none;align-items:baseline;gap:10px;font-family:var(--f-pen);color:var(--red)}
+body.graded .score{display:flex}
+.score .n{font-size:56px;line-height:1}
+.score .d{font-size:20px}
+
+/* Question sheet */
+.sheet{background:var(--paper);border-radius:12px;margin-top:18px;padding:22px clamp(14px,4vw,32px);scroll-margin-top:110px}
+.sh{display:flex;gap:12px;align-items:flex-start}
+.no{flex:none;border:1.5px solid var(--ink);width:34px;height:34px;display:grid;place-items:center;font-family:var(--f-mono);font-size:17px;margin-top:2px}
+.lead{font-family:var(--f-q);font-size:16px;margin:0;min-width:0}
+.pts{display:inline-block;font-family:var(--f-ui);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 6px;margin-left:4px;white-space:nowrap}
+.body{display:grid;gap:18px;margin-top:16px}
+.qtext{font-family:var(--f-q);font-size:15.5px;margin:0}
+.stmts{list-style:none;margin:6px 0 0;padding:10px 14px;background:var(--soft);border-radius:8px;font-family:var(--f-q);font-size:15px;display:grid;gap:4px}
+.stmts li{display:flex;gap:8px}
+.stmts li b{font-family:var(--f-mono);font-weight:500;color:var(--muted);flex:none;width:2.6em}
+
+/* Figures */
+.figs{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end}
+figure{margin:0;background:var(--plate);border:1px solid var(--line);border-radius:6px;padding:6px;max-width:100%}
+figure img{display:block;height:auto;max-width:100%}
+figcaption{font-size:12px;color:#55636b;text-align:center;font-family:var(--f-ui)}
+.fig-l img{width:560px}.fig-m img{width:380px}.fig-s img{width:220px}.fig-xs img{width:150px}
+
+/* Tables */
+.tw{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;font-size:14px;font-family:var(--f-q)}
+th,td{border:1px solid var(--line);padding:4px 10px;text-align:center;white-space:nowrap}
+th{background:var(--soft);font-family:var(--f-ui);font-weight:700}
+.tf td{font-family:var(--f-ui);min-width:34px}
+.tf td.o{color:var(--accent);font-weight:700}
+
+/* Parts / answers */
+.part{display:grid;gap:8px;padding-top:14px;border-top:1px dashed var(--line);position:relative}
+.part .lab{font-family:var(--f-q);font-size:15.5px;min-width:0}
+.part .lab b{font-family:var(--f-ui);color:var(--accent);margin-right:6px}
+.opts{display:flex;flex-wrap:wrap;gap:6px}
+.opts button{border:1px solid var(--line);background:var(--paper);border-radius:8px;min-width:42px;padding:5px 12px;font-size:14.5px;text-align:left}
+.opts button:hover{border-color:var(--accent)}
+.opts button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper);font-weight:700}
+.opts.col{flex-direction:column;align-items:stretch}
+.inp{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.inp input{font:inherit;font-size:16px;border:1px solid var(--line);border-bottom:2px solid var(--ink);background:var(--paper);color:var(--ink);
+  padding:4px 10px;border-radius:6px 6px 0 0;width:min(240px,100%)}
+.inp span{font-family:var(--f-q)}
+.mark{position:absolute;right:0;top:4px;font-family:var(--f-pen);color:var(--red);font-size:40px;line-height:1;display:none;pointer-events:none}
+body.graded .mark,body.reveal .mark{display:block}
+body.reveal:not(.graded) .mark{display:none}
+.key{display:none;font-size:13.5px;background:var(--red-soft);border-radius:8px;padding:8px 12px;max-width:66ch}
+.key .c{font-family:var(--f-pen);color:var(--red);font-size:18px;margin-right:8px}
+body.graded .key,body.reveal .key{display:block}
+.part.right .key{background:var(--ok-soft)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.grid2>*{min-width:0}
+
+/* Q10 diagram */
+.dg{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;font-size:13.5px}
+.dg .box{border:1px solid var(--ink);padding:8px 10px;border-radius:2px;background:var(--paper)}
+.dg .box h4{margin:0 0 4px;font-size:12.5px;font-weight:700}
+.dg .row{display:flex;gap:6px;align-items:center;padding:2px 0}
+.dg .k{border:1px solid var(--ink);width:24px;height:22px;display:grid;place-items:center;font-family:var(--f-mono);flex:none}
+.dg svg text{fill:var(--ink);font-family:var(--f-mono);font-size:13px}
+.dg svg .ln{stroke:var(--ink);fill:none;stroke-width:1.2}
+.dg svg .bx{fill:var(--paper);stroke:var(--ink)}
+
+/* Q4 chart */
+.chart{width:100%;max-width:440px}
+.chart text{fill:var(--ink);font-family:var(--f-ui);font-size:12px}
+.chart .ax{fill:var(--muted);font-size:10px;font-family:var(--f-mono)}
+.chart .sA{fill:#9aa6ad}.chart .sI{fill:var(--paper);stroke:var(--ink)}.chart .sU{fill:var(--paper);stroke:var(--ink)}.chart .sW{fill:var(--paper);stroke:var(--ink)}
+.chart .gl{stroke:var(--line)}
+
+footer{margin-top:28px;font-size:12px;color:var(--muted);text-align:center}
+@media (max-width:480px){
+  .mark{font-size:32px}.lead{font-size:15px}
+  .bar{gap:6px;padding-block:8px}
+  .bar .t{font-size:13px;flex:1 1 auto}
+  .btn{padding:6px 9px;font-size:12px}
+  .idx a{width:30px;height:28px}
+  .sheet{scroll-margin-top:96px}
+  .opts button{min-width:44px;min-height:40px}
+  .figs figure{flex:1 1 40%}
+  .figs figure img{width:100%}
+}
+</style>
+
+<div class="wrap">
+  <div class="bar">
+    <div class="t">地理総合 中間考査<small id="prog">回答 0 / 0</small></div>
+    <button class="btn" id="b-reset">リセット</button>
+    <button class="btn" id="b-key" aria-pressed="false">解答を見る</button>
+    <button class="btn primary" id="b-grade">採点する</button>
+    <nav class="idx" id="idx" aria-label="大問へ移動"></nav>
+  </div>
+
+  <div class="cover">
+    <div class="meta"><span>地理総合 2025</span><span>2学期中間考査</span><span>1年</span><span>100点満点</span></div>
+    <h1>人種・民族・宗教・言語と世界の地域</h1>
+    <p>選択問題はボタンを押し、記述問題は入力欄に書き込みます。最後に「採点する」を押すと赤ペンで丸つけされ、正解と解説が表示されます。入力した答えはこのブラウザに保存されます。</p>
+    <div class="score"><span class="n" id="sc">0</span><span class="d">/ 100点</span><span class="d" id="sc2"></span></div>
+  </div>
+
+  <main id="main"></main>
+  <footer>問題は試験用紙をもとに再構成しています。図版は元の用紙から切り出したものです。</footer>
+</div>
+
+<script>
+/* ---------- helpers ---------- */
+const TF8=[["○","○","○"],["○","○","×"],["○","×","○"],["×","○","○"],["○","×","×"],["×","○","×"],["×","×","○"],["×","×","×"]];
+const tf8Table=()=>`<div class="tw"><table class="tf"><tr><th></th>${TF8.map((_,i)=>`<th>${i+1}</th>`).join("")}</tr>${["i","ii","iii"].map((r,ri)=>`<tr><th>${r}</th>${TF8.map(c=>`<td class="${c[ri]==="○"?"o":""}">${c[ri]}</td>`).join("")}</tr>`).join("")}</table></div>`;
+const stm=(arr,marks)=>`<ul class="stmts">${arr.map((s,i)=>`<li><b>${(marks||["i)","ii)","iii)"])[i]}</b><span>${s}</span></li>`).join("")}</ul>`;
+const fig=(src,cls,cap)=>`<figure class="${cls}"><img src="img/${src}.jpg" alt="${cap||""}" loading="lazy">${cap?`<figcaption>${cap}</figcaption>`:""}</figure>`;
+const nums=n=>Array.from({length:n},(_,i)=>String(i+1));
+const kana=s=>s.split("");
+/* part: {id,lab,type:'c'|'t',opts,ans,acc,suf,pts,note,col} */
+const C=(id,lab,opts,ans,pts,note,col)=>({id,lab,type:"c",opts,ans,pts,note,col});
+const T=(id,lab,acc,pts,note,suf)=>({id,lab,type:"t",acc:[].concat(acc),pts,note,suf});
+const TF=(id,lab,stmts,ans,note)=>C(id,`${lab}${stm(stmts)}`,nums(8),String(ans),2,note);
+
+/* ---------- questions ---------- */
+const Q=[
+{no:1,lead:"次の地図の A〜D の地域の人種について次の設問に答えよ。",
+ body:fig("q1-world","fig-m"),
+ parts:[
+  {html:`<p class="qtext">① 15世紀以前 A〜D の地域に分布していた人種を、学術名「<u>〜イド</u>」で答えよ。<span class="pts">知識×1点</span></p>`},
+  T("1a","A",["オーストラロイド"],1,"オーストラリアの先住民（アボリジニ）。","イド"),
+  T("1b","B",["ネグロイド"],1,"アフリカ中南部。","イド"),
+  T("1c","C",["コーカソイド"],1,"ヨーロッパ。","イド"),
+  T("1d","D",["モンゴロイド"],1,"東アジア。","イド"),
+  {html:`<p class="qtext">② 15世紀以前と今日の地球上の分布と比べたとき、その間の分布の変化について述べた次の i)〜iii) の文章の正誤について正しい組み合わせのものを表の 1〜8 の中から1つ選べ。<span class="pts">思考×2点</span></p>`+tf8Table()},
+  TF("1e","",["A の分布域が主に南北アメリカ大陸で拡大した。","C の分布域が主に南北アメリカ大陸で拡大した。","B の分布域が主にヨーロッパ地域で縮小した。"],6,"i ×・ii ○・iii ×。南北アメリカに広がったのは C（移民）と B（奴隷貿易）。B はもともとヨーロッパにいない。")
+ ]},
+{no:2,lead:"今から1万年前までには、Homo sapiens は一部の地域を除く地球のほぼ全域に広がっていたと考えられる。これについての設問に答えよ。",
+ parts:[
+  {html:`<p class="qtext">① Homo sapiens の拡散について述べた次の i)〜iii) の文章の正誤について正しい組み合わせのものを下の表の 1〜8 の中から1つ選べ。<span class="pts">思考×2点</span></p>`+tf8Table()},
+  TF("2a","",["Homo sapiens の起源はアフリカ大陸中部であると考えられている。","ユーラシア大陸に進出した Homo sapiens の中で、ヨーロッパ系人種となっていく集団は、カスピ海と黒海の間の地域に起源を持つとされている。","アジア系人種が北アメリカ大陸に進出することができたのは、氷期による海面低下にともなってユーラシア大陸と北アメリカ大陸が陸続きであったためである。"],1,"すべて ○。起源は厳密には東アフリカだが、この問題では ○ 扱い。"),
+  T("2b",`② ヨーロッパ系人種の学術名〜イドの語源となった山脈は、<u>現地語</u>で何山脈と呼ばれるか。<span class="pts">知識×1点</span>`,["カフカス"],1,"英語読みはコーカサス（コーカソイドの語源）。黒海とカスピ海の間。","山脈"),
+  T("2c",`③ 現在ユーラシア大陸と北アメリカ大陸との間にある海峡名を答えよ。<span class="pts">知識×1点</span>`,["ベーリング"],1,"氷期は陸続き（ベーリンジア）だった。","海峡")
+ ]},
+{no:3,lead:"ヨーロッパの3つの民族と3つの宗教宗派についての次の表についての問いに答えよ。",
+ body:`<div class="grid2">${fig("q3-europe","fig-m")}<div class="tw"><table><tr><th></th><th>プロテスタント</th><th>カトリック</th><th>正教会</th></tr><tr><th>ゲルマン</th><td>A</td><td>D</td><td>G</td></tr><tr><th>ラテン</th><td>B</td><td>E</td><td>H</td></tr><tr><th>スラブ</th><td>C</td><td>F</td><td>I</td></tr></table></div></div>`,
+ parts:[
+  {html:`<p class="qtext">① 地図中 <b>あ〜か</b> の国の多数派の民族と宗派の組み合わせを上の表の A〜I の中から選べ。<span class="pts">知識×1点</span></p>`},
+  ...[["あ","A","ノルウェー・スウェーデン：ゲルマン×プロテスタント。"],["い","I","ロシア：スラブ×正教会。"],["う","F","ポーランド：スラブ×カトリック。"],["え","H","ルーマニア：ラテン×正教会。ラテン系なのに正教の例外。"],["お","D","オーストリア：ゲルマン×カトリック。"],["か","E","スペイン：ラテン×カトリック。"]]
+    .map(([k,a,n])=>C("3"+k,k,kana("ABCDEFGHI"),a,1,n)),
+  {html:`<p class="qtext">② 上の表に関する次の質問に答えよ。<span class="pts">思考×1点</span></p>`},
+  C("3x","i) それぞれの民族で最も多い組み合わせを下のア)〜キ)から一つ選べ",["ア) AEH","イ) AEI","ウ) BDH","エ) BCG","オ) BFI","カ) CEG","キ) CDG"],"イ) AEI",1,"ゲルマン→プロテスタント(A)、ラテン→カトリック(E)、スラブ→正教(I)。"),
+  C("3y","ii) ほぼあり得ない組み合わせを下のア)〜キ)から一つ選べ",["ア) AEH","イ) AEI","ウ) BDH","エ) BCG","オ) BFI","カ) CEG","キ) CDG"],"エ) BCG",1,"ラテンのプロテスタント、スラブのプロテスタント、ゲルマンの正教。")
+ ]},
+{no:4,lead:"次のグラフは地図中のいずれかの国で信仰されている宗教について、宗教別の人口の割合を示したものである。グラフ中のア〜ウはイスラーム・ヒンドゥー・仏教のいずれかであり、下の写真(イラスト)のア〜ウはそれらの宗教に関するものである。①〜③に該当する国名の組み合わせとして正しいものを下の表の A〜F の中から1つ選べ。",pts:"思考×2点",
+ body:`<div class="grid2">${fig("q4-map","fig-s")}<div id="chart"></div></div>
+  <div class="figs">${fig("q4-a","fig-s","ア")}${fig("q4-i","fig-xs","イ")}${fig("q4-u","fig-s","ウ")}</div>
+  <div class="tw"><table><tr><th></th><th>①</th><th>②</th><th>③</th></tr>${[["A","インド","バングラデシュ","スリランカ"],["B","インド","スリランカ","バングラデシュ"],["C","バングラデシュ","インド","スリランカ"],["D","バングラデシュ","スリランカ","インド"],["E","スリランカ","インド","バングラデシュ"],["F","スリランカ","バングラデシュ","インド"]].map(r=>`<tr><th>${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join("")}</table></div>`,
+ parts:[C("4a","①〜③の国名の組み合わせ",kana("ABCDEF"),"F",2,"パキスタンがほぼイ一色なので イ＝イスラーム。ア＝ヒンドゥー（ガンジス川の沐浴）、ウ＝仏教（托鉢）。① 仏教7割＝スリランカ、② イスラーム9割＝バングラデシュ、③ ヒンドゥー8割＝インド。")]},
+{no:5,lead:"次の写真(イラスト)はいずれかの宗教(宗派)の聖地(重要都市)である。それぞれの<u>都市名</u>を答えよ。",pts:"知識×1点",
+ body:`<div class="figs">${fig("q5-1","fig-s","①")}${fig("q5-2","fig-xs","②")}${fig("q5-3","fig-s","③")}</div>`,
+ parts:[T("5a","①",["メッカ","マッカ"],1,"カーバ神殿。イスラーム最大の聖地。"),T("5b","②",["エルサレム"],1,"嘆きの壁。ユダヤ教の聖地。"),T("5c","③",["ローマ","バチカン"],1,"サン・ピエトロ大聖堂（バチカン市国）。カトリックの総本山。")]},
+{no:6,lead:"次の写真(イラスト)①〜③の宗教施設は下の選択肢ア〜オのうちいずれのものか。ア〜オの記号で答えよ。",pts:"知識×1点",
+ body:`<div class="figs">${fig("q6-1","fig-s","①")}${fig("q6-2","fig-s","②")}${fig("q6-3","fig-s","③")}</div>`,
+ parts:[["①","エ) ギリシャ正教","エーゲ海の島に多い白い教会。"],["②","ウ) ロシア正教","モスクワの聖ワシリイ大聖堂。"],["③","ア) イスラーム","イスタンブールのブルーモスク。"]]
+  .map(([l,a,n],i)=>C("6"+i,l,["ア) イスラーム","イ) カトリック","ウ) ロシア正教","エ) ギリシャ正教","オ) プロテスタント"],a,1,n))},
+{no:7,lead:"地図1・2、人物1・2について次の設問に答えよ。",pts:"知識×1点",
+ body:`<div class="figs">${fig("q7-map1","fig-m","地図1")}${fig("q7-map2","fig-s","地図2")}${fig("q7-p1","fig-s","人物1：Usain Bolt")}${fig("q7-p2","fig-xs","人物2：Zinedine Zidane")}</div>`,
+ parts:[
+  C("7a","(1) 1492年コロンブスが上陸した地点を地図1の 1〜4 の中から1つ選べ。",nums(4),"3",1,"バハマのサンサルバドル島。"),
+  C("7b","(2) アングロアメリカとラテンアメリカの境界となる国境は地図1のア〜エのうちどれか。",kana("アイウエ"),"イ",1,"アメリカとメキシコの国境。"),
+  T("7c","(3) アングロアメリカに含まれる国は全部で何か国あるか。数字で答えよ。",["2","2か国","二"],1,"アメリカとカナダ。","か国"),
+  {html:`<p class="qtext">(4) 人物1は地図1の X(ジャマイカ)の人である。彼の祖先は ①(　　) 大陸に居住していたが奴隷貿易によって X の地域に連行され、X でサトウキビもしくは ②(　　) のプランテーションで奴隷とされていた。アメリカ合衆国の黒人の祖先はアメリカ合衆国南部で ③(　　) のプランテーションで奴隷とされていた。</p>`},
+  T("7d","①",["アフリカ"],1,"","大陸"),
+  T("7e","②",["コーヒー"],1,"ジャマイカのブルーマウンテン。"),
+  T("7f","③",["綿花","めんか","ワタ","綿"],1,"アメリカ南部はコットンベルト。"),
+  T("7g","(5) 人物2の両親は地図2のアフリカの国 Y からの移民である。人物2の人種は(　　)イドである。",["コーカソイド"],1,"Y＝アルジェリア。北アフリカのアラブ系・ベルベル系はコーカソイド。","イド")
+ ]},
+{no:8,lead:"次の設問に答えよ。",pts:"知識×1点",
+ body:fig("q8-piper","fig-xs"),
+ parts:[
+  T("8a","① 右のイラストの人物の民族言語はケルト(ゲール)語であり、この国では少数民族となっている。この地域は国からの分離独立運動が盛んである。この民族の住む地域名を答えよ。",["スコットランド"],1,"バグパイプとキルト。"),
+  T("8b","② スペイン語とはマドリードを中心とした地域の言語のカスティーリャ語のことであり、スペイン全土の言語ではない。スペインでもバルセロナを中心とした地域では A 語が話されており、この国の中では少数民族となっている。A の地域(言語)名を答えよ。",["カタルーニャ","カタロニア"],1,"","語"),
+  T("8c","③ スイスは23%がフランス語、8%がイタリア語を使用しているが、63%が使用している言語は(　　)語である。(　)に国名を入れよ。",["ドイツ"],1,"","語"),
+  T("8d","④ 母国語人口で多い順に言語を並べると、中国語→スペイン語→英語 に次ぐ言語は(　　)語である。(　)に地域名を入れよ。",["アラビア","アラブ"],1,"","語"),
+  T("8e","⑤ カナダには英語以外に(　　)語も公用語である。(　)に国名を入れよ。",["フランス"],1,"ケベック州が中心。","語"),
+  T("8f","⑥ イラン人の言語は何語と呼ばれるか。イラン語以外で答えよ。",["ペルシャ","ペルシア"],1,"アラビア語ではない。","語"),
+  T("8g","⑦ ユダヤ人独自の言語は何語と呼ばれるか。ユダヤ語以外で答えよ。",["ヘブライ","ヘブル"],1,"","語"),
+  T("8h","⑧ ベルギーの南部はフランス語圏、北部は何語圏か。",["オランダ","フラマン"],1,"フラマン語（オランダ語の一種）。","語圏")
+ ]},
+{no:9,lead:"地図中の A〜K の都市についての次の文の正誤について下の 1〜8 の組み合わせの中から正しいものを選び数字で答えよ。",pts:"思考×2点",
+ body:fig("q9-map","fig-l")+tf8Table(),
+ parts:[
+  TF("9a","①",["嘆きの壁があるのは F","サンピエトロ大聖堂があるのは E","シーア派の聖地コムは C"],8,"すべて ×。嘆きの壁はエルサレム＝E、コムはイランの B。"),
+  TF("9b","②",["聖墳墓教会があるのは I","カーバ神殿があるのは D","東ローマ帝国の都コンスタンティノープルは G"],4,"i ×（聖墳墓教会もエルサレム＝E）、ii ○、iii ○。")
+ ]},
+{no:10,lead:"下の図表に示した A〜H はそれぞれの宗教の宗派を示し、I X Y Z は宗教名を示している。これについて次の文章の正誤の組み合わせとして正しいものを正誤表の 1〜8 の中から選び数字で答えよ。",pts:"思考×2点",
+ body:`<div class="dg">
+  <div class="box"><h4>キリスト教3つの宗派</h4><svg width="190" height="112" viewBox="0 0 190 112" role="img" aria-label="A と B に分かれ、B から C が分かれる図">
+    <path class="ln" d="M4 56H30M30 22V56M30 22H60M30 56H60M84 22H186M84 56H186M72 66V92H118M142 92H186"/>
+    <path class="ln" d="M180 17l6 5-6 5M180 51l6 5-6 5M180 87l6 5-6 5"/>
+    <rect class="bx" x="60" y="10" width="24" height="24"/><text x="72" y="27" text-anchor="middle">A</text>
+    <rect class="bx" x="60" y="44" width="24" height="24"/><text x="72" y="61" text-anchor="middle">B</text>
+    <rect class="bx" x="118" y="80" width="24" height="24"/><text x="130" y="97" text-anchor="middle">C</text></svg></div>
+  <div class="box"><h4>イスラーム</h4><div class="row"><span class="k">D</span>イランのムスリム</div><div class="row"><span class="k">E</span>東南アジアのムスリム</div></div>
+  <div class="box"><h4>仏教</h4><div class="row"><span class="k">F</span>ミャンマーの仏教</div><div class="row"><span class="k">G</span>ベトナムの仏教</div><div class="row"><span class="k">H</span>モンゴルの仏教</div></div>
+  <div class="box"><h4>インドの民族宗教</h4><div class="row"><span class="k">I</span></div></div>
+  <div class="box"><h4>一神教の3つの宗教</h4><svg width="150" height="86" viewBox="0 0 150 86" role="img" aria-label="X から Y と Z が分かれる図">
+    <path class="ln" d="M38 43H56M56 20V66M56 20H84M56 66H84M108 20H146M108 66H146M140 15l6 5-6 5M140 61l6 5-6 5"/>
+    <rect class="bx" x="12" y="31" width="26" height="24"/><text x="25" y="48" text-anchor="middle">X</text>
+    <rect class="bx" x="84" y="8" width="24" height="24"/><text x="96" y="25" text-anchor="middle">Y</text>
+    <rect class="bx" x="84" y="54" width="24" height="24"/><text x="96" y="71" text-anchor="middle">Z</text></svg></div>
+ </div>`+tf8Table(),
+ parts:[
+  TF("10a","①",["ABC のうち信者数が一番多いのは B である。","ABC のうち信者数が一番少ないのは C である。","ラテンアメリカで信者数が多いのは A である。"],5,"A＝正教、B＝カトリック、C＝プロテスタント。信者が一番少ないのは正教(A)。ラテンアメリカはカトリック(B)。"),
+  TF("10b","②",["A は西ローマ帝国の宗教として始まった。","B は東ローマ帝国の宗教として始まった。","C はローマを中心とした地域に広まった。"],8,"正教は東ローマ、カトリックは西ローマ。プロテスタントはローマ中心ではない。"),
+  TF("10c","③",["聖像崇拝を認めているのは B である。","イコンを認めているのは C である。","教会に牧師がいるのは B である。"],5,"イコンは正教。「牧師」はプロテスタントで、カトリックは「神父」。"),
+  TF("10d","④",["フィリピンの多数派は B 信者である。","ミンダナオ島の多数派は Y 教徒である。","スリランカの多数派は F 教徒である。"],3,"Y＝キリスト教。ミンダナオ島はイスラーム教徒が多い地域として出題。スリランカは上座部仏教(F)。"),
+  TF("10e","⑤",["豚肉を食べてはならないのは I である。","アルコールが禁止されているのは Z である。","ラマダンは X の信者が行う。"],6,"I＝ヒンドゥー教（牛を食べない）、Z＝イスラーム、X＝ユダヤ教。"),
+  TF("10f","⑥",["DE のうち多数派は E である。","D はスンニ派と呼ばれる。","E はシーア派と呼ばれる。"],5,"D（イラン）＝シーア派、E（東南アジア）＝スンナ派。多数派はスンナ派。"),
+  TF("10g","⑦",["僧侶が生きとし生けるものを救済するのは F である。","各個人が修行によって解脱を目指すのは G である。","ポタラ宮を聖地とするのは H である。"],7,"みんなを救うのは大乗(G)、個人の修行は上座部(F)。ポタラ宮はチベット仏教(H)。")
+ ]},
+{no:11,lead:"次の地図に関する設問に答えよ。",pts:"主体×1点",
+ body:fig("q11-map","fig-l")+`<div class="tw"><table class="tf"><tr><th></th><th>あ</th><th>い</th><th>う</th><th>え</th></tr><tr><th>i</th><td class="o">○</td><td class="o">○</td><td>×</td><td>×</td></tr><tr><th>ii</th><td class="o">○</td><td>×</td><td class="o">○</td><td>×</td></tr></table></div>`,
+ parts:[
+  {html:`<p class="qtext">問1. (1)〜(10) の i)・ii) の内容について正誤の組み合わせを上の表の あ〜え のうちから1つ選べ。</p>`},
+  ...[["(1)","a は東経30度線","b は東経60度線","え","a＝東経60度、b＝東経90度。"],
+    ["(2)","① はユーフラテス川","② はユーフラテス川","い","西側の①がユーフラテス川、東側の②がティグリス川。"],
+    ["(3)","流域にモヘンジョ・ダロの遺跡があるのは ③","流域にヒンドゥー教の聖地があるのは ④","あ","③インダス川、④ガンジス川（ヴァラナシ）。"],
+    ["(4)","トルコは A","イランは B","い","B はイラク。イランは D。"],
+    ["(5)","サウジアラビアは C","イラクは D","い","D はイラン。"],
+    ["(6)","アフガニスタンは G","カザフスタンは F","い","カザフスタンは E。"],
+    ["(7)","メッカは ◉6","エルサレムは ◉9","え","⑥リヤド、⑦メッカ、⑧エルサレム、⑨カイロ。"],
+    ["(8)","イスタンブールは ◉10","バグダッドは ◉4","い","④テヘラン、⑤バグダッド。"],
+    ["(9)","デリーは ◉1","ムンバイは ◉2","あ","両方 ○。"],
+    ["(10)","ドバイは ◉6","テヘランは ◉5","え","ドバイは③、テヘランは④。"]]
+   .map(([l,a,b,ans,n],i)=>C("11"+i,`${l}${stm([a,b],["i)","ii)"])}`,kana("あいうえ"),ans,1,n)),
+  {html:`<p class="qtext">問2. 地図中の い〜へ の地名を答えよ。(　)内のカタカナによる地名のみを記入すること。</p>`},
+  T("11k","い(　　)高原",["アナトリア"],1,"トルコ。","高原"),
+  T("11l","ろ(　　)高原",["デカン"],1,"インド。綿花栽培、レグール土。","高原"),
+  T("11m","は(　　)山脈",["カフカス","コーカサス"],1,"","山脈"),
+  T("11n","に(　　)山脈",["ザグロス"],1,"イラン西部。","山脈"),
+  T("11o","ほ(　　)湾",["ペルシャ","ペルシア"],1,"","湾"),
+  T("11p","へ(　　)海",["アラル"],1,"灌漑で縮小した湖。","海")
+ ]},
+{no:12,lead:"右の地図に関する設問に答えよ。",pts:"主体×1点",
+ body:fig("q12-map","fig-m"),
+ parts:[
+  C("12a","問1. 秋田県を通る緯線は次のうちどれか。",["あ) 北緯30°","い) 北緯35°","う) 北緯40°","え) 北緯45°","お) 北緯50°"],"う) 北緯40°",1,""),
+  C("12b","問2. 秋田県を通る緯線に最も近い緯線を地図中の ア〜オ の中から一つ選べ。",kana("アイウエオ"),"オ",1,"北緯40度はスペイン中部あたり。ヨーロッパは日本よりずっと北にある。"),
+  C("12c","問3. 地図中 X の経線は次のうちどれか。",["あ) 経度0°","い) 東経10°","う) 西経10°","え) 東経20°","お) 西経20°"],"あ) 経度0°",1,"ロンドンのグリニッジを通る本初子午線。"),
+  {html:`<p class="qtext">問4. 次の i〜iv の河川を示すものを、地図中の 1〜6 の数字で選べ。</p>`},
+  C("12d","i) ロンドンを流れるテムズ川",nums(6),"3",1,""),
+  C("12e","ii) ライン川",nums(6),"4",1,""),
+  C("12f","iii) パリを流れるセーヌ川",nums(6),"2",1,""),
+  C("12g","iv) ドナウ川",nums(6),"6",1,"黒海に注ぐ国際河川。"),
+  {html:`<p class="qtext">問5. 地図中の い〜に の地名を答えよ。(　)内のカタカナ(漢字)による地名のみを記入すること。</p>`},
+  T("12h","い(　　)海",["北"],1,"","海"),
+  T("12i","ろ(　　)海",["バルト"],1,"","海"),
+  T("12j","は(　　)海",["エーゲ"],1,"","海"),
+  T("12k","に(　　)海峡",["ジブラルタル"],1,"","海峡"),
+  {html:`<p class="qtext">問6. 次の i〜v に適する国名を下の選択肢 1〜10 の中から選び記号で答えよ。</p><p class="qtext" style="font-size:14px">1 オーストリア　2 ベルギー　3 スペイン　4 スウェーデン　5 イタリア　6 ギリシャ　7 オランダ　8 ポルトガル　9 ノルウェー　10 フランス</p>`},
+  C("12l","i) スカンディナビア半島にある2か国のうち東側にある国。",nums(10),"4",1,"スウェーデン。"),
+  C("12m","ii) イベリア半島にある2か国のうち面積の狭い方の国。",nums(10),"8",1,"ポルトガル。"),
+  C("12n","iii) ライン川の河口のある国。",nums(10),"7",1,"オランダ（ロッテルダム）。"),
+  C("12o","iv) オランダ・フランスと国境を接する国はドイツ以外にもう一か国。",nums(10),"2",1,"ベルギー。"),
+  C("12p","v) ピレネー山脈に接している2か国のうち南側の国。",nums(10),"3",1,"スペイン。")
+ ]},
+{no:13,lead:"次の地図中の あ〜か の国における公用語・多数宗教を示した次の組み合わせの正誤を下の表の 1〜8 の中から正しい組み合わせを選べ。",pts:"思考×2点",
+ body:fig("q13-map","fig-l")+tf8Table(),
+ parts:[
+  TF("13a","①",["あ：アラビア語・イスラームスンニ派","い：ロシア語・キリスト教正教会","う：スペイン語・キリスト教カトリック"],2,"う（ブラジル）はポルトガル語。"),
+  TF("13b","②",["え：スペイン語・キリスト教カトリック","お：フランス語・キリスト教プロテスタント","か：英語・キリスト教カトリック"],3,"お（オーストラリア）は英語。か（フィリピン）は英語とフィリピノ語、カトリック。")
+ ]},
+{no:14,lead:"次の設問に答えよ。",pts:"問1〜3 思考×1点／問4 知識×1点",
+ parts:[
+  {html:`<p class="qtext">問1. 次の ①② の出来事はいつ起こったか、選択肢の記号で答えよ。</p>`},
+  ...[["①","ディアスポラ","イ) 約2000年前","ローマ帝国によってユダヤ人が各地に離散した。"],["②","ホロコースト","エ) 約80年前","元の用紙では選択肢の「エ」が2つある誤植。後ろの「約80年前」が正解。"]]
+   .map(([l,t,a,n])=>C("14"+l,`${l} ${t}`,["ア) 約2500年前","イ) 約2000年前","ウ) 約1000年前","エ) 約100年前","エ) 約80年前","オ) 1948年"],a,1,n)),
+  C("14c","問2. シオニズムとは何を意味するのか。最も適当なものを次の選択肢から1つ選び記号で答えよ。",["ア) ユダヤ人がローマ帝国内の各地に離散させられたこと。","イ) ユダヤ人がヨーロッパ各地で金融活動を広げていった運動","ウ) ユダヤ人が故郷パレスチナにユダヤ人国家を建設しようとする運動","エ) ユダヤ教の戒律を厳しく守る宗教改革運動"],"ウ) ユダヤ人が故郷パレスチナにユダヤ人国家を建設しようとする運動",1,"1948年のイスラエル建国につながった。",true),
+  T("14d","問3. モーセに率いられたユダヤ人が海を割って脱出したお話は、旧約聖書の「出(　　)記」に書かれている。(　)に適語を入れよ。",["エジプト"],1,"出エジプト記。"),
+  T("14e","問4. ムスリムは「貧しき者に施しをする行為」を義務としているが、これを漢字2文字で何と呼ぶか。",["喜捨"],1,"ザカート。五行（信仰告白・礼拝・断食・喜捨・巡礼）の一つ。")
+ ]}
+];
+
+/* ---------- render ---------- */
+const KEY="chiri-midterm-test-v1";
+let ans={};try{ans=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ans))}catch(e){}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const parts=[];
+const main=document.getElementById("main"),idx=document.getElementById("idx");
+
+Q.forEach(q=>{
+  idx.insertAdjacentHTML("beforeend",`<a href="#s${q.no}" data-s="${q.no}">${q.no}</a>`);
+  const html=q.parts.map(p=>{
+    if(p.html)return p.html;
+    p.sec=q.no;parts.push(p);
+    const input=p.type==="c"
+      ?`<div class="opts${p.col?" col":""}">${p.opts.map(o=>`<button type="button" data-v="${esc(o)}" aria-pressed="${ans[p.id]===o}">${esc(o)}</button>`).join("")}</div>`
+      :`<div class="inp"><input id="in-${p.id}" type="text" autocomplete="off" value="${esc(ans[p.id]||"")}" aria-label="解答">${p.suf?`<span>${p.suf}</span>`:""}</div>`;
+    const correct=p.type==="c"?p.ans:p.acc[0]+(p.suf||"");
+    return `<div class="part" data-id="${p.id}"><div class="lab">${p.lab?(p.type==="c"&&!p.lab.includes("<ul")&&!p.lab.startsWith("(")&&!p.lab.startsWith("問")&&p.lab.length<4?`<b>${p.lab}</b>`:p.lab):""}</div>${input}
+      <span class="mark" aria-hidden="true"></span>
+      <div class="key"><span class="c">${esc(correct)}</span>${esc(p.note||"")}</div></div>`;
+  }).join("");
+  main.insertAdjacentHTML("beforeend",`<section class="sheet" id="s${q.no}">
+    <div class="sh"><span class="no">${q.no}</span><p class="lead">${q.lead}${q.pts?`<span class="pts">${q.pts}</span>`:""}</p></div>
+    <div class="body">${q.body||""}${html}</div></section>`);
+});
+
+/* Q4 chart (読み取った割合) */
+(()=>{
+  const rows=[["パキスタン",[["W",2,""],["I",98,"イ"]]],["①",[["A",13,"ア"],["U",64,"ウ"],["W",23,""]]],["②",[["A",8,"ア"],["I",92,"イ"]]],["③",[["A",80,"ア"],["I",14,"イ"],["W",6,""]]]];
+  const X0=64,W=280,H=26,G=12;let y=8,s="";
+  for(let p=0;p<=100;p+=10){const x=X0+W*p/100;s+=`<line class="gl" x1="${x}" x2="${x}" y1="4" y2="${8+rows.length*(H+G)-G+4}"/><text class="ax" x="${x}" y="${8+rows.length*(H+G)+8}" text-anchor="middle">${p}%</text>`}
+  rows.forEach(([lab,segs])=>{let x=X0;s+=`<text x="${X0-8}" y="${y+H/2+4}" text-anchor="end">${lab}</text>`;
+    segs.forEach(([k,v,t])=>{const w=W*v/100;s+=`<rect class="s${k}" x="${x}" y="${y}" width="${w}" height="${H}"/>`;if(t)s+=`<text x="${x+w/2}" y="${y+H/2+4}" text-anchor="middle">${t}</text>`;x+=w});y+=H+G});
+  document.getElementById("chart").innerHTML=`<svg class="chart" viewBox="0 0 ${X0+W+10} ${y+20}" role="img" aria-label="宗教別人口割合のグラフ">${s}</svg>`;
+})();
+
+/* ---------- interaction ---------- */
+const prog=document.getElementById("prog");
+const answered=p=>!!(ans[p.id]&&String(ans[p.id]).trim());
+function updProg(){
+  prog.textContent=`回答 ${parts.filter(answered).length} / ${parts.length}`;
+  Q.forEach(q=>{const ps=parts.filter(p=>p.sec===q.no);idx.querySelector(`[data-s="${q.no}"]`).classList.toggle("done",ps.every(answered))});
+}
+main.addEventListener("click",e=>{
+  const b=e.target.closest(".opts button");if(!b)return;
+  const part=b.closest(".part"),id=part.dataset.id;
+  ans[id]=ans[id]===b.dataset.v?"":b.dataset.v;
+  part.querySelectorAll(".opts button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.v===ans[id]));
+  save();updProg();if(document.body.classList.contains("graded"))grade();
+});
+main.addEventListener("input",e=>{
+  if(!e.target.matches(".inp input"))return;
+  ans[e.target.closest(".part").dataset.id]=e.target.value;save();updProg();
+});
+
+const kata=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));
+const norm=(s,suf)=>{let t=kata(String(s||"").normalize("NFKC")).replace(/[\s　()（）「」]/g,"").replace(/ー+/g,"ー");
+  if(suf&&t.endsWith(suf))t=t.slice(0,-suf.length);
+  t=t.replace(/(語|語圏|山脈|海峡|高原|湾|海|大陸|イド|か国|カ国)$/,m=>m===t?m:"");return t};
+function isRight(p){
+  if(p.type==="c")return ans[p.id]===p.ans;
+  const v=norm(ans[p.id],p.suf);if(!v)return false;
+  return p.acc.some(a=>norm(a,p.suf)===v);
+}
+function grade(){
+  let score=0,n=0;
+  parts.forEach(p=>{const ok=isRight(p);if(ok){score+=p.pts;n++}
+    const el=main.querySelector(`.part[data-id="${p.id}"]`);el.classList.toggle("right",ok);el.querySelector(".mark").textContent=ok?"○":"✓";
+    el.querySelector(".mark").style.opacity=ok?1:.9;});
+  document.getElementById("sc").textContent=score;
+  document.getElementById("sc2").textContent=`（${n}/${parts.length}問正解）`;
+}
+document.getElementById("b-grade").onclick=()=>{grade();document.body.classList.add("graded");document.querySelector(".cover").scrollIntoView({behavior:"smooth"})};
+const kb=document.getElementById("b-key");
+kb.onclick=()=>{const on=kb.getAttribute("aria-pressed")!=="true";kb.setAttribute("aria-pressed",on);document.body.classList.toggle("reveal",on)};
+let armed=false;const rb=document.getElementById("b-reset");
+rb.onclick=()=>{
+  if(!armed){armed=true;rb.textContent="もう一度押すと消去";setTimeout(()=>{armed=false;rb.textContent="リセット"},3000);return}
+  armed=false;rb.textContent="リセット";ans={};save();
+  main.querySelectorAll(".opts button").forEach(x=>x.setAttribute("aria-pressed","false"));
+  main.querySelectorAll(".inp input").forEach(x=>x.value="");
+  document.body.classList.remove("graded","reveal");kb.setAttribute("aria-pressed","false");updProg();
+};
+updProg();
+</script>
