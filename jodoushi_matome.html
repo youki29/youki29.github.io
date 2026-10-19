@@ -80,12 +80,32 @@ tr.top > *{border-top:2px solid var(--ink)}
   h2{break-after:avoid}
   table{break-inside:avoid}
 }
+table td{cursor:pointer; -webkit-tap-highlight-color:transparent; transition:background .15s}
+tr.group td{cursor:default}
+td.hide{background:var(--cover)!important; color:transparent!important}
+td.hide *{visibility:hidden}
+.controls{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--paper); padding:8px 0; display:flex; flex-wrap:wrap; gap:8px; align-items:center; border-bottom:1px solid var(--line); margin-bottom:8px}
+.controls p{margin:0; font-size:.82rem; color:var(--sub); flex-basis:100%}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--paper)}
+.btn{font:inherit; font-size:.85rem; padding:6px 12px; border-radius:999px; border:1px solid var(--red); background:var(--paper); color:var(--red); cursor:pointer}
+.btn.fill{background:var(--red); color:#fff}
+.tbar{display:flex; gap:6px; justify-content:flex-end; margin:0 0 6px}
+.tbar .btn{font-size:.78rem; padding:4px 10px}
+:root{--cover:#c9a3ae}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--cover:#6b3a48}}
+:root[data-theme="dark"]{--cover:#6b3a48}
+@media print{.controls,.tbar{display:none}}
 </style>
 </head>
 <body>
 <main>
 <h1>助動詞まとめ</h1>
 <p class="lead">たり・り・ず・き・けり・つ・ぬ・る・らる・す・さす・しむ・む・むず・べし</p>
+<div class="controls">
+<p>表のマスをタップすると、隠す／表示を切り替えられます。</p>
+<button class="btn fill" id="hideAll" type="button">すべて隠す</button>
+<button class="btn" id="showAll" type="button">すべて表示</button>
+</div>
 
 <h2>1．助動詞一覧表</h2>
 <div class="scroll">
@@ -225,5 +245,31 @@ tr.top > *{border-top:2px solid var(--ink)}
 </div>
 <div class="tip">主語の人称がわかったら、む・べしの意味は「一人称→意志、二人称→適当・勧誘（べしは命令も）、三人称→推量」で決める。最後に訳を当てはめて確認する。</div>
 </main>
+<script>
+(function(){
+  function cellsIn(root){
+    return Array.prototype.filter.call(root.querySelectorAll('td'), function(td){ return !td.closest('tr.group'); });
+  }
+  document.addEventListener('click', function(e){
+    var td = e.target.closest('td');
+    if(!td || td.closest('tr.group')) return;
+    td.classList.toggle('hide');
+  });
+  document.querySelectorAll('.scroll').forEach(function(wrap){
+    var bar = document.createElement('div');
+    bar.className = 'tbar';
+    var h = document.createElement('button');
+    h.type = 'button'; h.className = 'btn'; h.textContent = 'この表を隠す';
+    var s = document.createElement('button');
+    s.type = 'button'; s.className = 'btn'; s.textContent = 'この表を表示';
+    h.addEventListener('click', function(){ cellsIn(wrap).forEach(function(td){ td.classList.add('hide'); }); });
+    s.addEventListener('click', function(){ cellsIn(wrap).forEach(function(td){ td.classList.remove('hide'); }); });
+    bar.appendChild(h); bar.appendChild(s);
+    wrap.parentNode.insertBefore(bar, wrap);
+  });
+  document.getElementById('hideAll').addEventListener('click', function(){ cellsIn(document).forEach(function(td){ td.classList.add('hide'); }); });
+  document.getElementById('showAll').addEventListener('click', function(){ cellsIn(document).forEach(function(td){ td.classList.remove('hide'); }); });
+})();
+</script>
 </body>
 </html>
