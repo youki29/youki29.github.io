@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>土佐日記 門出・帰郷 品詞の学習</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF0EC; --paper:#FAFBF8; --ink:#1F2A36; --sub:#5A6571;
+  --verb:#2B5C8A; --aux:#962C4D; --line:#D3D9D4; --ok:#2C7A57; --ng:#B0363A;
+  --chip:#E3E8E4;
+  color-scheme:light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12161A; --paper:#1A2026; --ink:#E3E7EA; --sub:#9AA5B0;
+    --verb:#8AB3DD; --aux:#E78DAA; --line:#2D353D; --ok:#6CC59A; --ng:#F08484;
+    --chip:#252D35; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12161A; --paper:#1A2026; --ink:#E3E7EA; --sub:#9AA5B0;
+  --verb:#8AB3DD; --aux:#E78DAA; --line:#2D353D; --ok:#6CC59A; --ng:#F08484;
+  --chip:#252D35; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+  -webkit-text-size-adjust:100%;}
+.wrap{max-width:720px;margin:0 auto;padding:20px 16px 140px}
+
+header.hero{display:flex;gap:18px;align-items:stretch;padding:12px 0 22px}
+.hero h1{writing-mode:vertical-rl;margin:0;font-family:"Shippori Mincho",serif;
+  font-weight:800;font-size:clamp(44px,13vw,72px);line-height:1;letter-spacing:.08em}
+.hero .meta{display:flex;flex-direction:column;justify-content:flex-end;gap:6px;
+  font-size:14px;color:var(--sub);line-height:1.5}
+.hero .meta strong{color:var(--ink);font-family:"Shippori Mincho",serif;font-size:20px;font-weight:700}
+
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);
+  padding:10px 0;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.seg{display:flex;background:var(--chip);border-radius:10px;padding:3px}
+.seg button{flex:1;border:0;background:transparent;color:var(--sub);font:inherit;font-size:15px;
+  padding:9px 6px;border-radius:8px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink);font-weight:700;
+  box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tog{border:1px solid var(--line);background:var(--paper);color:var(--ink);font:inherit;font-size:13px;
+  padding:6px 11px;border-radius:999px;cursor:pointer}
+.tog[aria-pressed="true"]{border-color:var(--ink);font-weight:700}
+.score{margin-left:auto;font-size:13px;color:var(--sub)}
+.score b{color:var(--ink)}
+
+.legend{font-size:13px;color:var(--sub);display:flex;gap:16px;flex-wrap:wrap;margin:16px 0 4px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{display:inline-block;width:22px;height:0;border-bottom:2px solid var(--verb)}
+.legend i.a{border-bottom:4px double var(--aux)}
+
+.text{background:var(--paper);border-radius:6px;padding:22px 20px;margin-top:12px;
+  font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-size:20px;line-height:2.5;font-weight:500}
+.text p{margin:0 0 .4em}
+.text p.poem{padding-left:2em;margin:.6em 0}
+.tate .text{writing-mode:vertical-rl;overflow-x:auto;max-height:78vh;line-height:2.4}
+.tate .text p.poem{padding-left:0;padding-top:2em}
+.tate .text p{margin:0 0 0 .4em}
+
+.tk{font:inherit;color:inherit;background:none;border:0;padding:0 1px;margin:0;cursor:pointer;
+  border-bottom:2px solid var(--verb);line-height:inherit;border-radius:0}
+.tk.a{border-bottom:4px double var(--aux)}
+.tate .tk{border-bottom:0;border-right:2px solid var(--verb);padding:1px 0}
+.tate .tk.a{border-bottom:0;border-right:4px double var(--aux)}
+.tk:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.tk.sel{background:color-mix(in srgb,var(--verb) 16%,transparent)}
+.tk.a.sel{background:color-mix(in srgb,var(--aux) 16%,transparent)}
+.tk.ok{color:var(--ok)} .tk.ng{color:var(--ng)}
+rt{font-family:"Zen Kaku Gothic New",sans-serif;font-size:10px;color:var(--sub);visibility:hidden;letter-spacing:0}
+.show-forms rt{visibility:visible}
+
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--paper);
+  border-top:1px solid var(--line);border-radius:16px 16px 0 0;
+  padding:16px 18px calc(18px + env(safe-area-inset-bottom,0px));
+  box-shadow:0 -6px 24px rgba(0,0,0,.12);transform:translateY(110%);transition:transform .22s ease}
+.sheet.open{transform:none}
+@media (prefers-reduced-motion:reduce){.sheet{transition:none}}
+.sheet .in{max-width:720px;margin:0 auto}
+.sh-top{display:flex;align-items:baseline;gap:12px}
+.sh-word{font-family:"Shippori Mincho",serif;font-size:30px;font-weight:700}
+.sh-kind{font-size:13px;padding:2px 9px;border-radius:999px;color:var(--paper);background:var(--verb)}
+.sh-kind.a{background:var(--aux)}
+.close{margin-left:auto;border:0;background:var(--chip);color:var(--ink);font:inherit;width:34px;height:34px;border-radius:50%;font-size:18px;cursor:pointer}
+dl{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:14px 0 0;font-size:16px}
+dt{color:var(--sub)} dd{margin:0;font-weight:500}
+dd.form{font-weight:700}
+.note{margin-top:10px;font-size:14px;color:var(--sub);line-height:1.6}
+.ask{font-size:15px;margin:12px 0 10px}
+.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.choices button{font:inherit;font-size:16px;padding:11px 4px;border-radius:10px;border:1px solid var(--line);
+  background:var(--bg);color:var(--ink);cursor:pointer}
+.verdict{font-weight:700;margin-top:12px;font-size:16px}
+.verdict.ok{color:var(--ok)} .verdict.ng{color:var(--ng)}
+.hint{font-size:13px;color:var(--sub);margin-top:14px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <header class="hero">
+    <h1>土佐日記</h1>
+    <div class="meta">
+      <strong>門出・帰郷</strong>
+      <span>作者　紀貫之</span>
+      <span>成立　平安時代中期（935年頃）</span>
+      <span>ジャンル　日記文学</span>
+    </div>
+  </header>
+
+  <div class="bar">
+    <div class="seg" id="secSeg">
+      <button data-sec="kadode" aria-pressed="true">門出</button>
+      <button data-sec="kikyo" aria-pressed="false">帰郷</button>
+    </div>
+    <div class="row">
+      <div class="seg" id="modeSeg" style="flex:0 0 auto">
+        <button data-mode="learn" aria-pressed="true">確認</button>
+        <button data-mode="test" aria-pressed="false">テスト</button>
+      </div>
+      <button class="tog" id="formsTog" aria-pressed="false">活用形を表示</button>
+      <button class="tog" id="tateTog" aria-pressed="false">縦書き</button>
+    </div>
+    <div class="row" id="scoreRow" hidden>
+      <span class="score">正解 <b id="okN">0</b> / <b id="allN">0</b>（全<span id="totN">0</span>語）</span>
+      <button class="tog" id="resetBtn">結果をリセット</button>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i></i>単線＝用言（動詞・形容詞・形容動詞）</span>
+    <span><i class="a"></i>二重線＝助動詞</span>
+  </div>
+
+  <div class="text" id="text"></div>
+  <p class="hint" id="hint">線のある語をタップすると、活用の種類・基本形・活用形が出ます。</p>
+</div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="false" aria-label="語の解説">
+  <div class="in" id="sheetIn"></div>
+</div>
+
+<script>
+// [語|活用の種類|基本形|活用形|注] = 用言　{語|意味|活用の型|基本形|活用形|注} = 助動詞
+const DATA = {
+kadode: [
+ "男も[す|サ行変格|す|終止形]{なる|伝聞|ナリ型|なり|連体形|終止形接続の「なり」は伝聞・推定}日記と[いふ|ハ行四段|いふ|連体形]ものを、女も[し|サ行変格|す|連用形]て[み|マ行上一段|みる|未然形]{む|意志|四段型|む|終止形}とて[する|サ行変格|す|連体形]{なり|断定|ナリ型|なり|終止形|連体形接続の「なり」は断定}。",
+ "それの年の十二月の二十日あまり一日の日の戌の時に、[門出す|サ行変格|門出す|終止形]。",
+ "そのよし、[いささかに|形容動詞ナリ活用|いささかなり|連用形]物に[書きつく|カ行下二段|書きつく|終止形]。",
+ "ある人、県の四年五年[はて|タ行下二段|はつ|連用形]て、例の事どもみな[し終へ|ハ行下二段|し終ふ|連用形]て、解由など[取り|ラ行四段|取る|連用形]て、[住む|マ行四段|住む|連体形]館より[出で|ダ行下二段|出づ|連用形]て、船に[乗る|ラ行四段|乗る|終止形|「べし」は終止形接続]{べき|当然|ク活用型|べし|連体形}所へ[渡る|ラ行四段|渡る|終止形]。",
+ "かれこれ、[知る|ラ行四段|知る|連体形][知ら|ラ行四段|知る|未然形]{ぬ|打消|特殊型|ず|連体形}、[送りす|サ行変格|送りす|終止形]。",
+ "年ごろよく[くらべ|バ行下二段|くらぶ|連用形]{つる|完了|下二段型|つ|連体形}人々なむ、[別れ難く|形容詞ク活用|別れ難し|連用形][思ひ|ハ行四段|思ふ|連用形]て、日しきりにとかく[し|サ行変格|す|連用形]つつ[ののしる|ラ行四段|ののしる|連体形]うちに、夜[更け|カ行下二段|更く|連用形]{ぬ|完了|ナ変型|ぬ|終止形}。",
+ "二十二日に、和泉の国までと、[平らかに|形容動詞ナリ活用|平らかなり|連用形][願立つ|タ行四段|願立つ|終止形]。",
+ "藤原のときざね、船路{なれ|断定|ナリ型|なり|已然形|「ど」は已然形接続}ど、馬のはなむけ[す|サ行変格|す|終止形]。",
+ "上中下、[酔ひ飽き|カ行四段|酔ひ飽く|連用形|「飽く」は古文では四段活用]て、いと[あやしく|形容詞シク活用|あやし|連用形]、潮海のほとりにて[あざれあへ|ハ行四段|あざれあふ|已然形|助動詞「り」は四段の已然形（命令形とする説も）に接続]{り|存続|ラ変型|り|終止形}。"
+],
+kikyo: [
+ "京に[入り立ち|タ行四段|入り立つ|連用形]て[うれし|形容詞シク活用|うれし|終止形]。家に[至り|ラ行四段|至る|連用形]て、門に[入る|ラ行四段|入る|連体形]に、月[明かけれ|形容詞ク活用|明かし|已然形]ば、いと[よく|形容詞ク活用|よし|連用形]ありさま[見ゆ|ヤ行下二段|見ゆ|終止形]。",
+ "[聞き|カ行四段|聞く|連用形]{し|過去|特殊型|き|連体形}よりも[まし|サ行四段|ます|連用形]て、[言ふかひなく|形容詞ク活用|言ふかひなし|連用形]ぞ[こぼれ破れ|ラ行下二段|こぼれ破る|連用形]{たる|存続|ラ変型|たり|連体形|係助詞「ぞ」の結びで連体形}。",
+ "家に[預け|カ行下二段|預く|連用形]{たり|完了|ラ変型|たり|連用形}{つる|完了|下二段型|つ|連体形}人の心も、[荒れ|ラ行下二段|荒る|連用形]{たる|存続|ラ変型|たり|連体形}{なり|断定|ナリ型|なり|連用形}{けり|詠嘆|ラ変型|けり|終止形}。",
+ "中垣こそ[あれ|ラ行変格|あり|已然形|係助詞「こそ」の結びで已然形。逆接で下に続く]、一つ家の{やうなれ|比況|ナリ型|やうなり|已然形}ば、[望み|マ行四段|望む|連用形]て[預かれ|ラ行四段|預かる|已然形]{る|存続|ラ変型|り|連体形}{なり|断定|ナリ型|なり|終止形}。",
+ "さるは、便りごとに物も[絶え|ヤ行下二段|絶ゆ|未然形]{ず|打消|特殊型|ず|連用形}[得|ア行下二段|得|未然形|ア行の動詞は「得・心得・所得」だけ]{させ|使役|下二段型|さす|連用形}{たり|完了|ラ変型|たり|終止形}。",
+ "今宵、「かかること。」と、[声高に|形容動詞ナリ活用|声高なり|連用形]ものも[言は|ハ行四段|言ふ|未然形]{せ|使役|下二段型|す|未然形}{ず|打消|特殊型|ず|終止形}。",
+ "いと[つらく|形容詞ク活用|つらし|連用形][見ゆれ|ヤ行下二段|見ゆ|已然形]ど、志は[せ|サ行変格|す|未然形]{む|意志|四段型|む|終止形}と[す|サ行変格|す|終止形]。",
+ "さて、[池めい|カ行四段|池めく|連用形|イ音便（池めき→池めい）]て[くぼまり|ラ行四段|くぼまる|連用形]、[水漬け|カ行四段|水漬く|已然形]{る|存続|ラ変型|り|連体形}所[あり|ラ行変格|あり|終止形]。ほとりに松も[あり|ラ行変格|あり|連用形]{き|過去|特殊型|き|終止形}。",
+ "五年六年のうちに、千年や[過ぎ|ガ行上二段|過ぐ|連用形]{に|完了|ナ変型|ぬ|連用形}{けむ|過去推量|四段型|けむ|連体形|係助詞「や」の結びで連体形}、かたへは[なくなり|ラ行四段|なくなる|連用形]{に|完了|ナ変型|ぬ|連用形}{けり|過去|ラ変型|けり|終止形}。今[生ひ|ハ行上二段|生ふ|連用形]{たる|存続|ラ変型|たり|連体形}ぞ[交じれ|ラ行四段|交じる|已然形]{る|存続|ラ変型|り|連体形|係助詞「ぞ」の結びで連体形}。",
+ "大方のみな[荒れ|ラ行下二段|荒る|連用形]{に|完了|ナ変型|ぬ|連用形}{たれ|存続|ラ変型|たり|已然形}ば、「あはれ。」とぞ人々[言ふ|ハ行四段|言ふ|連体形|係助詞「ぞ」の結びで連体形]。",
+ "[思ひ出で|ダ行下二段|思ひ出づ|未然形]{ぬ|打消|特殊型|ず|連体形}こと[なく|形容詞ク活用|なし|連用形]、[思ひ恋しき|形容詞シク活用|思ひ恋し|連体形]がうちに、この家にて[生まれ|ラ行下二段|生まる|連用形]{し|過去|特殊型|き|連体形}女子の、もろともに[帰ら|ラ行四段|帰る|未然形]{ね|打消|特殊型|ず|已然形}ば、いかがは[悲しき|形容詞シク活用|悲し|連体形|疑問の「いかがは」を受けて連体形]。船人もみな、子[たかり|ラ行四段|たかる|連用形]て[ののしる|ラ行四段|ののしる|終止形]。",
+ "かかるうちに、なほ[悲しき|形容詞シク活用|悲し|連体形]に[耐へ|ハ行下二段|耐ふ|未然形]{ず|打消|特殊型|ず|連用形}して、[ひそかに|形容動詞ナリ活用|ひそかなり|連用形]心[知れ|ラ行四段|知る|已然形]{る|存続|ラ変型|り|連体形}人と[言へ|ハ行四段|言ふ|已然形]{り|完了|ラ変型|り|連用形}{ける|過去|ラ変型|けり|連体形}歌、",
+ "#[生まれ|ラ行下二段|生まる|連用形]{し|過去|特殊型|き|連体形}も[帰ら|ラ行四段|帰る|未然形]{ぬ|打消|特殊型|ず|連体形}ものをわが宿に小松の[ある|ラ行変格|あり|連体形]を[見る|マ行上一段|見る|連体形]が悲しさ",
+ "とぞ[言へ|ハ行四段|言ふ|已然形]{る|完了|ラ変型|り|連体形|係助詞「ぞ」の結びで連体形}。なほ[飽か|カ行四段|飽く|未然形]{ず|打消|特殊型|ず|連用形}や[あら|ラ行変格|あり|未然形]{む|推量|四段型|む|連体形|係助詞「や」の結びで連体形}、また、かくなむ。",
+ "#[見|マ行上一段|見る|連用形]{し|過去|特殊型|き|連体形}人の松の千年に[見|マ行上一段|見る|連用形]{ましか|反実仮想|特殊型|まし|未然形|「ましかば～まし」＝もし～だったら…だろうに}ば[遠く|形容詞ク活用|遠し|連用形][悲しき|形容詞シク活用|悲し|連体形]別れ[せ|サ行変格|す|未然形]{まし|反実仮想|特殊型|まし|終止形}や",
+ "[忘れ難く|形容詞ク活用|忘れ難し|連用形]、[口惜しき|形容詞シク活用|口惜し|連体形]こと[多かれ|形容詞ク活用|多し|已然形]ど、え[尽くさ|サ行四段|尽くす|未然形]{ず|打消|特殊型|ず|終止形|「え～ず」＝～できない}。とまれかうまれ、[とく|形容詞ク活用|疾し|連用形][破り|ラ行四段|破る|連用形]{て|強意|下二段型|つ|未然形|「てむ」＝きっと～しよう}{む|意志|四段型|む|終止形}。"
+]};
+
+const FORMS=["未然形","連用形","終止形","連体形","已然形","命令形"];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+
+let state=Object.assign({sec:"kadode",mode:"learn",forms:false,tate:false},store.get("tosa-ui",{}));
+let results=store.get("tosa-results",{});
+let tokens={}, current=null;
+
+function parse(sec){
+  const out=[]; let n=0;
+  DATA[sec].forEach(raw=>{
+    const poem=raw.startsWith("#"); const s=poem?raw.slice(1):raw;
+    const parts=[]; const re=/\[([^\]]+)\]|\{([^}]+)\}/g; let last=0,m;
+    while((m=re.exec(s))){
+      if(m.index>last) parts.push({t:s.slice(last,m.index)});
+      const id=sec+"-"+(n++);
+      let tk;
+      if(m[1]){const [w,type,base,form,note]=m[1].split("|");tk={id,kind:"v",w,type,base,form,note};}
+      else{const [w,mean,type,base,form,note]=m[2].split("|");tk={id,kind:"a",w,mean,type,base,form,note};}
+      tokens[id]=tk; parts.push(tk); last=re.lastIndex;
+    }
+    if(last<s.length) parts.push({t:s.slice(last)});
+    out.push({poem,parts});
+  });
+  return out;
+}
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function render(){
+  document.querySelectorAll("#secSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.sec===state.sec));
+  document.querySelectorAll("#modeSeg button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.mode===state.mode));
+  formsTog.setAttribute("aria-pressed",state.forms);
+  tateTog.setAttribute("aria-pressed",state.tate);
+  formsTog.hidden = state.mode==="test";
+  document.body.classList.toggle("show-forms",state.forms && state.mode==="learn");
+  document.body.classList.toggle("tate",state.tate);
+  scoreRow.hidden = state.mode!=="test";
+  hint.textContent = state.mode==="test"
+    ? "線のある語をタップして、活用形を選んでください。まちがえた語は赤、正解した語は緑になります。"
+    : "線のある語をタップすると、活用の種類・基本形・活用形が出ます。";
+  const lines=parse(state.sec);
+  text.innerHTML=lines.map(l=>`<p class="${l.poem?"poem":""}">`+l.parts.map(p=>{
+    if(!p.kind) return esc(p.t);
+    let cls="tk "+p.kind;
+    if(state.mode==="test" && p.id in results) cls+= results[p.id]?" ok":" ng";
+    return `<button class="${cls}" data-id="${p.id}"><ruby>${esc(p.w)}<rt>${p.form.replace("形","")}</rt></ruby></button>`;
+  }).join("")+"</p>").join("");
+  updateScore();
+  store.set("tosa-ui",state);
+}
+function updateScore(){
+  const ids=Object.keys(tokens).filter(k=>k.startsWith(state.sec+"-"));
+  const done=ids.filter(k=>k in results);
+  okN.textContent=done.filter(k=>results[k]).length;
+  allN.textContent=done.length; totN.textContent=ids.length;
+}
+function posLabel(t){
+  if(t.kind==="a") return "助動詞";
+  if(t.type.startsWith("形容動詞")) return "形容動詞";
+  if(t.type.startsWith("形容詞")) return "形容詞";
+  return "動詞";
+}
+function typeLabel(t){
+  if(t.kind==="a") return t.type;
+  return t.type.replace(/^形容動詞|^形容詞/,"").replace(/(四段|二段|一段|変格)$/,"$1活用");
+}
+function details(t){
+  const rows = t.kind==="a"
+    ? [["意味",t.mean],["活用の型",t.type],["基本形",t.base],["活用形",t.form,1]]
+    : [["活用の種類",typeLabel(t)],["基本形",t.base],["活用形",t.form,1]];
+  return `<dl>${rows.map(r=>`<dt>${r[0]}</dt><dd${r[2]?' class="form"':""}>${esc(r[1])}</dd>`).join("")}</dl>`
+    + (t.note?`<div class="note">${esc(t.note)}</div>`:"");
+}
+function head(t){
+  return `<div class="sh-top"><span class="sh-word">${esc(t.w)}</span>
+    <span class="sh-kind ${t.kind}">${posLabel(t)}</span>
+    <button class="close" aria-label="閉じる" data-close>×</button></div>`;
+}
+function open(id){
+  const t=tokens[id]; current=id;
+  document.querySelectorAll(".tk.sel").forEach(e=>e.classList.remove("sel"));
+  const el=text.querySelector(`[data-id="${id}"]`); if(el) el.classList.add("sel");
+  if(state.mode==="test"){
+    sheetIn.innerHTML=head(t)+`<p class="ask">活用形は？</p><div class="choices">${
+      FORMS.map(f=>`<button data-ans="${f}">${f}</button>`).join("")}</div>`;
+  } else {
+    sheetIn.innerHTML=head(t)+details(t);
+  }
+  sheet.classList.add("open");
+}
+function answer(f){
+  const t=tokens[current]; const ok=f===t.form;
+  results[current]=ok; store.set("tosa-results",results);
+  const el=text.querySelector(`[data-id="${current}"]`);
+  if(el){el.classList.remove("ok","ng");el.classList.add(ok?"ok":"ng");}
+  sheetIn.innerHTML=head(t)+`<div class="verdict ${ok?"ok":"ng"}">${ok?"正解":"不正解（"+esc(f)+"を選択）"}</div>`+details(t);
+  updateScore();
+}
+function close(){sheet.classList.remove("open");document.querySelectorAll(".tk.sel").forEach(e=>e.classList.remove("sel"));current=null}
+
+text.addEventListener("click",e=>{const b=e.target.closest(".tk");if(b) open(b.dataset.id)});
+sheet.addEventListener("click",e=>{
+  if(e.target.closest("[data-close]")) return close();
+  const a=e.target.closest("[data-ans]"); if(a) answer(a.dataset.ans);
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+secSeg.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;state.sec=b.dataset.sec;close();render();window.scrollTo({top:0})});
+modeSeg.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;state.mode=b.dataset.mode;close();render()});
+formsTog.addEventListener("click",()=>{state.forms=!state.forms;render()});
+tateTog.addEventListener("click",()=>{state.tate=!state.tate;render()});
+resetBtn.addEventListener("click",()=>{
+  Object.keys(results).forEach(k=>{if(k.startsWith(state.sec+"-"))delete results[k]});
+  store.set("tosa-results",results);close();render();
+});
+render();
+</script>
+</body>
+</html>
