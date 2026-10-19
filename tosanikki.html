@@ -107,6 +107,11 @@ dd.form{font-weight:700}
 .verdict{font-weight:700;margin-top:12px;font-size:16px}
 .verdict.ok{color:var(--ok)} .verdict.ng{color:var(--ng)}
 .hint{font-size:13px;color:var(--sub);margin-top:14px;line-height:1.7}
+.mean{display:flex;gap:8px}
+.mean input{flex:1;min-width:0;font:inherit;font-size:17px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+.mean input:focus-visible{outline:2px solid var(--aux);outline-offset:1px}
+.mean button{font:inherit;font-size:15px;padding:10px 14px;border-radius:10px;border:0;background:var(--aux);color:var(--paper);font-weight:700;cursor:pointer}
+.verdict small{display:block;font-weight:500;font-size:14px;color:var(--ink);margin-top:4px}
 </style>
 </head>
 <body>
@@ -224,7 +229,7 @@ function render(){
   document.body.classList.toggle("tate",state.tate);
   scoreRow.hidden = state.mode!=="test";
   hint.textContent = state.mode==="test"
-    ? "線のある語をタップして、活用形を選んでください。まちがえた語は赤、正解した語は緑になります。"
+    ? "線のある語をタップして、活用形を選んでください。助動詞は続けて意味も入力します。まちがえた語は赤、正解した語は緑になります。"
     : "線のある語をタップすると、活用の種類・基本形・活用形が出ます。";
   const lines=parse(state.sec);
   text.innerHTML=lines.map(l=>`<p class="${l.poem?"poem":""}">`+l.parts.map(p=>{
@@ -269,19 +274,46 @@ function open(id){
   document.querySelectorAll(".tk.sel").forEach(e=>e.classList.remove("sel"));
   const el=text.querySelector(`[data-id="${id}"]`); if(el) el.classList.add("sel");
   if(state.mode==="test"){
-    sheetIn.innerHTML=head(t)+`<p class="ask">活用形は？</p><div class="choices">${
+    sheetIn.innerHTML=head(t)+`<p class="ask">活用形は？${t.kind==="a"?"（このあと意味も答えます）":""}</p><div class="choices">${
       FORMS.map(f=>`<button data-ans="${f}">${f}</button>`).join("")}</div>`;
   } else {
     sheetIn.innerHTML=head(t)+details(t);
   }
   sheet.classList.add("open");
 }
+let pending=null;
 function answer(f){
-  const t=tokens[current]; const ok=f===t.form;
+  const t=tokens[current];
+  if(t.kind==="a"){
+    pending=f;
+    sheetIn.innerHTML=head(t)+`<p class="ask">活用形：<b>${esc(f)}</b><br>意味は？（漢字で入力）</p>
+      <div class="mean"><input id="meanIn" type="text" autocomplete="off" enterkeyhint="done" placeholder="例：完了" aria-label="意味"><button data-check>答え合わせ</button></div>`;
+    const i=document.getElementById("meanIn");
+    i.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.isComposing){e.preventDefault();check()}});
+    i.focus();
+    return;
+  }
+  const ok=f===t.form;
+  finish(ok,ok?"":"「"+esc(f)+"」を選びました");
+}
+function normMean(s){return s.replace(/\s/g,"").replace(/(の意味|の意)$/,"")}
+function meanOk(t,s){
+  const a=normMean(s); if(!a) return false;
+  const okList=[t.mean];
+  if((t.base==="り"||t.base==="たり")&&(t.mean==="完了"||t.mean==="存続")) okList.push("完了","存続");
+  return okList.includes(a);
+}
+function check(){
+  const t=tokens[current]; const v=document.getElementById("meanIn").value;
+  const fOk=pending===t.form, mOk=meanOk(t,v);
+  finish(fOk&&mOk,`活用形 ${fOk?"○":"×（"+esc(pending)+"）"}　意味 ${mOk?"○":"×（"+esc(v.trim()||"未入力")+"）"}`);
+}
+function finish(ok,msg){
+  const t=tokens[current];
   results[current]=ok; store.set("tosa-results",results);
   const el=text.querySelector(`[data-id="${current}"]`);
   if(el){el.classList.remove("ok","ng");el.classList.add(ok?"ok":"ng");}
-  sheetIn.innerHTML=head(t)+`<div class="verdict ${ok?"ok":"ng"}">${ok?"正解":"不正解（"+esc(f)+"を選択）"}</div>`+details(t);
+  sheetIn.innerHTML=head(t)+`<div class="verdict ${ok?"ok":"ng"}">${ok?"正解":"不正解"}${msg?`<small>${msg}</small>`:""}</div>`+details(t);
   updateScore();
 }
 function close(){sheet.classList.remove("open");document.querySelectorAll(".tk.sel").forEach(e=>e.classList.remove("sel"));current=null}
@@ -289,6 +321,7 @@ function close(){sheet.classList.remove("open");document.querySelectorAll(".tk.s
 text.addEventListener("click",e=>{const b=e.target.closest(".tk");if(b) open(b.dataset.id)});
 sheet.addEventListener("click",e=>{
   if(e.target.closest("[data-close]")) return close();
+  if(e.target.closest("[data-check]")) return check();
   const a=e.target.closest("[data-ans]"); if(a) answer(a.dataset.ans);
 });
 document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
