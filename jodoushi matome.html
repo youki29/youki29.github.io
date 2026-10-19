@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>助動詞まとめ（たり・り・ず・き・けり・つ・ぬ・る・らる・す・さす・しむ・む・むず・べし）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff;
+  --ink:#1d1a1c;
+  --sub:#5c5458;
+  --red:#9b1f3c;
+  --red-soft:#f6e7eb;
+  --line:#dccfd3;
+  --row:#fbf7f8;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#18151a;
+    --ink:#efe9eb;
+    --sub:#b5aaae;
+    --red:#e2708b;
+    --red-soft:#3a2129;
+    --line:#41363b;
+    --row:#201c21;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#18151a; --ink:#efe9eb; --sub:#b5aaae; --red:#e2708b;
+  --red-soft:#3a2129; --line:#41363b; --row:#201c21; color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;
+  font-size:15px; line-height:1.7;
+}
+main{max-width:860px; margin:0 auto; padding:20px 16px 48px}
+h1{
+  font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-size:1.6rem; line-height:1.35; margin:8px 0 4px;
+  border-left:8px solid var(--red); padding-left:12px;
+}
+.lead{color:var(--sub); margin:0 0 24px; font-size:.9rem}
+h2{
+  font-family:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  font-size:1.2rem; margin:36px 0 10px; color:var(--red);
+  border-bottom:2px solid var(--red); padding-bottom:4px;
+}
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch; border:1px solid var(--line); border-radius:6px}
+table{border-collapse:collapse; width:100%; min-width:560px}
+th,td{border:1px solid var(--line); padding:7px 8px; text-align:center; vertical-align:middle}
+thead th{background:var(--red); color:#fff; font-weight:700; white-space:nowrap}
+tbody th{background:var(--red-soft); font-weight:700; white-space:nowrap}
+
+td.l{text-align:left}
+.group td{background:var(--paper)!important; text-align:left; font-weight:700; color:var(--red); border-left:none; border-right:none}
+.wide{min-width:640px}
+.big{min-width:900px}
+.big td,.big th{white-space:nowrap}
+tr.top > *{border-top:2px solid var(--ink)}
+.narrow{min-width:0}
+.note{font-size:.88rem; color:var(--sub); margin:8px 2px 0}
+.mark{color:var(--red); font-weight:700}
+.tip{
+  margin-top:12px; padding:10px 12px; background:var(--red-soft);
+  border-radius:6px; font-size:.92rem;
+}
+@media print{
+  body{font-size:12px}
+  .scroll{overflow:visible; border:none}
+  h2{break-after:avoid}
+  table{break-inside:avoid}
+}
+table td{cursor:pointer; -webkit-tap-highlight-color:transparent; transition:background .15s}
+tr.group td{cursor:default}
+td.hide{background:var(--cover)!important; color:transparent!important}
+td.hide *{visibility:hidden}
+.controls{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--paper); padding:8px 0; display:flex; flex-wrap:wrap; gap:8px; align-items:center; border-bottom:1px solid var(--line); margin-bottom:8px}
+.controls p{margin:0; font-size:.82rem; color:var(--sub); flex-basis:100%}
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--paper)}
+.btn{font:inherit; font-size:.85rem; padding:6px 12px; border-radius:999px; border:1px solid var(--red); background:var(--paper); color:var(--red); cursor:pointer}
+.btn.fill{background:var(--red); color:#fff}
+.tbar{display:flex; gap:6px; justify-content:flex-end; margin:0 0 6px}
+.tbar .btn{font-size:.78rem; padding:4px 10px}
+:root{--cover:#c9a3ae}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--cover:#6b3a48}}
+:root[data-theme="dark"]{--cover:#6b3a48}
+@media print{.controls,.tbar{display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>助動詞まとめ</h1>
+<p class="lead">たり・り・ず・き・けり・つ・ぬ・る・らる・す・さす・しむ・む・むず・べし</p>
+<div class="controls">
+<p>表のマスをタップすると、隠す／表示を切り替えられます。</p>
+<button class="btn fill" id="hideAll" type="button">すべて隠す</button>
+<button class="btn" id="showAll" type="button">すべて表示</button>
+</div>
+
+<h2>1．助動詞一覧表</h2>
+<div class="scroll">
+<table class="big">
+<thead>
+<tr><th>助動詞</th><th>文法的意味</th><th>（代表的な）訳し方</th><th>未然形</th><th>連用形</th><th>終止形</th><th>連体形</th><th>已然形</th><th>命令形</th><th>接続</th></tr>
+</thead>
+<tbody>
+<!-- る・らる -->
+<tr class="top"><th rowspan="2">る</th><td>自発</td><td class="l">自然に…れる<br>自然に…られる</td><td rowspan="2">れ</td><td rowspan="2">れ</td><td rowspan="2">る</td><td rowspan="2">るる</td><td rowspan="2">るれ</td><td rowspan="2">れよ</td><td class="l" rowspan="10">「る」「す」…<br>（四段）動詞<br>（ナ変）動詞<br>（ラ変）動詞<br><br>「らる」「さす」…<br>右以外の動詞<br><br>「しむ」…用言<br><br>の（<span class="mark">未然</span>）形。</td></tr>
+<tr><td>可能</td><td class="l">…ことができる<br>…れる・…られる</td></tr>
+<tr><th rowspan="2">らる</th><td>受身</td><td class="l">…れる・…られる</td><td rowspan="2">られ</td><td rowspan="2">られ</td><td rowspan="2">らる</td><td rowspan="2">らるる</td><td rowspan="2">らるれ</td><td rowspan="2">られよ</td></tr>
+<tr><td>尊敬</td><td class="l">お…になる<br>…れる・…られる</td></tr>
+<!-- す・さす・しむ -->
+<tr class="top"><th rowspan="2">す</th><td rowspan="3">使役</td><td class="l" rowspan="3">…せる・…させる</td><td rowspan="2">せ</td><td rowspan="2">せ</td><td rowspan="2">す</td><td rowspan="2">する</td><td rowspan="2">すれ</td><td rowspan="2">せよ</td></tr>
+<tr></tr>
+<tr><th rowspan="2">さす</th><td rowspan="2">させ</td><td rowspan="2">させ</td><td rowspan="2">さす</td><td rowspan="2">さする</td><td rowspan="2">さすれ</td><td rowspan="2">させよ</td></tr>
+<tr><td rowspan="3">尊敬</td><td class="l" rowspan="3">お…になる<br>…せる・…させる</td></tr>
+<tr><th rowspan="2">しむ</th><td rowspan="2">しめ</td><td rowspan="2">しめ</td><td rowspan="2">しむ</td><td rowspan="2">しむる</td><td rowspan="2">しむれ</td><td rowspan="2">しめよ</td></tr>
+<tr></tr>
+<!-- ず -->
+<tr class="top"><th rowspan="2">ず</th><td rowspan="2">打消</td><td class="l" rowspan="2">…ない</td><td>（ず）</td><td>ず</td><td>ず</td><td>ぬ</td><td>ね</td><td>○</td><td class="l" rowspan="2">（<span class="mark">未然</span>）形</td></tr>
+<tr><td>ざら</td><td>ざり</td><td>○</td><td>ざる</td><td>ざれ</td><td>ざれ</td></tr>
+<!-- き・けり -->
+<tr class="top"><th>き</th><td>過去</td><td class="l">…た</td><td>（せ）</td><td>○</td><td>き</td><td class="mark">し</td><td class="mark">しか</td><td>○</td><td class="l" rowspan="3">（<span class="mark">連用</span>）形<br><br>※「き」はカ変・サ変に付くとき特殊<br>（こし・こしか・きし・きしか／せし・せしか）</td></tr>
+<tr><th rowspan="2">けり</th><td>過去</td><td class="l">…た・…たそうだ</td><td rowspan="2">（けら）</td><td rowspan="2">○</td><td rowspan="2">けり</td><td rowspan="2">ける</td><td rowspan="2">けれ</td><td rowspan="2">○</td></tr>
+<tr><td>詠嘆</td><td class="l">…だなあ・…たことよ</td></tr>
+<!-- つ・ぬ -->
+<tr class="top"><th>つ</th><td>完了</td><td class="l">…た・…てしまった</td><td>て</td><td>て</td><td>つ</td><td>つる</td><td>つれ</td><td>てよ</td><td class="l" rowspan="2">（<span class="mark">連用</span>）形</td></tr>
+<tr><th>ぬ</th><td>強意</td><td class="l">きっと…・確かに…</td><td>な</td><td>に</td><td>ぬ</td><td>ぬる</td><td>ぬれ</td><td>ね</td></tr>
+<!-- たり・り -->
+<tr class="top"><th>たり</th><td>完了</td><td class="l">…た・…てしまった</td><td>たら</td><td>たり</td><td>たり</td><td>たる</td><td>たれ</td><td>たれ</td><td class="l">（<span class="mark">連用</span>）形</td></tr>
+<tr><th>り</th><td>存続</td><td class="l">…ている・…てある</td><td>ら</td><td>り</td><td>り</td><td>る</td><td>れ</td><td>れ</td><td class="l">（<span class="mark">サ変</span>）の未然形<br>（<span class="mark">四段</span>）の已然形</td></tr>
+<!-- む・むず -->
+<tr class="top"><th rowspan="3">む</th><td>推量</td><td class="l">…だろう</td><td rowspan="3">（ま）</td><td rowspan="3">○</td><td rowspan="3">む</td><td rowspan="3">む</td><td rowspan="3">め</td><td rowspan="3">○</td><td class="l" rowspan="6">（<span class="mark">未然</span>）形</td></tr>
+<tr><td>意志</td><td class="l">…しよう・…するつもりだ</td></tr>
+<tr><td>適当</td><td class="l">…するのがよい</td></tr>
+<tr><th rowspan="3">むず</th><td>勧誘</td><td class="l">…しませんか・…したらどうか</td><td rowspan="3">○</td><td rowspan="3">○</td><td rowspan="3">むず</td><td rowspan="3">むずる</td><td rowspan="3">むずれ</td><td rowspan="3">○</td></tr>
+<tr><td>仮定</td><td class="l">…としたら・…ならば</td></tr>
+<tr><td>婉曲</td><td class="l">…ような</td></tr>
+<!-- べし -->
+<tr class="top"><th rowspan="8">べし</th><td>推量</td><td class="l">…にちがいない・…だろう</td><td rowspan="4">（べく）</td><td rowspan="4">べく</td><td rowspan="4">べし</td><td rowspan="4">べき</td><td rowspan="4">べけれ</td><td rowspan="4">○</td><td class="l" rowspan="8">（<span class="mark">終止</span>）形<br><br>※ラ変・ラ変型には<br>（<span class="mark">連体</span>）形</td></tr>
+<tr><td>意志</td><td class="l">…しよう・…するつもりだ</td></tr>
+<tr><td>適当</td><td class="l">…するのがよい</td></tr>
+<tr><td>当然</td><td class="l">…はずだ・…べきだ</td></tr>
+<tr><td>義務</td><td class="l">…しなければならない</td><td rowspan="4">べから</td><td rowspan="4">べかり</td><td rowspan="4">○</td><td rowspan="4">べかる</td><td rowspan="4">○</td><td rowspan="4">○</td></tr>
+<tr><td>強い勧誘</td><td class="l">…しようよ</td></tr>
+<tr><td>命令</td><td class="l">…せよ</td></tr>
+<tr><td>可能</td><td class="l">…できる</td></tr>
+</tbody>
+</table>
+</div>
+<p class="note">つ・ぬ、たり・りの意味は、どちらの助動詞にも両方あります（つ・ぬ＝完了・強意、たり・り＝完了・存続）。む・むず、べしの意味は、表の区切りに関係なくどちらにもすべてあります。赤字の「き」の連体形「し」・已然形「しか」は特に忘れやすいので注意。</p>
+
+<h2>2．意味の見分け方</h2>
+<div class="scroll">
+<table class="wide">
+<thead><tr><th>助動詞</th><th>意味</th><th>見分けるポイント</th></tr></thead>
+<tbody>
+<tr><th rowspan="4">る<br>らる</th><td>自発</td><td class="l">心情語（思ふ・偲ぶ・泣く など）に付く</td></tr>
+<tr><td>受身</td><td class="l">「〜に」（相手）がある</td></tr>
+<tr><td>可能</td><td class="l">下に打消がある</td></tr>
+<tr><td>尊敬</td><td class="l">主語が身分の高い人</td></tr>
+<tr><th rowspan="2">す<br>さす<br>しむ</th><td>使役</td><td class="l">単独で使われている／「〜に」（させる相手）がある</td></tr>
+<tr><td>尊敬</td><td class="l">下に尊敬語「給ふ」などがある（せ給ふ・させ給ふ）</td></tr>
+<tr><th rowspan="2">き<br>けり</th><td>過去</td><td class="l">き＝自分が直接体験した過去、けり＝人から聞いた過去</td></tr>
+<tr><td>詠嘆（けり）</td><td class="l">和歌・会話文の中で、今気づいたこと</td></tr>
+<tr><th rowspan="2">つ<br>ぬ</th><td>完了</td><td class="l">基本はこちら</td></tr>
+<tr><td>強意</td><td class="l">下に推量の助動詞が続く（てむ・なむ・つべし・ぬべし）</td></tr>
+<tr><th rowspan="2">たり<br>り</th><td>完了</td><td class="l">「〜た」と訳して自然</td></tr>
+<tr><td>存続</td><td class="l">「〜ている」と訳して自然</td></tr>
+<tr><th rowspan="5">む<br>むず</th><td>仮定・婉曲</td><td class="l">文中にあり、下に助詞（は・に・も など）→仮定、体言→婉曲</td></tr>
+<tr><td>意志</td><td class="l">文末で、主語が一人称（私）</td></tr>
+<tr><td>適当・勧誘</td><td class="l">文末で、主語が二人称（あなた）。「こそ〜め」の形も多い</td></tr>
+<tr><td>推量</td><td class="l">文末で、主語が三人称（彼・それ）</td></tr>
+<tr><td>確認</td><td class="l">最後に訳を当てはめて意味が通るか確かめる</td></tr>
+<tr><th rowspan="5">べし</th><td>意志</td><td class="l">主語が一人称</td></tr>
+<tr><td>命令・適当</td><td class="l">主語が二人称（命令や助言をしている）</td></tr>
+<tr><td>推量</td><td class="l">主語が三人称</td></tr>
+<tr><td>可能</td><td class="l">下に打消がある（べからず など）</td></tr>
+<tr><td>当然・義務</td><td class="l">「〜はずだ・〜べきだ・〜ねばならない」と訳して自然</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>3．テスト頻出：「ぬ」「ね」の識別</h2>
+<div class="scroll">
+<table class="narrow">
+<thead><tr><th>直前の形</th><th>正体</th><th>例</th></tr></thead>
+<tbody>
+<tr><th>未然形</th><td>打消「ず」<br>（ぬ＝連体形、ね＝已然形）</td><td class="l">花咲か<span class="mark">ぬ</span><br>→ 咲かない</td></tr>
+<tr><th>連用形</th><td>完了「ぬ」<br>（ぬ＝終止形、ね＝命令形）</td><td class="l">花咲き<span class="mark">ぬ</span><br>→ 咲いた</td></tr>
+</tbody>
+</table>
+</div>
+<div class="tip">直前が「ア段（咲か）」なら打消、「イ段（咲き）」なら完了、と音で見ると判断しやすい（四段動詞の場合）。</div>
+
+<h2>4．覚え方まとめ</h2>
+<div class="scroll">
+<table class="wide">
+<thead><tr><th>覚え方</th><th>対象</th><th>中身</th></tr></thead>
+<tbody>
+<tr class="group"><td colspan="3">意味の覚え方</td></tr>
+<tr><th>スイカカエテ</th><td>む・むず</td><td class="l"><span class="mark">ス</span>イ量（推量）・<span class="mark">イ</span>志・<span class="mark">カ</span>ン誘（勧誘）・<span class="mark">カ</span>定（仮定）・<span class="mark">エ</span>ン曲（婉曲）・<span class="mark">テ</span>キ当（適当）</td></tr>
+<tr><th>スイカトメテ</th><td>べし</td><td class="l"><span class="mark">ス</span>イ量（推量）・<span class="mark">イ</span>志・<span class="mark">カ</span>能・<span class="mark">ト</span>ウ然（当然）・<span class="mark">メ</span>イ令（命令）・<span class="mark">テ</span>キ当（適当）<br>※義務は当然の仲間、強い勧誘は命令の仲間</td></tr>
+<tr><th>じうかそ</th><td>る・らる</td><td class="l"><span class="mark">じ</span>発・<span class="mark">う</span>け身・<span class="mark">か</span>能・<span class="mark">そ</span>ん敬</td></tr>
+<tr class="group"><td colspan="3">接続の覚え方</td></tr>
+<tr><th>もしもしかめよ</th><td>未然形接続</td><td class="l">「る・らる・す・さす・しむ・ず・む・むず」を「もしもしかめよ」のメロディーで歌う</td></tr>
+<tr><th>きけり つぬ たり</th><td>連用形接続</td><td class="l">き・けり・つ・ぬ・たりをリズムで唱える</td></tr>
+<tr><th>さみしいり</th><td>り</td><td class="l"><span class="mark">サ</span>変の<span class="mark">未</span>然形・<span class="mark">四</span>段の<span class="mark">已</span>然形に付く</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>5．主語（人称）の見分け方</h2>
+<div class="scroll">
+<table class="wide">
+<thead><tr><th>人称</th><th>見分けるポイント</th><th>む・むず</th><th>べし</th></tr></thead>
+<tbody>
+<tr><th>一人称<br>（私）</th><td class="l">・会話文（「」の中）で、<span class="mark">話している人</span>の動作<br>・「〜と思ふ」「〜と念ず」の前（心の中の言葉）で、思っている本人の動作<br>・「我」「おのれ」「まろ」などが主語<br>・自分の動作なので尊敬語は付かない</td><td>意志</td><td>意志</td></tr>
+<tr class="top"><th>二人称<br>（あなた）</th><td class="l">・会話文で、<span class="mark">話しかけられている相手</span>の動作<br>・会話文で、相手の動作に尊敬語（給ふ など）が付いている<br>・命令形や「〜給へ」など、相手に向けた言葉<br>・「こそ〜め」の形になっていることが多い<br>・「君」「御身」「なんぢ」などが主語</td><td>適当・勧誘</td><td>適当・命令<br>（強い勧誘）</td></tr>
+<tr class="top"><th>三人称<br>（彼・それ）</th><td class="l">・<span class="mark">地の文</span>（会話以外の部分）の動作はほとんどこれ<br>・会話文でも、話し手・聞き手以外の人やもの（雪・馬など）の動作<br>・尊敬語が付いていれば、身分の高い人（帝・主人など）</td><td>推量</td><td>推量</td></tr>
+</tbody>
+</table>
+</div>
+<div class="tip">主語がつかみにくいときは接続助詞も見る。「て」「で」でつながれば主語は同じことが多く、「を」「に」「ば」「ど」でつながれば主語が変わることが多い。</div>
+
+<div class="scroll" style="margin-top:12px">
+<table class="wide">
+<thead><tr><th>例文</th><th>手がかり</th><th>主語</th><th>意味</th></tr></thead>
+<tbody>
+<tr><td class="l">いま一声呼ばれていらへ<span class="mark">む</span>と、念じて</td><td class="l">「と念じて」の中＝心の中の言葉</td><td>念じている本人<br>（一人称）</td><td>意志</td></tr>
+<tr><td class="l">花を見てこそ帰り給は<span class="mark">め</span></td><td class="l">会話文で、相手の動作に尊敬語「給ふ」</td><td>相手<br>（二人称）</td><td>勧誘</td></tr>
+<tr><td class="l">（帝は）峰にてす<span class="mark">べき</span>やう</td><td class="l">地の文で、帝のことを説明している</td><td>帝<br>（三人称）</td><td>当然</td></tr>
+</tbody>
+</table>
+</div>
+<div class="tip">主語の人称がわかったら、む・べしの意味は「一人称→意志、二人称→適当・勧誘（べしは命令も）、三人称→推量」で決める。最後に訳を当てはめて確認する。</div>
+</main>
+<script>
+(function(){
+  function cellsIn(root){
+    return Array.prototype.filter.call(root.querySelectorAll('td'), function(td){ return !td.closest('tr.group'); });
+  }
+  document.addEventListener('click', function(e){
+    var td = e.target.closest('td');
+    if(!td || td.closest('tr.group')) return;
+    td.classList.toggle('hide');
+  });
+  document.querySelectorAll('.scroll').forEach(function(wrap){
+    var bar = document.createElement('div');
+    bar.className = 'tbar';
+    var h = document.createElement('button');
+    h.type = 'button'; h.className = 'btn'; h.textContent = 'この表を隠す';
+    var s = document.createElement('button');
+    s.type = 'button'; s.className = 'btn'; s.textContent = 'この表を表示';
+    h.addEventListener('click', function(){ cellsIn(wrap).forEach(function(td){ td.classList.add('hide'); }); });
+    s.addEventListener('click', function(){ cellsIn(wrap).forEach(function(td){ td.classList.remove('hide'); }); });
+    bar.appendChild(h); bar.appendChild(s);
+    wrap.parentNode.insertBefore(bar, wrap);
+  });
+  document.getElementById('hideAll').addEventListener('click', function(){ cellsIn(document).forEach(function(td){ td.classList.add('hide'); }); });
+  document.getElementById('showAll').addEventListener('click', function(){ cellsIn(document).forEach(function(td){ td.classList.remove('hide'); }); });
+})();
+</script>
+</body>
+</html>
