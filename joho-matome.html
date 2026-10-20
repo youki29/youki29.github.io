@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>情報Ⅰ まとめ｜穴埋め</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#D7DFE6; --bar:#EEF2F5; --text:#1F2A36; --sub:#5C6875; --line:#C3CDD6;
+  --paper:#FFFFFF; --ink:#1F2A36; --rule:#C9CED4; --head:#F1F2F3;
+  --red:#FF2A1A; --blank:#E7EBEF; --blank-edge:#9AA6B2; --on:#1F2A36; --on-text:#FFFFFF;
+  --sheet:rgb(205,28,40);
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151A20; --bar:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --paper:#ECEBE6; --ink:#1F2A36; --rule:#BFC3C7; --head:#E0DFD9;
+  --blank:#D9DCDF; --blank-edge:#7D8791; --on:#E4E9EE; --on-text:#151A20; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#151A20; --bar:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --paper:#ECEBE6; --ink:#1F2A36; --rule:#BFC3C7; --head:#E0DFD9;
+  --blank:#D9DCDF; --blank-edge:#7D8791; --on:#E4E9EE; --on-text:#151A20; color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 112px)}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);border-bottom:1px solid var(--line)}
+.hin{max-width:760px;margin:0 auto;padding:10px 14px 8px}
+.row1{display:flex;align-items:center;justify-content:space-between;gap:8px}
+h1{font-size:15px;margin:0;font-weight:700}
+.prog{font-size:12px;color:var(--sub);white-space:nowrap}
+.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:8px 0 6px}
+.mode{font:inherit;font-size:13px;padding:8px 4px;border:0;background:var(--bar);color:var(--text);cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--on);color:var(--on-text);font-weight:700}
+.row2{display:flex;gap:6px;align-items:center}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--text);text-decoration:none;background:var(--bg)}
+.tool{flex:none;font:inherit;font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);cursor:pointer}
+.tool[hidden]{display:none}
+main{max-width:760px;margin:0 auto;padding:14px 10px 60vh}
+.paper{background:var(--paper);color:var(--ink);border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.15);padding:18px 18px 14px;margin:0 0 16px;line-height:1.7;font-size:15px}
+.paper h2{font-size:17px;margin:0 0 10px;padding:6px 10px;border:2px solid var(--ink);background:var(--head)}
+.paper h3{font-size:15px;margin:16px 0 6px;padding-left:8px;border-left:4px solid #555}
+.paper p{margin:6px 0}
+.paper ul,.paper ol{margin:4px 0 8px;padding-left:22px}
+.paper li{margin:2px 0}
+.tw{overflow-x:auto;margin:6px 0 10px}
+.paper table{border-collapse:collapse;font-size:14px;min-width:max-content}
+.paper th,.paper td{border:1px solid var(--rule);padding:4px 9px;text-align:left;vertical-align:top}
+.paper th{background:var(--head)}
+.a{color:var(--red);font-weight:700;border-radius:3px}
+body.blank .a{color:transparent;background:var(--blank);box-shadow:inset 0 -2px 0 var(--blank-edge);cursor:pointer;user-select:none}
+body.blank .a.open{color:var(--red);background:transparent;box-shadow:inset 0 -2px 0 var(--red)}
+.hint{font-size:12px;color:var(--sub);margin:0 2px 10px}
+.paper pre{background:#F3F5F7;border:1px solid var(--rule);border-radius:6px;padding:10px 12px;overflow-x:auto;margin:6px 0 10px;font-size:14px;line-height:1.6}
+.paper code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono",monospace}
+a:focus-visible,button:focus-visible,.a:focus-visible{outline:3px solid #3A7BD5;outline-offset:2px}
+@media (max-width:420px){.paper{padding:14px 12px;font-size:14.5px}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="row1"><h1>情報Ⅰ まとめ（教15〜20・プログラミング）</h1><span class="prog" id="prog"></span></div>
+  <div class="modes" role="group" aria-label="表示モード">
+    <button class="mode" data-m="show">答えを表示</button>
+    <button class="mode" data-m="blank">穴埋め</button>
+  </div>
+  <div class="row2">
+    <nav class="chips" aria-label="資料へ移動"><a class="chip" href="#s-k15">教15</a><a class="chip" href="#s-k16">教16</a><a class="chip" href="#s-k17">教17</a><a class="chip" href="#s-k18">教18</a><a class="chip" href="#s-k19">教19</a><a class="chip" href="#s-k20">教20</a><a class="chip" href="#s-j01">実01</a><a class="chip" href="#s-jm01">実問01</a><a class="chip" href="#s-jm02">実問02</a><a class="chip" href="#s-jm03">実問03</a><a class="chip" href="#s-jm04">実問04</a><a class="chip" href="#s-jm05">実問05</a><a class="chip" href="#s-jm06">実問06</a></nav>
+    <button class="tool" id="hideAll" hidden>全部隠す</button>
+    <button class="tool" id="openAll" hidden>全部見る</button>
+  </div>
+</div></header>
+<main>
+  <p class="hint" id="hint"></p>
+  <section class="paper" id="s-k15"><h2>教15　誤り検出符号（チェックディジット）</h2>
+<h3>文字コードの復習</h3>
+<ul>
+<li><span class="a" data-i="1">文字コード</span>：コンピュータで文字を扱うために、文字ごとに決まった番号を割り当てたもの（一覧表のようなもの）</li>
+<li>英数字や記号は<span class="a" data-i="2">256種類</span>あれば表せる → 2⁸＝256 なので <span class="a" data-i="3">8bit＝1B</span> 必要</li>
+<li>漢字などは<span class="a" data-i="4">65536種類以上</span>必要 → 2¹⁶＝65536 なので <span class="a" data-i="5">2B以上</span> 必要</li>
+<li>文字コードの種類：<span class="a" data-i="6">ASCII</span>・<span class="a" data-i="7">シフトJIS</span>・<span class="a" data-i="8">EUC</span>・<span class="a" data-i="9">Unicode</span></li>
+</ul>
+<h3>誤り検出符号</h3>
+<p>データを送受信するとき、通信回線の<span class="a" data-i="10">ノイズ</span>で0と1が変わると、送ったデータと違うデータが届いてしまう（例：「A」1000001 が 1010001 になり「Q」として受信）。そこで、各ビットの変化を確認するための情報を加えて、誤りを検出する。この付加データを<span class="a" data-i="11">誤り検出符号（チェックディジット）</span>という。</p>
+<ul>
+<li>データ中の「1」の個数を偶数か奇数にそろえるために付け加える1bitを<span class="a" data-i="12">パリティビット</span>という</li>
+<li><span class="a" data-i="13">偶数パリティ</span>：「1」の数が偶数になるように付加する（101 → 101<span class="a" data-i="14">0</span>、111 → 111<span class="a" data-i="15">1</span>）</li>
+<li><span class="a" data-i="16">奇数パリティ</span>：「1」の数が奇数になるように付加する（101 → 101<span class="a" data-i="17">1</span>、111 → 111<span class="a" data-i="18">0</span>）</li>
+</ul>
+<h3>パリティチェックの限界</h3>
+<ul>
+<li><span class="a" data-i="19">1bit</span>の誤りは<span class="a" data-i="20">検出できる</span>が、<span class="a" data-i="21">2bit</span>の誤りは<span class="a" data-i="22">検出できない</span>（1の数の偶奇が元に戻り、正しいと判断されてしまう）</li>
+<li>誤りを検出しても<span class="a" data-i="23">場所を特定できない</span>ので、<span class="a" data-i="24">訂正はできない</span> → <span class="a" data-i="25">データの再送</span>を要求する</li>
+</ul>
+<h3>水平垂直パリティチェック</h3>
+<p>文字コードを縦に並べ、<span class="a" data-i="26">水平方向と垂直方向</span>の両方にパリティビットを付けて、2次元でチェックする方法。誤りのある行と列が交わる場所がわかるので、1bitなら訂正できる。</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>誤り</th>
+<th>検出</th>
+<th>場所の特定</th>
+<th>訂正</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>パリティチェック</td>
+<td>1bit</td>
+<td><span class="a" data-i="27">○</span></td>
+<td><span class="a" data-i="28">×</span></td>
+<td><span class="a" data-i="29">×</span></td>
+</tr>
+<tr>
+<td>水平垂直パリティチェック</td>
+<td>1bit</td>
+<td><span class="a" data-i="30">○</span></td>
+<td><span class="a" data-i="31">○</span></td>
+<td><span class="a" data-i="32">○</span></td>
+</tr>
+<tr>
+<td>水平垂直パリティチェック</td>
+<td>2bit以上</td>
+<td><span class="a" data-i="33">○</span></td>
+<td><span class="a" data-i="34">×</span></td>
+<td><span class="a" data-i="35">×</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>教科書の問題（偶数パリティ）：5行目と5列目の1の数が奇数 → <span class="a" data-i="36">5列目・5行目の0を1に訂正</span>（正しい7文字は「<span class="a" data-i="37">Network</span>」）</li>
+<li>練習問題（1）7bit＋奇数パリティ：答えは<span class="a" data-i="38">ア</span>（奇数個のbitが誤っている時だけ再送を依頼できる）</li>
+<li>練習問題（2）奇数パリティの表：<span class="a" data-i="39">3行目・6列目の1を0に訂正</span>（※答えはClaudeが解いたもの）</li>
+</ul>
+</section>
+<section class="paper" id="s-k16"><h2>教16　音のデジタル化のしくみ</h2>
+<ul>
+<li>音は<span class="a" data-i="40">空気の振動</span>が伝わる波で、アナログの波形で表す</li>
+<li>1秒間に空気が振動する回数を<span class="a" data-i="41">周波数</span>といい、単位は<span class="a" data-i="42">ヘルツ［Hz］</span></li>
+<li>マイクでとらえた連続的なアナログデータを、段階的なデジタルデータに変換する作業を<span class="a" data-i="43">A/D変換</span>、逆を<span class="a" data-i="44">D/A変換</span>という</li>
+</ul>
+<h3>デジタル化の3つの手順</h3>
+<ol>
+<li><span class="a" data-i="45">標本化（サンプリング）</span>：波を時間で一定間隔に分割し、量として取り出す</li>
+<li><span class="a" data-i="46">量子化</span>：波を電圧で一定間隔に分割し、近い段階値で表す</li>
+<li><span class="a" data-i="47">符号化（コード化）</span>：量子化された数値を0と1に変換する</li>
+</ol>
+<h3>①標本化</h3>
+<ul>
+<li>音の波形と縦線の交点として取り出した点を<span class="a" data-i="48">標本点</span>という</li>
+<li>区切る間隔を<span class="a" data-i="49">標本化周期（サンプリング周期）</span>という</li>
+<li>1秒あたり何回標本点を取るかを<span class="a" data-i="50">標本化周波数（サンプリング周波数）</span>という（1秒に10回なら<span class="a" data-i="51">10Hz</span>）</li>
+<li>音楽CDは<span class="a" data-i="52">44100Hz</span>、ハイレゾ音源は<span class="a" data-i="53">96000Hz</span></li>
+</ul>
+<h3>②量子化</h3>
+<ul>
+<li>縦軸を一定間隔で区切って<span class="a" data-i="54">段階値</span>を決め、標本点の値を<span class="a" data-i="55">最も近い段階値</span>にそろえる</li>
+<li>何段階に分けるかを<span class="a" data-i="56">量子化ビット数</span>という（2bitなら2²＝<span class="a" data-i="57">4段階</span>、3bitなら2³＝<span class="a" data-i="58">8段階</span>）</li>
+<li>元の数値とデジタル化した数値の差を<span class="a" data-i="59">量子化誤差</span>という（例：1.25を4段階で量子化すると1になり、誤差は<span class="a" data-i="60">0.25</span>）</li>
+</ul>
+<h3>③符号化</h3>
+<ul>
+<li>量子化された10進数の値を<span class="a" data-i="61">2進数</span>で表す（例：6 → <span class="a" data-i="62">110</span>）</li>
+<li>音声情報を2進数の符号に変換する方式を<span class="a" data-i="63">PCM（パルス符号変調）方式</span>という</li>
+</ul>
+<h3>元のアナログデータに近づけるには</h3>
+<p><span class="a" data-i="64">標本化周波数</span>を<span class="a" data-i="65">大きく</span>し、<span class="a" data-i="66">量子化ビット数</span>を<span class="a" data-i="67">大きく</span>する。ただし、使用する<span class="a" data-i="68">データ量は多くなる</span>。</p>
+</section>
+<section class="paper" id="s-k17"><h2>教17　静止画と動画の表現</h2>
+<h3>色と光</h3>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>三原色</th>
+<th>混ぜると</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="69">減法混色</span>（色の三原色）</td>
+<td><span class="a" data-i="70">シアン（C）・マゼンタ（M）・イエロー（Y）</span></td>
+<td><span class="a" data-i="71">黒</span>に近づく</td>
+<td>印刷物</td>
+</tr>
+<tr>
+<td><span class="a" data-i="72">加法混色</span>（光の三原色）</td>
+<td><span class="a" data-i="73">赤（R）・緑（G）・青（B）</span></td>
+<td><span class="a" data-i="74">白</span>に近づく</td>
+<td>コンピュータのディスプレイ</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>カラープリンタは、CMYだけではきれいな黒が出ないので<span class="a" data-i="75">K（黒）</span>を加えた<span class="a" data-i="76">CMYK</span>の4色を使う</li>
+</ul>
+<h3>画素と色の数</h3>
+<ul>
+<li>ディスプレイのRGBの3つの点をまとめて<span class="a" data-i="77">画素（ピクセル）</span>という。画素は<span class="a" data-i="78">画像の最小単位</span></li>
+<li>明るさを0〜255の256段階で表すには<span class="a" data-i="79">8bit</span>必要</li>
+<li>RGBに8bitずつ割り当てると、1画素あたり8bit×3色＝<span class="a" data-i="80">24bit</span></li>
+<li>24bitなら2⁸×2⁸×2⁸＝<span class="a" data-i="81">約1677万色</span>（16,777,216色）まで表現できる → <span class="a" data-i="82">24ビットフルカラー</span></li>
+</ul>
+<h3>解像度と階調</h3>
+<ul>
+<li>画像の<span class="a" data-i="83">標本化</span>をし、細かく区切るほど<span class="a" data-i="84">解像度</span>が増える。画像の精度は<span class="a" data-i="85">画素の数</span>で決まる</li>
+<li>ディスプレイの総画素数は<span class="a" data-i="86">横×縦の画素数</span>で表す（例：480×480）</li>
+<li>画像の<span class="a" data-i="87">量子化</span>で、各画素の明るさを最も近い段階値にそろえる。この段階数を<span class="a" data-i="88">階調</span>という（RGBがそれぞれ256段階なら<span class="a" data-i="89">256階調</span>）</li>
+</ul>
+<h3>画像のデジタル化</h3>
+<ol>
+<li><span class="a" data-i="90">標本化</span>：画像を一定間隔のます目に区切り、RGBに分解して濃淡を取り出す</li>
+<li><span class="a" data-i="91">量子化</span>：各画素の明るさを、最も近い段階値にそろえる</li>
+<li><span class="a" data-i="92">符号化</span>：量子化した値を0と1（2進数）にする</li>
+</ol>
+<h3>ラスタ画像とベクタ画像</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><span class="a" data-i="93">ラスタ形式</span></th>
+<th><span class="a" data-i="94">ベクタ形式</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ソフト</td>
+<td><span class="a" data-i="95">ペイント系</span>（Paint、Photoshop）</td>
+<td><span class="a" data-i="96">ドロー系</span>（Illustrator）</td>
+</tr>
+<tr>
+<td>表し方</td>
+<td>画像を<span class="a" data-i="97">画素の集まり</span>として表現</td>
+<td>基準点からの<span class="a" data-i="98">座標や角度、太さ</span>で表現</td>
+</tr>
+<tr>
+<td>拡大すると</td>
+<td><span class="a" data-i="99">ジャギー</span>（ギザギザ）が目立つ</td>
+<td>ジャギーが目立たない、変形や回転が容易</td>
+</tr>
+</tbody>
+</table>
+<h3>ファイル形式と動画</h3>
+<ul>
+<li>ファイル名の末尾の「.〇〇〇」を<span class="a" data-i="100">拡張子</span>という</li>
+<li><span class="a" data-i="101">JPEG</span>（.jpg）は<span class="a" data-i="102">非可逆圧縮</span>、<span class="a" data-i="103">PNG</span>（.png）は<span class="a" data-i="104">可逆圧縮</span></li>
+<li>動画は静止画を短い間隔で切り替えて、動いているように見せている（パラパラ漫画のように）</li>
+<li>動画を構成する1枚1枚の静止画を<span class="a" data-i="105">フレーム</span>、1秒あたりの静止画の数を<span class="a" data-i="106">フレームレート</span>（単位：<span class="a" data-i="107">fps</span>）という。24fpsなら1秒に24枚</li>
+<li>動画はデータ量が大きいので、<span class="a" data-i="108">H.264/MPEG-4 AVC</span>などで圧縮することが多い</li>
+</ul>
+</section>
+<section class="paper" id="s-k18"><h2>教18　データ量とデータの圧縮</h2>
+<ul>
+<li>必要な情報を失わずにデータ量を小さくすることを<span class="a" data-i="109">圧縮</span>という</li>
+<li>圧縮したデータを元に戻すことを<span class="a" data-i="110">伸張・解凍・復元・展開</span>という</li>
+</ul>
+<h3>可逆圧縮と非可逆圧縮</h3>
+<table>
+<thead>
+<tr>
+<th>種類</th>
+<th>特徴</th>
+<th>使うもの</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="111">可逆圧縮</span></td>
+<td>元のデータに<span class="a" data-i="112">完全に復元できる</span></td>
+<td>プログラム・文書ファイルなど、変わると困るもの</td>
+</tr>
+<tr>
+<td><span class="a" data-i="113">非可逆圧縮</span></td>
+<td>元のデータに<span class="a" data-i="114">完全には戻せない</span>が、圧縮率が高い</td>
+<td><span class="a" data-i="115">静止画・動画・音声</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>可逆圧縮では<span class="a" data-i="116">ZIP形式</span>がよく使われる。複数のファイルやフォルダを一つにまとめて圧縮でき、<span class="a" data-i="117">展開しないと利用できない</span></li>
+<li>非可逆圧縮の形式：画像 <span class="a" data-i="118">JPEG</span>、動画 <span class="a" data-i="119">MPEG-4・AVI</span>、音声 <span class="a" data-i="120">MP3</span>（※GIF・PNGは可逆圧縮）</li>
+</ul>
+<h3>圧縮率の計算</h3>
+<p><span class="a" data-i="121">圧縮率（%）＝ 圧縮後のデータサイズ ÷ 圧縮前のデータサイズ × 100</span></p>
+<ul>
+<li>問題1：100MB → 70MB なら <span class="a" data-i="122">70%</span></li>
+<li>問題2：ファイルA 100KB→80KB は<span class="a" data-i="123">80%</span>、ファイルB 120KB→60KB は<span class="a" data-i="124">50%</span> → <span class="a" data-i="125">ファイルB</span>の方が圧縮率が高い（<span class="a" data-i="126">数値が小さい方が圧縮率は高い</span>）</li>
+</ul>
+<h3>ランレングス圧縮（可逆圧縮①）</h3>
+<p>「同じデータが何個並んでいるか」を数えて、その数を付け加えて記録する方法。</p>
+<ul>
+<li>例：AAAABBBBBCCCCCCDEE（18個）→ <span class="a" data-i="127">A4B5C6DE2</span>（9個）→ 圧縮率 <span class="a" data-i="128">50%</span></li>
+</ul>
+<h3>ハフマン圧縮（可逆圧縮②）</h3>
+<p><span class="a" data-i="129">出現頻度が高いデータほど短いコード</span>を与える方法。<span class="a" data-i="130">ハフマン木</span>を使って符号を決める。</p>
+<ol>
+<li>文字を出現頻度の多い順に並べる</li>
+<li>出現頻度の少ない2つを線で結び、合計を書く</li>
+<li>2をくり返す</li>
+<li>線の上に数字を書く（<span class="a" data-i="131">左は0・右は1</span>）</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>文字</th>
+<th>C</th>
+<th>B</th>
+<th>A</th>
+<th>D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>出現回数</td>
+<td>9</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>符号</td>
+<td><span class="a" data-i="132">0</span></td>
+<td><span class="a" data-i="133">10</span></td>
+<td><span class="a" data-i="134">110</span></td>
+<td><span class="a" data-i="135">111</span></td>
+</tr>
+</tbody>
+</table>
+<p>例：ACCACCCCBCBCCDBB は、全部2bitで表すと<span class="a" data-i="136">32bit</span>、ハフマン圧縮すると<span class="a" data-i="137">26bit</span>になる。</p>
+</section>
+<section class="paper" id="s-k19"><h2>教19　コンピュータの仕組みと動作</h2>
+<h3>ハードウェアとソフトウェア</h3>
+<ul>
+<li><span class="a" data-i="138">ハードウェア</span>：パソコン本体や周辺機器など、物理的な機械の部分</li>
+<li><span class="a" data-i="139">ソフトウェア</span>：ハードウェアを動かすプログラム（Windows、macOS、アプリなど）</li>
+</ul>
+<h3>コンピュータの5つの装置</h3>
+<table>
+<thead>
+<tr>
+<th>装置</th>
+<th>働き・例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="140">記憶装置</span></td>
+<td><span class="a" data-i="141">主記憶装置（メインメモリ）</span>と<span class="a" data-i="142">補助記憶装置</span></td>
+</tr>
+<tr>
+<td><span class="a" data-i="143">制御装置</span></td>
+<td>プログラムの命令を実行し、各機能に指示を出す</td>
+</tr>
+<tr>
+<td><span class="a" data-i="144">演算装置</span></td>
+<td>演算を行う</td>
+</tr>
+<tr>
+<td><span class="a" data-i="145">入力装置</span></td>
+<td>キーボード・マウス・タッチパネル・スキャナなど</td>
+</tr>
+<tr>
+<td><span class="a" data-i="146">出力装置</span></td>
+<td>ディスプレイ・プリンタなど</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="a" data-i="147">制御装置と演算装置</span>をまとめて<span class="a" data-i="148">CPU（中央処理装置）</span>という</li>
+<li><span class="a" data-i="149">主記憶装置</span>＝コンピュータの<span class="a" data-i="150">作業スペース</span>。データを一時的に記憶し、CPUと直接やり取りできる。<span class="a" data-i="151">電源を切るとデータが消える</span></li>
+<li><span class="a" data-i="152">補助記憶装置</span>＝コンピュータの<span class="a" data-i="153">本棚</span>。データを長期的に記憶し、<span class="a" data-i="154">電源を切ってもデータが残る</span>（USBメモリ・CD・ハードディスクなど）</li>
+<li>ハードウェアをつなげる電子回路基盤を<span class="a" data-i="155">マザーボード</span>という</li>
+</ul>
+<h3>命令やデータの流れ</h3>
+<ol>
+<li><span class="a" data-i="156">入力装置</span>でデータを入力する</li>
+<li>一時的に<span class="a" data-i="157">主記憶装置</span>に記憶される</li>
+<li>必要があれば<span class="a" data-i="158">補助記憶装置</span>に記憶したり、呼び出したりする</li>
+<li><span class="a" data-i="159">CPU</span>が主記憶装置から命令やデータを読み込み、演算して実行する</li>
+<li>演算されたデータが<span class="a" data-i="160">出力装置</span>で出力される</li>
+</ol>
+<p>※<span class="a" data-i="161">制御装置</span>は、各装置の制御を行っている。</p>
+<h3>ソフトウェアの種類</h3>
+<ul>
+<li><span class="a" data-i="162">OS（オペレーティングシステム）</span>＝<span class="a" data-i="163">基本ソフトウェア</span>：パソコンはWindows・macOS、スマホはAndroid・iOS</li>
+<li><span class="a" data-i="164">アプリケーションソフトウェア</span>＝<span class="a" data-i="165">応用ソフトウェア</span>：Word・Excel・Google ChromeなどOS上で動くもの</li>
+</ul>
+<h3>OSの機能</h3>
+<ul>
+<li>その1：周辺機器を動作させる<span class="a" data-i="166">デバイスドライバ</span>を追加すると、周辺機器が動く。今は接続しただけで動く<span class="a" data-i="167">プラグ・アンド・プレイ</span>が多い</li>
+<li>その2：ハードウェアと応用ソフトウェアの<span class="a" data-i="168">仲介</span>をしている</li>
+<li>その3：アプリからハードウェアや機能を呼び出す<span class="a" data-i="169">API</span>を用意している（例：アプリからカメラを起動）</li>
+</ul>
+<h3>その他</h3>
+<ul>
+<li><span class="a" data-i="170">GUI</span>：アイコンを選んでアプリを実行する環境／<span class="a" data-i="171">CUI</span>：文字を入力してアプリを実行する環境</li>
+<li><span class="a" data-i="172">キャッシュメモリ</span>：主記憶装置はCPUより遅いので、間に置く<span class="a" data-i="173">小容量で高速なメモリ</span></li>
+</ul>
+</section>
+<section class="paper" id="s-k20"><h2>教20　演算の仕組み（論理回路）</h2>
+<p>コンピュータが0と1で演算や制御するための回路を<span class="a" data-i="174">論理回路</span>という。基本は<span class="a" data-i="175">AND回路・OR回路・NOT回路</span>の3つで、これらの組み合わせですべての計算を行っている。</p>
+<h3>基本の論理回路</h3>
+<ul>
+<li><span class="a" data-i="176">AND回路（論理積回路）</span>：2つの入力が<span class="a" data-i="177">ともに1の時だけ</span>1を出力（スイッチの<span class="a" data-i="178">直列</span>回路）</li>
+<li><span class="a" data-i="179">OR回路（論理和回路）</span>：2つの入力の<span class="a" data-i="180">どちらか一方でも1</span>なら1を出力（スイッチの<span class="a" data-i="181">並列</span>回路）</li>
+<li><span class="a" data-i="182">NOT回路（否定回路）</span>：入力した値を<span class="a" data-i="183">反転</span>して出力（1なら0）</li>
+</ul>
+<h3>真理値表</h3>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>AND</th>
+<th>OR</th>
+<th>NAND</th>
+<th>NOR</th>
+<th>XOR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><span class="a" data-i="184">1</span></td>
+<td>1</td>
+<td><span class="a" data-i="185">0</span></td>
+<td>0</td>
+<td><span class="a" data-i="186">0</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="a" data-i="187">NAND回路（否定論理積回路）</span>：AND回路を反転した値を出力</li>
+<li><span class="a" data-i="188">NOR回路（否定論理和回路）</span>：OR回路を反転した値を出力</li>
+<li><span class="a" data-i="189">XOR回路（排他的論理和回路）</span>：<span class="a" data-i="190">どちらか片方だけ</span>が1なら1を出力</li>
+<li>問題A①（AND→NOT）も②（それぞれNOT→OR）も、出力は<span class="a" data-i="191">1・1・1・0</span>（NANDと同じ）</li>
+</ul>
+<h3>半加算回路</h3>
+<p>AND・OR・NOT回路を組み合わせた、<span class="a" data-i="192">2進数1桁の足し算</span>をする回路。<span class="a" data-i="193">C</span>は<span class="a" data-i="194">桁上げ（Carry）</span>、<span class="a" data-i="195">S</span>は<span class="a" data-i="196">1桁目の和（Sum）</span>を表す。真理値表は<span class="a" data-i="197">足し算</span>をすればOK。</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>S</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td><span class="a" data-i="198">1</span></td>
+<td><span class="a" data-i="199">0</span></td>
+</tr>
+</tbody>
+</table>
+<h3>全加算回路</h3>
+<p>半加算回路では、下位からの桁上げがある2桁目以上の計算ができない。そこで、<span class="a" data-i="200">半加算回路2つとOR回路</span>を組み合わせた<span class="a" data-i="201">全加算回路</span>を使う。A・Bと<span class="a" data-i="202">下位からの桁上げX</span>を足し、Cが上の桁、Sがその桁の値を表す。</p>
+<table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>X</th>
+<th>C</th>
+<th>S</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td><span class="a" data-i="203">1</span></td>
+<td><span class="a" data-i="204">0</span></td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td><span class="a" data-i="205">1</span></td>
+<td><span class="a" data-i="206">0</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td><span class="a" data-i="207">1</span></td>
+<td><span class="a" data-i="208">0</span></td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td><span class="a" data-i="209">1</span></td>
+<td><span class="a" data-i="210">1</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="paper" id="s-j01"><h2>実01　プログラミングの基礎</h2>
+<ul>
+<li>プログラムを作るには<span class="a" data-i="211">アルゴリズム</span>を用いる。アルゴリズムとは、<span class="a" data-i="212">問題解決の処理手順</span>のこと</li>
+<li>アルゴリズムの3つの基本構造：<span class="a" data-i="213">順次構造</span>（上から順に処理）・<span class="a" data-i="214">分岐構造</span>（条件で処理を分ける）・<span class="a" data-i="215">反復構造</span>（くり返す）</li>
+<li>例：体育祭で「晴れなら開催、雨なら中止」は<span class="a" data-i="216">分岐構造</span>、「お昼にPVをくり返し流す」は<span class="a" data-i="217">反復構造</span></li>
+<li>アルゴリズムを記号で図にして、わかりやすくしたものを<span class="a" data-i="218">フローチャート</span>という</li>
+</ul>
+<h3>おもなフローチャート記号</h3>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="219">端子</span></td>
+<td>開始と終了</td>
+</tr>
+<tr>
+<td><span class="a" data-i="220">処理</span></td>
+<td>演算などの処理</td>
+</tr>
+<tr>
+<td><span class="a" data-i="221">判断</span>（ひし形）</td>
+<td>条件による分岐</td>
+</tr>
+<tr>
+<td><span class="a" data-i="222">ループ端</span></td>
+<td>くり返しの開始と終了</td>
+</tr>
+<tr>
+<td><span class="a" data-i="223">定義済み処理</span></td>
+<td>関数などの処理</td>
+</tr>
+<tr>
+<td><span class="a" data-i="224">データ</span></td>
+<td>データの入力や出力</td>
+</tr>
+<tr>
+<td><span class="a" data-i="225">手操作入力</span></td>
+<td>キーボード入力のデータなど</td>
+</tr>
+<tr>
+<td><span class="a" data-i="226">表示</span></td>
+<td>画面に表示されるデータなど</td>
+</tr>
+<tr>
+<td><span class="a" data-i="227">線</span></td>
+<td>処理の流れ</td>
+</tr>
+<tr>
+<td><span class="a" data-i="228">結合子</span></td>
+<td>フローチャート内での続き</td>
+</tr>
+</tbody>
+</table>
+<p>※「フローチャートを書きなさい」という問題は出題しない（プリントより）</p>
+</section>
+<section class="paper" id="s-jm01"><h2>実問01　Pythonの基礎（表示と計算）</h2>
+<ul>
+<li>文字や数字を画面に表示するには<span class="a" data-i="229">print()</span>を使う</li>
+<li>文字は<span class="a" data-i="230">"　"（ダブルクォーテーション）</span>で囲む。数字はそのまま書く</li>
+</ul>
+<pre><code>print("Yamada")
+print("Taro")
+print(16)</code></pre>
+
+<h3>算術演算子</h3>
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>意味</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="231">+</span></td>
+<td>足し算</td>
+<td>1 + 1 → 2</td>
+</tr>
+<tr>
+<td><span class="a" data-i="232">-</span></td>
+<td>引き算</td>
+<td>5 - 3 → 2</td>
+</tr>
+<tr>
+<td><span class="a" data-i="233">*</span></td>
+<td>掛け算</td>
+<td>2 * 3 → 6</td>
+</tr>
+<tr>
+<td><span class="a" data-i="234">/</span></td>
+<td>割り算</td>
+<td>5 / 3 → 1.66…</td>
+</tr>
+<tr>
+<td><span class="a" data-i="235">**</span></td>
+<td>べき乗</td>
+<td>2 ** 3 → 8</td>
+</tr>
+<tr>
+<td><span class="a" data-i="236">%</span></td>
+<td>割り算の余り</td>
+<td>5 % 3 → 2</td>
+</tr>
+<tr>
+<td><span class="a" data-i="237">//</span></td>
+<td>割り算の余りを切り捨て</td>
+<td>5 // 3 → 1</td>
+</tr>
+</tbody>
+</table>
+<h3>練習問題</h3>
+<pre><code>print(100 <span class="a" data-i="238">%</span> 3)          # 余り → <span class="a" data-i="239">1</span>
+print(50 <span class="a" data-i="240">//</span> 4)          # 余りを切り捨て → <span class="a" data-i="241">12</span>
+print((2*(1+3)/4)<span class="a" data-i="242">**</span>3)   # 計算結果 → <span class="a" data-i="243">8.0</span></code></pre>
+
+</section>
+<section class="paper" id="s-jm02"><h2>実問02　分岐処理（if文）</h2>
+<ul>
+<li>コードは<span class="a" data-i="244">1行に1つの処理</span>しか書かない</li>
+<li><span class="a" data-i="245">インデント（字下げ）</span>に注意する。ifの中の処理は字下げする</li>
+<li>ifやelseの行の最後には<span class="a" data-i="246">:（コロン）</span>をつける</li>
+</ul>
+<h3>比較演算子</h3>
+<table>
+<thead>
+<tr>
+<th>演算子</th>
+<th>結果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>X <span class="a" data-i="247">&lt;</span> Y</td>
+<td>XがYより小さければ</td>
+</tr>
+<tr>
+<td>X <span class="a" data-i="248">&lt;=</span> Y</td>
+<td>XがY以下だったら</td>
+</tr>
+<tr>
+<td>X <span class="a" data-i="249">&gt;</span> Y</td>
+<td>XがYより大きければ</td>
+</tr>
+<tr>
+<td>X <span class="a" data-i="250">&gt;=</span> Y</td>
+<td>XがY以上だったら</td>
+</tr>
+<tr>
+<td>X <span class="a" data-i="251">==</span> Y</td>
+<td>XとYが等しければ</td>
+</tr>
+<tr>
+<td>X <span class="a" data-i="252">!=</span> Y</td>
+<td>XとYが等しくなければ</td>
+</tr>
+</tbody>
+</table>
+<h3>例題と練習問題</h3>
+<p>入力した数値が2より大きければatteru、そうでなければchigauと表示する。</p>
+<pre><code>x = int(input())
+<span class="a" data-i="253">if</span> x <span class="a" data-i="254">></span> 2:
+    print("atteru")
+<span class="a" data-i="255">else</span>:
+    print("chigau")</code></pre>
+
+<p>練習1：入力した数値が5ならatteru、そうでなければchigau。最後に必ずowari。</p>
+<pre><code>x = int(input())
+if x <span class="a" data-i="256">==</span> 5:
+    print("atteru")
+else:
+    print("chigau")
+print("owari")      # 字下げしない → <span class="a" data-i="257">必ず表示される</span></code></pre>
+
+<p>練習2：成人ならseijin、未成年ならmiseinen。</p>
+<pre><code>nenrei = int(input())
+if nenrei <span class="a" data-i="258">>= 18</span>:
+    print("seijin")
+else:
+    print("miseinen")</code></pre>
+
+</section>
+<section class="paper" id="s-jm03"><h2>実問03　変数と分岐の応用</h2>
+<ul>
+<li><span class="a" data-i="259">変数</span>とは、数値や文字などのデータを入れておく<span class="a" data-i="260">箱</span>のようなもの</li>
+<li><span class="a" data-i="261">=</span>は「等しい」ではなく、右の値を左の変数に入れる<span class="a" data-i="262">代入</span>の意味</li>
+</ul>
+<pre><code>n = 1
+print(n)        # → <span class="a" data-i="263">1</span>
+n = "Taro"
+print(n)        # → <span class="a" data-i="264">Taro</span></code></pre>
+
+<p>例3：このプログラムでは何が出力される？</p>
+<pre><code>a = 1
+b = 2
+c = a + b
+a = 100
+print(c)        # → <span class="a" data-i="265">3</span></code></pre>
+
+<p>cは計算したときの値（3）のまま。あとでaを100に変えても<span class="a" data-i="266">cは変わらない</span>。</p>
+<h3>3つ以上に分ける（elif）</h3>
+<p>tokutenが10ならmanten、5以上ならgoukaku、それより低ければsaisiken。</p>
+<pre><code>tokuten = 7
+if tokuten <span class="a" data-i="267">== 10</span>:
+    print("manten")
+<span class="a" data-i="268">elif</span> tokuten <span class="a" data-i="269">>= 5</span>:
+    print("goukaku")
+else:
+    print("saisiken")</code></pre>
+
+<ul>
+<li>3つ以上に分けるときは<span class="a" data-i="270">elif</span>を使う</li>
+<li><span class="a" data-i="271">条件の順番</span>が大事。「tokuten &gt;= 5」を先に書くと、10点でも<span class="a" data-i="272">goukaku</span>になってしまい、mantenが表示されない（ダメな例）</li>
+</ul>
+</section>
+<section class="paper" id="s-jm04"><h2>実問04　反復構造（for文）</h2>
+<pre><code>for i in <span class="a" data-i="273">range(10)</span>:
+    print(i)        # → <span class="a" data-i="274">0〜9</span>が表示される</code></pre>
+
+<ul>
+<li><span class="a" data-i="275">range(10)</span>は0から<span class="a" data-i="276">9</span>まで（終わりの数は含まない）</li>
+<li><span class="a" data-i="277">range(開始, 終わり, 増やす数)</span>で範囲と間隔を決められる</li>
+</ul>
+<p>練習①：1〜10の奇数／練習②：2〜10の偶数</p>
+<pre><code>for n in range(<span class="a" data-i="278">1, 11, 2</span>):
+    print(n)        # → 1 3 5 7 9
+for m in range(<span class="a" data-i="279">2, 11, 2</span>):
+    print(m)        # → 2 4 6 8 10</code></pre>
+
+<p>練習③：1〜5の整数の和／練習④：1〜100の偶数の和</p>
+<pre><code>s = <span class="a" data-i="280">0</span>
+for a in range(1, 6):
+    s = <span class="a" data-i="281">s + a</span>
+print(s)            # → <span class="a" data-i="282">15</span>
+
+s = 0
+for a in range(<span class="a" data-i="283">2, 101, 2</span>):
+    s = s + a
+print(s)            # → <span class="a" data-i="284">2550</span></code></pre>
+
+<ul>
+<li>合計を入れる変数sは、くり返しの前に<span class="a" data-i="285">0</span>にしておく</li>
+<li>print(s)を字下げしないと、くり返しが<span class="a" data-i="286">終わったあとに1回だけ</span>表示される</li>
+</ul>
+</section>
+<section class="paper" id="s-jm05"><h2>実問05　反復構造（while文）</h2>
+<pre><code>i = 0
+<span class="a" data-i="287">while</span> i <span class="a" data-i="288">&lt; 10</span>:
+    print(i)
+    i = <span class="a" data-i="289">i + 1</span>      # → 0〜9が表示される</code></pre>
+
+<ul>
+<li><span class="a" data-i="290">for文</span>は、くり返す回数が<span class="a" data-i="291">決まっている</span>ときに使う</li>
+<li><span class="a" data-i="292">while文</span>は、くり返す回数が<span class="a" data-i="293">決まっていない</span>ときに使う（条件を満たす間くり返す）</li>
+<li>「i = i + 1」を先に書いて、あとでprint(i)すると<span class="a" data-i="294">1〜10</span>が表示される</li>
+<li>「i = i + 1」を書き忘れると、iが増えずに<span class="a" data-i="295">無限ループ</span>になる</li>
+</ul>
+<p>練習問題</p>
+<pre><code>n = 1                  # ①1〜10の奇数
+while n <= 10:
+    print(n)
+    n = n <span class="a" data-i="296">+ 2</span>
+
+m = 2                  # ②2〜10の偶数
+while m <= 10:
+    print(m)
+    m = m + 2
+
+i = <span class="a" data-i="297">5</span>                  # ③5 4 3 2 1と表示
+while i <span class="a" data-i="298">>= 1</span>:
+    print(i)
+    i = i <span class="a" data-i="299">- 1</span></code></pre>
+
+</section>
+<section class="paper" id="s-jm06"><h2>実問06　配列（リスト）</h2>
+<ul>
+<li><span class="a" data-i="300">配列（リスト）</span>：複数の値を、変数をたくさん用意せずに1つの配列で管理するしくみ</li>
+<li>配列の中の数値や文字を<span class="a" data-i="301">要素</span>という</li>
+<li>要素の番号を<span class="a" data-i="302">添字（インデックス）</span>という。添字は<span class="a" data-i="303">0</span>から始まる</li>
+</ul>
+<pre><code>a = [5, 10, 15]     # a[0]=5, a[1]=10, a[2]=15
+print(a[1])         # 2番目の要素 → <span class="a" data-i="304">10</span></code></pre>
+
+<p>例題2：要素を1行ずつ表示する（反復構造を使う）</p>
+<pre><code>a = [5, 10, 15]
+for i in range(<span class="a" data-i="305">3</span>):
+    print(<span class="a" data-i="306">a[i]</span>)     # → 5 10 15</code></pre>
+
+<p>練習問題：空の配列に1, 2, 3を追加して表示する</p>
+<pre><code>b = <span class="a" data-i="307">[]</span>
+b.<span class="a" data-i="308">append</span>(1)
+b.append(2)
+b.append(3)
+for i in range(<span class="a" data-i="309">len(b)</span>):
+    print(b[i])     # → 1 2 3</code></pre>
+
+<ul>
+<li>要素を追加するときは<span class="a" data-i="310">append()</span>を使う</li>
+<li>要素の数は<span class="a" data-i="311">len()</span>で調べられる</li>
+</ul></section>
+</main>
+<script>
+const TOTAL=311;
+const $=id=>document.getElementById(id);
+const body=document.body;
+const HINTS={show:"赤字が答えです。",blank:"空欄をタップすると答えが出ます。もう一度タップで隠れます。"};
+let mode="show";
+try{const s=JSON.parse(localStorage.getItem("joho-matome")||"null");if(s&&(s.mode==="show"||s.mode==="blank"))mode=s.mode;}catch(e){}
+function save(){try{localStorage.setItem("joho-matome",JSON.stringify({mode}));}catch(e){}}
+// wrap tables for horizontal scroll
+document.querySelectorAll(".paper table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.parentNode.insertBefore(w,t);w.appendChild(t);});
+const ans=[...document.querySelectorAll(".a")];
+ans.forEach(a=>{a.addEventListener("click",()=>{if(mode==="blank"){a.classList.toggle("open");prog();}});
+  a.addEventListener("keydown",e=>{if(mode==="blank"&&(e.key==="Enter"||e.key===" ")){e.preventDefault();a.click();}});});
+function prog(){
+  if(mode==="blank"){const o=ans.filter(a=>a.classList.contains("open")).length;$("prog").textContent="めくった "+o+" / "+TOTAL;}
+  else $("prog").textContent="答え "+TOTAL+" か所";
+}
+function setMode(m){
+  mode=m;
+  body.classList.toggle("blank",m==="blank");
+  ans.forEach(a=>{if(m==="blank"){a.setAttribute("tabindex","0");a.setAttribute("role","button");}else{a.removeAttribute("tabindex");a.removeAttribute("role");}});
+  document.querySelectorAll(".mode").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.m===m)));
+  $("hideAll").hidden=$("openAll").hidden=(m!=="blank");
+  $("hint").textContent=HINTS[m];
+  prog();save();
+}
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+$("hideAll").onclick=()=>{ans.forEach(a=>a.classList.remove("open"));prog();};
+$("openAll").onclick=()=>{ans.forEach(a=>a.classList.add("open"));prog();};
+setMode(mode);
+</script>
+</body>
+</html>

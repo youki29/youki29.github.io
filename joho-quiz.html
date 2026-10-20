@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>情報Ⅰ 練習問題</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#D7DFE6; --surface:#EEF2F5; --text:#1F2A36; --sub:#5C6875; --line:#C3CDD6;
+  --card:#FFFFFF; --card-ink:#1F2A36; --card-sub:#7A8591; --red:#D6141C;
+  --ok:#1E7A4C; --ok-bg:#E3F3EA; --ng:#C0262D; --ng-bg:#FBE6E7; --on:#1F2A36; --on-text:#FFFFFF; --choice:#F6F8FA;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151A20; --surface:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --card:#ECEEEA; --card-ink:#1F2A36; --card-sub:#6E7884; --red:#C4121A;
+  --ok:#4FBF86; --ok-bg:#D6EDDF; --ng:#E0555B; --ng-bg:#F4DADB; --on:#E4E9EE; --on-text:#151A20; --choice:#E2E5E1; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#151A20; --surface:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --card:#ECEEEA; --card-ink:#1F2A36; --card-sub:#6E7884; --red:#C4121A;
+  --ok:#4FBF86; --ok-bg:#D6EDDF; --ng:#E0555B; --ng-bg:#F4DADB; --on:#E4E9EE; --on-text:#151A20; --choice:#E2E5E1; color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box}
+html{min-height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--text);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-tap-highlight-color:transparent}
+.app{max-width:560px;margin:0 auto;padding:14px 16px 28px}
+h1{font-size:18px;margin:6px 0 4px}
+.lead{font-size:13px;color:var(--sub);margin:0 0 16px}
+.label{font-size:13px;font-weight:700;margin:16px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:13px;padding:7px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--on);color:var(--on-text);border-color:var(--on)}
+.chip small{opacity:.7}
+.big{display:block;width:100%;font:inherit;font-size:16px;font-weight:700;padding:14px;border-radius:12px;border:0;background:var(--ok);color:#fff;cursor:pointer;margin-top:22px}
+.big:disabled{opacity:.45;cursor:default}
+.sub-btn{display:block;width:100%;font:inherit;font-size:14px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer;margin-top:10px}
+.note{font-size:12px;color:var(--sub);margin-top:10px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--sub);margin:4px 0 8px}
+.top button{font:inherit;font-size:13px;border:0;background:none;color:var(--sub);cursor:pointer;padding:4px 0}
+.bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.sheet{background:var(--card);color:var(--card-ink);border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.14);padding:18px 18px 16px}
+.tag{font-size:12px;color:var(--card-sub)}
+.q{font-size:18px;line-height:1.6;font-weight:500;margin:8px 0 16px;overflow-wrap:anywhere}
+.choices{display:grid;gap:8px}
+.choice{display:flex;gap:10px;align-items:flex-start;text-align:left;font:inherit;font-size:15px;line-height:1.5;padding:12px 12px;border-radius:10px;
+  border:1.5px solid #D5DBE1;background:var(--choice);color:var(--card-ink);cursor:pointer}
+.choice span{white-space:pre-wrap;font-family:inherit}
+.choice b{flex:none;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid #C3CDD6;display:grid;place-items:center;font-size:12px}
+.choice.ok{border-color:var(--ok);background:var(--ok-bg)}
+.choice.ng{border-color:var(--ng);background:var(--ng-bg)}
+.choice:disabled{cursor:default}
+.res{margin-top:14px;padding-top:12px;border-top:1px dashed #C9CED4}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)} .verdict.ng{color:var(--ng)}
+.ans{font-family:"Klee One","Zen Kaku Gothic New",cursive;font-weight:600;color:var(--red);font-size:19px;margin:4px 0}
+.exp{font-size:14px;line-height:1.6;color:var(--card-ink)}
+.score{text-align:center;padding:10px 0 4px}
+.score .num{font-size:44px;font-weight:700}
+.score .num small{font-size:18px;color:var(--card-sub)}
+.wrong{margin:14px 0 0;padding:0;list-style:none}
+.wrong li{padding:10px 0;border-top:1px solid #DDE2E7;font-size:14px;line-height:1.55}
+.wrong .ans{font-size:16px}
+.gw{overflow-x:auto;margin:4px 0 10px}
+.grid{border-collapse:collapse;margin:0 auto}
+.grid th{font-size:11px;font-weight:500;color:var(--card-sub);padding:2px;text-align:center}
+.grid td{padding:0}
+.cell{width:34px;height:34px;font:inherit;font-size:17px;border:1px solid #9AA6B2;background:#fff;color:var(--card-ink);cursor:pointer;padding:0;display:block}
+.cell.par{background:#DCEFD8}
+.cell:disabled{cursor:default}
+.cell.badline{box-shadow:inset 0 0 0 2px #E8A0A4}
+.cell.hit{background:var(--ok-bg);box-shadow:inset 0 0 0 3px var(--ok);font-weight:700}
+.cell.miss{background:var(--ng-bg);box-shadow:inset 0 0 0 3px var(--ng)}
+.gnote{font-size:12px;color:var(--card-sub);text-align:center;margin:4px 0 0}
+.noerr{display:block;margin:8px auto 0;font:inherit;font-size:14px;padding:9px 16px;border-radius:10px;border:1.5px solid #D5DBE1;background:var(--choice);color:var(--card-ink);cursor:pointer}
+.noerr.ok{border-color:var(--ok);background:var(--ok-bg)} .noerr.ng{border-color:var(--ng);background:var(--ng-bg)}
+@media (max-width:380px){.cell{width:30px;height:30px;font-size:15px}}
+pre.code{margin:0 0 12px;background:#F3F5F7;border:1px solid #D5DBE1;border-radius:8px;padding:10px 12px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono",monospace;font-size:14px;line-height:1.6;color:var(--card-ink)}
+[hidden]{display:none!important}
+button:focus-visible{outline:3px solid #3A7BD5;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section id="start">
+    <h1>情報Ⅰ 練習問題</h1>
+    <p class="lead">教15〜教20とプログラミング（実01・実問01〜06）の内容から出題します。4択（一部2択）と、水平垂直パリティチェックの表の問題があります。答えるとすぐに解説が出ます。</p>
+    <div class="label">範囲（複数選べます）</div>
+    <div class="chips" id="lessons"></div>
+    <div class="label">問題数</div>
+    <div class="chips" id="counts"></div>
+    <div class="label">出題する問題</div>
+    <div class="chips" id="pool"></div>
+    <button class="big" id="go">はじめる</button>
+    <p class="note" id="info"></p>
+  </section>
+
+  <section id="quiz" hidden>
+    <div class="top"><span id="pos"></span><button id="quit">やめる</button></div>
+    <div class="bar"><i id="fill"></i></div>
+    <div class="sheet">
+      <div class="tag" id="tag"></div>
+      <div class="q" id="qtext"></div>
+      <div class="choices" id="choices"></div>
+      <div class="res" id="res" hidden>
+        <div class="verdict" id="verdict"></div>
+        <div class="ans" id="right"></div>
+        <div class="exp" id="exp"></div>
+      </div>
+    </div>
+    <button class="big" id="next" hidden>次へ</button>
+  </section>
+
+  <section id="result" hidden>
+    <div class="sheet">
+      <div class="score"><div class="tag">結果</div><div class="num" id="score"></div><div class="tag" id="comment"></div></div>
+      <ul class="wrong" id="wrongList"></ul>
+    </div>
+    <button class="big" id="retry">間違えた問題をもう一度</button>
+    <button class="sub-btn" id="home">最初の画面に戻る</button>
+  </section>
+</div>
+<script>
+const Q=[
+[15,"英数字や記号の256種類を表すのに必要な情報量は？",["8bit（1B）","4bit","16bit（2B）","256bit"],0,"2⁸＝256なので8bit＝1Bあれば表せる。"],
+[15,"漢字など65536種類の文字を表すのに必要な情報量は？",["2B以上","1B","4bit","8bit"],0,"2¹⁶＝65536なので16bit＝2B以上必要。"],
+[15,"偶数パリティで「1011001」を送るとき、付け加えるパリティビットは？",["0","1"],0,"1の数は4個（偶数）なので、偶数のままにする0を付ける。"],
+[15,"奇数パリティで「1100101」を送るとき、付け加えるパリティビットは？",["1","0"],0,"1の数は4個（偶数）なので、奇数（5個）にするために1を付ける。"],
+[15,"パリティチェック（1次元）で、2bitの誤りが起きたらどうなる？",["誤りを検出できず、正しいと判断されてしまう","誤りを検出して訂正できる","誤りの場所だけ特定できる","必ず再送を要求する"],0,"2bit反転すると1の数の偶奇が元に戻るので、誤りに気づけない。"],
+[15,"パリティチェックで誤りを検出したとき、どうする？",["データの再送を要求する","誤りの場所を訂正する","パリティビットを付け直す","そのまま受け取る"],0,"場所が特定できないので訂正はできず、再送を要求する。"],
+[15,"水平垂直パリティチェックで、1bitの誤りについて正しいものは？",["検出・場所の特定・訂正のすべてができる","検出だけできる","検出と場所の特定だけできる","どれもできない"],0,"誤りのある行と列が交わる場所がわかるので、訂正までできる。"],
+[15,"水平垂直パリティチェックで、2bit以上の誤りについて正しいものは？",["検出はできるが、場所の特定と訂正はできない","すべてできる","検出もできない","訂正だけできる"],0,"どの組み合わせで誤ったのか分からないため、特定・訂正はできない。"],
+[15,"7bitのデータに奇数パリティを1bit付けて送るとき、正しい記述は？",["奇数個のbitが誤っている時だけ、再送を依頼できる","1bitが間違っている時だけ、誤りを訂正できる","2bit間違っていても、再送を依頼できる","1bitが間違っている時だけ、再送を依頼できる"],0,"奇数個（1・3・5…）の誤りなら偶奇が変わるので検出できる。偶数個の誤りは検出できない。"],
+[15,"データの送受信で、0と1が変わってしまう主な原因は？",["通信回線のノイズ","文字コードの違い","パリティビット","圧縮"],0,"ノイズで「A」(1000001)が「Q」(1010001)になる例があった。"],
+
+[16,"1秒間に空気が振動する回数を何という？",["周波数","標本化周期","量子化ビット数","フレームレート"],0,"単位はヘルツ［Hz］。"],
+[16,"アナログデータをデジタルデータに変換することを何という？",["A/D変換","D/A変換","符号化","圧縮"],0,"逆にデジタル→アナログはD/A変換。"],
+[16,"音のデジタル化の正しい順番は？",["標本化 → 量子化 → 符号化","量子化 → 標本化 → 符号化","符号化 → 標本化 → 量子化","標本化 → 符号化 → 量子化"],0,"区切って取り出す → 段階値にそろえる → 2進数にする。"],
+[16,"1秒間に44100回標本化するとき、標本化周波数は？",["44100Hz","44.1Hz","4410Hz","441000Hz"],0,"音楽CDの標本化周波数は44100Hz。"],
+[16,"量子化ビット数が3bitのとき、何段階に分けられる？",["8段階","3段階","6段階","9段階"],0,"2³＝8段階。"],
+[16,"0〜3の4段階で量子化するとき、2.7はいくつになる？",["3","2","2.7","4"],0,"最も近い段階値にそろえるので3。誤差は0.3。"],
+[16,"元の値とデジタル化した値の差を何という？",["量子化誤差","標本化周期","パリティ","圧縮率"],0,"例：1.25を1にすると、0.25の量子化誤差が出る。"],
+[16,"量子化された値「5」を3bitの2進数に符号化すると？",["101","110","011","100"],0,"5＝4＋1なので101。"],
+[16,"音声を2進数の符号に変換する方式は？",["PCM方式","JPEG方式","ZIP形式","ハフマン方式"],0,"PCM＝パルス符号変調。"],
+[16,"元のアナログデータに近づける方法として正しいものは？",["標本化周波数と量子化ビット数をどちらも大きくする","どちらも小さくする","標本化周波数だけ小さくする","量子化ビット数だけ小さくする"],0,"ただしデータ量は多くなる。"],
+
+[17,"光の三原色は？",["赤・緑・青（RGB）","シアン・マゼンタ・イエロー（CMY）","赤・黄・青","黒・白・灰"],0,"光は混ぜると白に近づく（加法混色）。"],
+[17,"絵の具のように、混ぜると黒に近づく混ぜ方は？",["減法混色","加法混色","量子化","標本化"],0,"色の三原色CMYを使う。"],
+[17,"カラープリンタでCMYに加える色は？",["K（黒）","W（白）","R（赤）","G（緑）"],0,"CMYだけではきれいな黒が出ないため、CMYKの4色を使う。"],
+[17,"画像の最小単位は？",["画素（ピクセル）","フレーム","階調","拡張子"],0,"RGBの3つの点をまとめて1画素という。"],
+[17,"RGBそれぞれ8bitで表すとき、1画素あたりのデータ量は？",["24bit","8bit","16bit","256bit"],0,"8bit×3色＝24bit（24ビットフルカラー）。"],
+[17,"24ビットフルカラーで表現できる色の数は？",["約1677万色","256色","約6万5千色","約100万色"],0,"2⁸×2⁸×2⁸＝2²⁴＝16,777,216色。"],
+[17,"明るさを何段階に分けるかの段階数を何という？",["階調","解像度","画素","フレームレート"],0,"RGBがそれぞれ256段階なら256階調。"],
+[17,"拡大するとジャギーが目立つ画像形式は？",["ラスタ形式","ベクタ形式"],0,"ラスタ形式は画素の集まりなので、拡大するとギザギザになる。"],
+[17,"PNGについて正しいものは？",["拡張子は.png、可逆圧縮","拡張子は.jpg、非可逆圧縮","拡張子は.png、非可逆圧縮","動画のファイル形式"],0,"JPEG（.jpg）は非可逆圧縮。"],
+[17,"30fpsの動画は、1秒間に何枚の静止画を表示している？",["30枚","3枚","300枚","60枚"],0,"fps＝1秒あたりのフレーム（静止画）の数。"],
+
+[18,"元のデータに完全に復元できる圧縮は？",["可逆圧縮","非可逆圧縮"],0,"プログラムや文書ファイルなど、変わると困るものに使う。"],
+[18,"非可逆圧縮がよく使われるものは？",["静止画・動画・音声","プログラム","文書ファイル","ZIPファイル"],0,"多少の欠損があっても品質への影響が少ないため。"],
+[18,"200MBのファイルを圧縮したら50MBになった。圧縮率は？",["25%","50%","75%","400%"],0,"50÷200×100＝25%。"],
+[18,"圧縮率が最も高い（よく圧縮できている）のはどれ？",["100KB→40KB","100KB→60KB","200KB→150KB","50KB→40KB"],0,"40%・60%・75%・80%。数値が小さいほど圧縮率は高い。"],
+[18,"「AAAABBBBBCCCCCCDEE」をランレングス圧縮すると？",["A4B5C6DE2","4A5B6C1D2E","A4B5C6D1E2E","ABCDE"],0,"1個だけのDは数を付けずにそのまま書く。"],
+[18,"「WWWWWWBBBW」（10文字）をランレングス圧縮すると「W6B3W」（5文字）。圧縮率は？",["50%","30%","60%","20%"],0,"5÷10×100＝50%。"],
+[18,"出現頻度が高いデータほど短いコードを与える圧縮方法は？",["ハフマン圧縮","ランレングス圧縮","ZIP形式","PCM方式"],0,"ハフマン木を使って符号を決める。"],
+[18,"ハフマン木で、左への線と右への線に書く数字は？",["左は0、右は1","左は1、右は0","どちらも0","どちらも1"],0,"例ではCは0、Bは10、Aは110、Dは111になった。"],
+[18,"圧縮したデータを元に戻すことの呼び方として、当てはまらないものは？",["符号化","伸張","解凍","展開"],0,"伸張・解凍・復元・展開と呼ぶ。符号化は2進数にすること。"],
+[18,"複数のファイルを1つにまとめて可逆圧縮する形式は？",["ZIP形式","JPEG","MP3","MPEG-4"],0,"ZIPは展開しないと利用できない。"],
+
+[19,"制御装置と演算装置をまとめて何という？",["CPU（中央処理装置）","主記憶装置","マザーボード","OS"],0,"コンピュータの頭脳にあたる。"],
+[19,"電源を切るとデータが消える記憶装置は？",["主記憶装置（メインメモリ）","補助記憶装置","USBメモリ","ハードディスク"],0,"主記憶装置は作業スペース、補助記憶装置は本棚。"],
+[19,"補助記憶装置の例として正しいものは？",["SSD","CPU","キーボード","ディスプレイ"],0,"USBメモリ・CD・ハードディスク・SSDなど。"],
+[19,"入力装置はどれ？",["スキャナ","プリンタ","ディスプレイ","メインメモリ"],0,"キーボード・マウス・タッチパネル・スキャナなど。"],
+[19,"CPUは、どこから命令やデータを読み込んで実行する？",["主記憶装置","補助記憶装置","入力装置","出力装置"],0,"入力 → 主記憶 → CPU → 出力の流れ。"],
+[19,"基本ソフトウェアと呼ばれるものは？",["OS","Word","Excel","Google Chrome"],0,"Word・Excelなどはアプリケーション（応用）ソフトウェア。"],
+[19,"周辺機器を動かすためにOSに追加するプログラムは？",["デバイスドライバ","API","キャッシュメモリ","GUI"],0,"今は接続しただけで動くプラグ・アンド・プレイが多い。"],
+[19,"アプリからハードウェアの機能（カメラなど）を呼び出すしくみは？",["API","CUI","OS","マザーボード"],0,"OSがAPIを用意しているので、どのアプリからでもカメラを起動できる。"],
+[19,"文字を入力してアプリを実行する環境は？",["CUI","GUI"],0,"アイコンを選ぶ環境はGUI。"],
+[19,"CPUと主記憶装置の間に置く、小容量で高速なメモリは？",["キャッシュメモリ","補助記憶装置","メインメモリ","マザーボード"],0,"主記憶装置がCPUより遅いので、高速化のために置く。"],
+
+[20,"2つの入力がともに1のときだけ1を出力する回路は？",["AND回路","OR回路","NOT回路","XOR回路"],0,"論理積回路。スイッチの直列回路で表せる。"],
+[20,"OR回路で、A=0・B=1のときの出力は？",["1","0"],0,"どちらか一方でも1なら1。"],
+[20,"NOT回路に1を入力したときの出力は？",["0","1"],0,"入力を反転する。"],
+[20,"NAND回路で、A=1・B=1のときの出力は？",["0","1"],0,"AND回路の出力（1）を反転して0。"],
+[20,"NOR回路で、出力が1になる入力は？",["A=0・B=0","A=0・B=1","A=1・B=0","A=1・B=1"],0,"ORの出力を反転するので、OR＝0になる0・0のときだけ1。"],
+[20,"XOR回路で、出力が0になる入力の組み合わせは？",["A=1・B=1","A=0・B=1","A=1・B=0"],0,"XORはどちらか片方だけが1のとき1。両方1なら0。"],
+[20,"AND回路の後ろにNOT回路をつなぐと、どの回路と同じ働きになる？",["NAND回路","NOR回路","OR回路","XOR回路"],0,"問題A①。出力は1・1・1・0。"],
+[20,"半加算回路で、A=1・B=1のときのCとSは？",["C=1・S=0","C=0・S=1","C=1・S=1","C=0・S=0"],0,"1＋1＝10（2進数）。Cが桁上げ、Sが1桁目の和。"],
+[20,"全加算回路で、A=1・B=0・X=1のときのCとSは？",["C=1・S=0","C=0・S=1","C=1・S=1","C=0・S=0"],0,"1＋0＋1＝2＝10（2進数）。"],
+[20,"全加算回路は何を組み合わせてできている？",["半加算回路2つとOR回路","AND回路だけ","NOT回路2つ","半加算回路1つとNOT回路"],0,"下位からの桁上げXも足せるようにした回路。"],
+[101,"問題解決の処理手順のことを何という？",["アルゴリズム","フローチャート","プログラム","インデント"],0,"アルゴリズムを記号で図にしたものがフローチャート。"],
+[101,"アルゴリズムの3つの基本構造は？",["順次構造・分岐構造・反復構造","入力・処理・出力","変数・配列・関数","if・for・while"],0,"上から順に／条件で分ける／くり返す、の3つ。"],
+[101,"「晴れなら通常通り開催、雨なら中止」はどの構造？",["分岐構造","順次構造","反復構造"],0,"条件によって処理が分かれるので分岐構造。"],
+[101,"「お昼に体育祭PVをくり返し流す」はどの構造？",["反復構造","分岐構造","順次構造"],0,"同じ処理をくり返すので反復構造。"],
+[101,"フローチャートで「条件による分岐」を表す記号は？",["判断（ひし形）","端子","処理（長方形）","ループ端"],0,"ひし形の中に条件を書き、YES／NOで分かれる。"],
+[101,"フローチャートで「開始と終了」を表す記号は？",["端子","判断","表示","結合子"],0,"「はじめ」「おわり」を書く角の丸い記号。"],
+[101,"フローチャートで「くり返しの開始と終了」を表す記号は？",["ループ端","判断","データ","定義済み処理"],0,"上下2つの記号で、くり返す範囲をはさむ。"],
+
+[102,"文字「Yamada」を正しく表示できるコードは？",["print(\"Yamada\")","print(Yamada)","print[\"Yamada\"]","\"Yamada\".print"],0,"文字は\" \"で囲む。囲まないと変数名として扱われてエラーになる。"],
+[102,"割り算の余りを求める演算子は？",["%","//","/","**"],0,"5 % 3 → 2"],
+[102,"割り算の余りを切り捨てる演算子は？",["//","%","/","**"],0,"5 // 3 → 1"],
+[102,"べき乗（2³など）を表す演算子は？",["**","^","*","//"],0,"2 ** 3 → 8"],
+[102,"このプログラムの出力は？",["1","33","33.33…","3"],0,"100÷3＝33余り1。%は余りを求める。","print(100 % 3)"],
+[102,"このプログラムの出力は？",["12","12.5","2","13"],0,"50÷4＝12余り2。//は余りを切り捨てる。","print(50 // 4)"],
+[102,"このプログラムの出力は？",["8.0","2.0","6.0","64"],0,"2×(1+3)÷4＝2.0、2.0の3乗で8.0。/を使うと小数になる。","print((2 * (1 + 3) / 4) ** 3)"],
+[102,"このプログラムの出力は？",["3.5","3","1","4"],0,"/はふつうの割り算なので3.5。","print(7 / 2)"],
+
+[103,"「XがY以上だったら」を表す比較演算子は？",["X >= Y","X > Y","X <= Y","X == Y"],0,">=は以上、>はより大きい。"],
+[103,"「XとYが等しければ」を表す比較演算子は？",["X == Y","X = Y","X != Y","X >= Y"],0,"=は代入。比較するときは==を使う。"],
+[103,"「XとYが等しくなければ」を表す比較演算子は？",["X != Y","X == Y","X <> Y","X =! Y"],0,"!=は「等しくない」。"],
+[103,"if文の条件の行の最後につける記号は？",[":（コロン）",";（セミコロン）",".（ピリオド）",",（カンマ）"],0,"if x > 2: のようにコロンをつける。"],
+[103,"if文の中で実行する処理を書くときに注意することは？",["インデント（字下げ）する","1行にまとめて書く","かっこで囲む","大文字で書く"],0,"字下げした部分がifの中の処理になる。"],
+[103,"x に 5 を入力したときの出力は？",["atteru","chigau","atteru と chigau","何も表示されない"],0,"5 > 2 は正しいので atteru。","x = int(input())\nif x > 2:\n    print(\"atteru\")\nelse:\n    print(\"chigau\")"],
+[103,"x に 3 を入力したときの出力は？",["chigau と owari","atteru と owari","chigau だけ","owari だけ"],0,"3は5ではないのでchigau。print(\"owari\")は字下げしていないので必ず表示される。","x = int(input())\nif x == 5:\n    print(\"atteru\")\nelse:\n    print(\"chigau\")\nprint(\"owari\")"],
+[103,"成人（18歳以上）かどうかを判定する条件として正しいものは？",["nenrei >= 18","nenrei > 18","nenrei <= 18","nenrei == 18"],0,"18歳も成人なので「以上」の>=を使う。"],
+
+[104,"変数とは？",["数値や文字などのデータを入れておく箱","画面に表示する命令","くり返しの回数","比較演算子の一つ"],0,"=で右の値を左の変数に入れる（代入）。"],
+[104,"このプログラムの出力は？",["3","102","100","1"],0,"cは計算したときの値（1＋2＝3）のまま。あとでaを変えてもcは変わらない。","a = 1\nb = 2\nc = a + b\na = 100\nprint(c)"],
+[104,"このプログラムの出力は？",["8","5","3","x + 3"],0,"右側のx＋3（5＋3＝8）をxに入れ直す。","x = 5\nx = x + 3\nprint(x)"],
+[104,"3つ以上に分岐するときに使うものは？",["elif","else if","then","switch"],0,"if → elif → else の順に書く。"],
+[104,"tokuten が 10 のときの出力は？",["manten","goukaku","saisiken","manten と goukaku"],0,"最初の条件 tokuten == 10 が正しいので manten だけ表示される。","tokuten = 10\nif tokuten == 10:\n    print(\"manten\")\nelif tokuten >= 5:\n    print(\"goukaku\")\nelse:\n    print(\"saisiken\")"],
+[104,"tokuten が 10 のときの出力は？（ダメな例）",["goukaku","manten","saisiken","何も表示されない"],0,"最初の tokuten >= 5 が正しくなるので goukaku。条件の順番が大事。","tokuten = 10\nif tokuten >= 5:\n    print(\"goukaku\")\nelif tokuten == 10:\n    print(\"manten\")\nelse:\n    print(\"saisiken\")"],
+[104,"tokuten が 3 のときの出力は？",["saisiken","goukaku","manten","エラー"],0,"10でも5以上でもないので else の saisiken。","tokuten = 3\nif tokuten == 10:\n    print(\"manten\")\nelif tokuten >= 5:\n    print(\"goukaku\")\nelse:\n    print(\"saisiken\")"],
+
+[105,"このプログラムで表示される数は？",["0〜9","1〜10","0〜10","1〜9"],0,"range(10)は0から9まで。終わりの数は含まない。","for i in range(10):\n    print(i)"],
+[105,"このプログラムで表示される数は？",["1 3 5 7 9","1 2 3 … 10","2 4 6 8 10","1 3 5 7 9 11"],0,"1から始めて2ずつ増やし、11の手前まで。","for n in range(1, 11, 2):\n    print(n)"],
+[105,"2〜10の偶数を表示するrangeは？",["range(2, 11, 2)","range(2, 10, 2)","range(1, 10, 2)","range(10, 2)"],0,"終わりの数は含まないので、10まで出すには11にする。"],
+[105,"このプログラムの出力は？",["15","5","10","1 3 6 10 15"],0,"1＋2＋3＋4＋5＝15。print(s)は字下げしていないので最後に1回だけ表示。","s = 0\nfor a in range(1, 6):\n    s = s + a\nprint(s)"],
+[105,"このプログラムの出力は？",["1 3 6（1行ずつ）","6","1 2 3","3"],0,"print(s)が字下げされているので、くり返しのたびに表示される。","s = 0\nfor a in range(1, 4):\n    s = s + a\n    print(s)"],
+[105,"このプログラムの出力は？（1〜100の偶数の和）",["2550","5050","2500","100"],0,"2＋4＋…＋100＝2550。","s = 0\nfor a in range(2, 101, 2):\n    s = s + a\nprint(s)"],
+[105,"合計を入れる変数sを、くり返しの前に0にする理由は？",["最初は何も足していない状態から始めるため","エラーを防ぐ決まりだから","くり返しの回数を決めるため","表示を速くするため"],0,"s ← 0 から、s ← s ＋ a をくり返して足していく。"],
+
+[106,"for文とwhile文の使い分けとして正しいものは？",["for文は回数が決まっているとき、while文は回数が決まっていないとき","for文は回数が決まっていないとき、while文は決まっているとき","どちらも同じ","while文は分岐のときに使う"],0,"while文は条件を満たしている間くり返す。"],
+[106,"このプログラムで表示される数は？",["0〜9","1〜10","0〜10","1〜9"],0,"表示してから1増やすので0〜9。","i = 0\nwhile i < 10:\n    print(i)\n    i = i + 1"],
+[106,"このプログラムで表示される数は？",["1〜10","0〜9","0〜10","1〜9"],0,"先に1増やしてから表示するので1〜10。","i = 0\nwhile i < 10:\n    i = i + 1\n    print(i)"],
+[106,"このプログラムはどうなる？",["0がずっと表示され続ける（無限ループ）","0〜9が表示される","何も表示されない","エラーになる"],0,"iが増えないので、i < 10 がずっと正しいまま。","i = 0\nwhile i < 10:\n    print(i)"],
+[106,"5 4 3 2 1 と表示するには、□に何を入れる？",["i = i - 1","i = i + 1","i = 5","i = i - 5"],0,"5から1ずつ減らしていく。","i = 5\nwhile i >= 1:\n    print(i)\n    □"],
+[106,"このプログラムで表示される数は？",["1 3 5 7 9","1〜10","2 4 6 8 10","1 3 5 7 9 11"],0,"1から2ずつ増やす。11になると n <= 10 が正しくないので終わる。","n = 1\nwhile n <= 10:\n    print(n)\n    n = n + 2"],
+
+[107,"配列の中の数値や文字を何という？",["要素","添字","変数名","インデント"],0,"要素の番号は添字（インデックス）。"],
+[107,"配列の添字は何から始まる？",["0","1","−1","好きな数"],0,"1番目の要素は a[0]。"],
+[107,"このプログラムの出力は？",["10","5","15","[5, 10, 15]"],0,"添字は0から始まるので、a[1]は2番目の10。","a = [5, 10, 15]\nprint(a[1])"],
+[107,"このプログラムの出力は？",["5","10","15","エラー"],0,"a[0]は1番目の要素。","a = [5, 10, 15]\nprint(a[0])"],
+[107,"このプログラムはどうなる？",["エラーになる","15が表示される","0が表示される","5が表示される"],0,"要素は3つなので添字は0〜2。a[3]は存在しない。","a = [5, 10, 15]\nprint(a[3])"],
+[107,"配列に要素を追加する命令は？",["append()","add()","len()","print()"],0,"b.append(1) のように使う。"],
+[107,"このプログラムの出力は？",["[1, 2]","[2, 1]","[]","1 2"],0,"空の配列に1、次に2を後ろに追加する。","b = []\nb.append(1)\nb.append(2)\nprint(b)"],
+[107,"このプログラムの出力は？",["3","15","2","30"],0,"len()は要素の数を調べる。","a = [5, 10, 15]\nprint(len(a))"],
+[107,"配列aの要素を1行ずつ全部表示するコードは？",["for i in range(3):\n    print(a[i])","print(a[3])","for i in range(3):\nprint(a)","print(a[i])"],0,"反復構造で添字iを0〜2まで変えながら表示する。","a = [5, 10, 15]"]
+];
+
+const TITLES={15:"誤り検出符号",16:"音のデジタル化",17:"静止画と動画",18:"データの圧縮",19:"コンピュータの仕組み",20:"演算の仕組み",101:"プログラミングの基礎",102:"Pythonの基礎",103:"分岐処理",104:"変数と分岐の応用",105:"反復構造for",106:"反復構造while",107:"配列"};
+const LBL=l=>l>100?(l===101?"実01":"実問0"+(l-101)):"教"+l;
+const ITEMS=Q.map((q,i)=>({id:i,l:q[0],q:q[1],c:q[2],a:q[3],e:q[4],code:q[5]}));
+["even","even","even","odd","odd","even"].forEach((par,k)=>ITEMS.push({id:"g"+k,l:15,grid:true,par}));
+function makeGrid(par){
+  // 7文字×7bit（列が文字）＋右にパリティ列・下にパリティ行
+  const g=[];for(let r=0;r<7;r++){g.push([]);for(let c=0;c<7;c++)g[r].push(Math.random()<0.5?1:0);}
+  const fix=n=>par==="even"?n%2:(n+1)%2;
+  for(let r=0;r<7;r++)g[r].push(fix(g[r].reduce((a,b)=>a+b,0)));
+  const last=[];for(let c=0;c<8;c++){let s=0;for(let r=0;r<7;r++)s+=g[r][c];last.push(fix(s));}
+  g.push(last);
+  let err=null;
+  if(Math.random()<0.8){const r=Math.floor(Math.random()*7),c=Math.floor(Math.random()*7);g[r][c]^=1;err={r,c,orig:g[r][c]^1};}
+  return {g,err};
+}
+function badLines(g,par){
+  const want=par==="even"?0:1, rows=[],cols=[];
+  for(let r=0;r<8;r++){if(r===7)continue;const s=g[r].reduce((a,b)=>a+b,0);if(s%2!==want)rows.push(r);}
+  for(let c=0;c<8;c++){if(c===7)continue;let s=0;for(let r=0;r<8;r++)s+=g[r][c];if(s%2!==want)cols.push(c);}
+  return {rows,cols};
+}
+const $=id=>document.getElementById(id);
+const KEY="joho-quiz-v1";
+let st={lessons:[],count:10,pool:"all"}, missed=new Set();
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s){missed=new Set(s.missed||[]);Object.assign(st,s.st||{});}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({missed:[...missed],st}));}catch(e){}}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a}
+function chip(parent,label,onClick){const b=document.createElement("button");b.className="chip";b.innerHTML=label;b.onclick=onClick;parent.appendChild(b);return b;}
+
+const lessonBtns={};
+Object.keys(TITLES).forEach(l=>{lessonBtns[l]=chip($("lessons"),LBL(+l)+" <small>"+TITLES[l]+"</small>",()=>{
+  const k=+l, i=st.lessons.indexOf(k); i<0?st.lessons.push(k):st.lessons.splice(i,1); save(); syncStart();});});
+const countBtns={};
+[[10,"10問"],[20,"20問"],[0,"全部"]].forEach(([v,lab])=>{countBtns[v]=chip($("counts"),lab,()=>{st.count=v;save();syncStart();});});
+const poolBtns={};
+[["all","すべて"],["missed","間違えた問題だけ"]].forEach(([v,lab])=>{poolBtns[v]=chip($("pool"),lab,()=>{st.pool=v;save();syncStart();});});
+
+function candidates(){
+  let l=ITEMS.filter(x=>!st.lessons.length||st.lessons.includes(x.l));
+  if(st.pool==="missed")l=l.filter(x=>missed.has(x.id));
+  return l;
+}
+function syncStart(){
+  Object.keys(lessonBtns).forEach(l=>lessonBtns[l].setAttribute("aria-pressed",String(st.lessons.includes(+l))));
+  Object.keys(countBtns).forEach(v=>countBtns[v].setAttribute("aria-pressed",String(+v===st.count)));
+  Object.keys(poolBtns).forEach(v=>poolBtns[v].setAttribute("aria-pressed",String(v===st.pool)));
+  poolBtns.missed.textContent="間違えた問題だけ（"+missed.size+"）";
+  const n=candidates().length, use=st.count?Math.min(st.count,n):n;
+  $("go").disabled=n===0;
+  $("info").textContent=n===0?(st.pool==="missed"?"この範囲に間違えた問題はありません。":"問題がありません。")
+    :(st.lessons.length?"選んだ範囲":"全範囲")+"から "+use+" 問出題します（対象 "+n+" 問）。";
+}
+
+let set=[],pos=0,correct=0,wrongNow=[];
+function show(id){["start","quiz","result"].forEach(s=>$(s).hidden=s!==id);window.scrollTo(0,0);}
+function begin(list){
+  set=list;pos=0;correct=0;wrongNow=[];show("quiz");render();
+}
+$("go").onclick=()=>{let l=shuffle(candidates());if(st.count)l=l.slice(0,st.count);begin(l);};
+function render(){
+  const it=set[pos];
+  $("pos").textContent=(pos+1)+" / "+set.length+" 問";
+  $("fill").style.width=(pos/set.length*100)+"%";
+  $("tag").textContent=LBL(it.l)+"　"+TITLES[it.l];
+  $("res").hidden=true;$("next").hidden=true;
+  const box=$("choices");box.innerHTML="";
+  if(it.grid){renderGrid(it,box);return;}
+  $("qtext").textContent=it.q;
+  if(it.code){const pre=document.createElement("pre");pre.className="code";pre.textContent=it.code;box.appendChild(pre);}
+  const order=shuffle(it.c.map((t,i)=>i));
+  order.forEach((ci,k)=>{const b=document.createElement("button");b.className="choice";
+    b.innerHTML="<b>"+"アイウエ"[k]+"</b><span></span>";b.querySelector("span").textContent=it.c[ci];
+    b.onclick=()=>answer(ci,b);b.dataset.ci=ci;box.appendChild(b);});
+}
+function renderGrid(it,box){
+  const pz=makeGrid(it.par);it.pz=pz;
+  $("qtext").textContent="7文字の文字コード（7bit）を縦に並べ、水平方向と垂直方向に"+(it.par==="even"?"偶数":"奇数")+"パリティのビットを付けて送った。受信したビット列に誤りがあれば、その場所をタップしよう。誤りがなければ「誤りなし」を押そう。";
+  const wrap=document.createElement("div");wrap.className="gw";
+  const t=document.createElement("table");t.className="grid";
+  let hr="<tr><th></th>";for(let c=0;c<8;c++)hr+="<th>"+(c+1)+"</th>";t.innerHTML=hr+"</tr>";
+  for(let r=0;r<8;r++){const tr=document.createElement("tr");const th=document.createElement("th");th.textContent=r+1;tr.appendChild(th);
+    for(let c=0;c<8;c++){const td=document.createElement("td");const b=document.createElement("button");b.className="cell"+(r===7||c===7?" par":"");
+      b.textContent=pz.g[r][c];b.dataset.r=r;b.dataset.c=c;b.setAttribute("aria-label",(c+1)+"列目"+(r+1)+"行目 "+pz.g[r][c]);
+      if(r===7&&c===7){b.textContent="";b.disabled=true;b.style.background="transparent";b.style.border="0";}
+      else b.onclick=()=>gridAnswer(it,r,c,b);
+      td.appendChild(b);tr.appendChild(td);}
+    t.appendChild(tr);}
+  wrap.appendChild(t);box.appendChild(wrap);
+  const n=document.createElement("p");n.className="gnote";n.textContent="緑のマスがパリティビット。列の番号は左から、行の番号は上から数えるよ。";box.appendChild(n);
+  const ne=document.createElement("button");ne.className="noerr";ne.textContent="誤りなし（正しく受信できた）";ne.onclick=()=>gridAnswer(it,-1,-1,ne);box.appendChild(ne);
+}
+function gridAnswer(it,r,c,btn){
+  const pz=it.pz, err=pz.err, ok=err?(r===err.r&&c===err.c):(r<0);
+  const bl=badLines(pz.g,it.par);
+  document.querySelectorAll(".cell,.noerr").forEach(b=>b.disabled=true);
+  document.querySelectorAll(".cell").forEach(b=>{const rr=+b.dataset.r,cc=+b.dataset.c;
+    if(bl.rows.includes(rr)||bl.cols.includes(cc))b.classList.add("badline");
+    if(err&&rr===err.r&&cc===err.c)b.classList.add("hit");});
+  if(!err)document.querySelector(".noerr").classList.add("ok");
+  if(!ok)btn.classList.add(btn.classList.contains("noerr")?"ng":"miss");
+  if(ok){correct++;missed.delete(it.id);}else{missed.add(it.id);wrongNow.push({l:it.l,q:"水平垂直パリティチェック（"+(it.par==="even"?"偶数":"奇数")+"パリティ）",c:[err?"左から"+(err.c+1)+"列目・上から"+(err.r+1)+"行目":"誤りなし"],a:0});}
+  save();
+  const pw=it.par==="even"?"偶数":"奇数", bad=it.par==="even"?"奇数":"偶数";
+  $("verdict").textContent=ok?"正解！":"ざんねん…";
+  $("verdict").className="verdict "+(ok?"ok":"ng");
+  if(err){
+    $("right").textContent="正解：左から"+(err.c+1)+"列目・上から"+(err.r+1)+"行目（"+pz.g[err.r][err.c]+" → "+err.orig+" に訂正）";
+    $("exp").textContent=pw+"パリティなのに、"+(err.r+1)+"行目と"+(err.c+1)+"列目だけ1の数が"+bad+"になっている（ピンクの枠）。その交わるマスが誤り。1bitの誤りなので、場所を特定して訂正できる。";
+  }else{
+    $("right").textContent="正解：誤りなし";
+    $("exp").textContent="すべての行と列で、1の数が"+pw+"になっているので、正しく受信できている。";
+  }
+  $("res").hidden=false;$("next").hidden=false;
+  $("next").textContent=pos+1<set.length?"次へ":"結果を見る";
+  $("next").focus({preventScroll:true});
+  $("res").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+function answer(ci,btn){
+  const it=set[pos], ok=ci===it.a;
+  document.querySelectorAll(".choice").forEach(b=>{b.disabled=true;if(+b.dataset.ci===it.a)b.classList.add("ok");});
+  if(!ok)btn.classList.add("ng");
+  if(ok){correct++;missed.delete(it.id);}else{missed.add(it.id);wrongNow.push(it);}
+  save();
+  $("verdict").textContent=ok?"正解！":"ざんねん…";
+  $("verdict").className="verdict "+(ok?"ok":"ng");
+  $("right").textContent="正解："+it.c[it.a];
+  $("exp").textContent=it.e;
+  $("res").hidden=false;$("next").hidden=false;
+  $("next").textContent=pos+1<set.length?"次へ":"結果を見る";
+  $("next").focus({preventScroll:true});
+  $("res").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+$("next").onclick=()=>{pos++;if(pos<set.length)render();else finish();};
+$("quit").onclick=()=>{syncStart();show("start");};
+function finish(){
+  $("fill").style.width="100%";
+  show("result");
+  $("score").innerHTML=correct+"<small> / "+set.length+"</small>";
+  const r=correct/set.length;
+  $("comment").textContent=r===1?"全問正解！すごい！":r>=0.8?"よくできました！":r>=0.5?"あと少し！間違えた問題を見直そう":"まとめを見直してから、もう一度やってみよう";
+  const ul=$("wrongList");ul.innerHTML="";
+  wrongNow.forEach(it=>{const li=document.createElement("li");
+    const q=document.createElement("div");q.textContent=LBL(it.l)+"："+it.q;
+    const a=document.createElement("div");a.className="ans";a.textContent=it.c[it.a];
+    li.append(q,a);ul.appendChild(li);});
+  $("retry").hidden=wrongNow.length===0;
+}
+$("retry").onclick=()=>begin(shuffle(wrongNow));
+$("home").onclick=()=>{syncStart();show("start");};
+syncStart();
+</script>
+</body>
+</html>
