@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>生物基礎 練習問題（3-1〜3-5）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#D7DFE6; --surface:#EEF2F5; --text:#1F2A36; --sub:#5C6875; --line:#C3CDD6;
+  --card:#FFFFFF; --card-ink:#1F2A36; --card-sub:#7A8591; --red:#D6141C;
+  --ok:#1E7A4C; --ok-bg:#E3F3EA; --ng:#C0262D; --ng-bg:#FBE6E7; --on:#1F2A36; --on-text:#FFFFFF; --choice:#F6F8FA;
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151A20; --surface:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --card:#ECEEEA; --card-ink:#1F2A36; --card-sub:#6E7884; --red:#C4121A;
+  --ok:#4FBF86; --ok-bg:#D6EDDF; --ng:#E0555B; --ng-bg:#F4DADB; --on:#E4E9EE; --on-text:#151A20; --choice:#E2E5E1; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#151A20; --surface:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --card:#ECEEEA; --card-ink:#1F2A36; --card-sub:#6E7884; --red:#C4121A;
+  --ok:#4FBF86; --ok-bg:#D6EDDF; --ng:#E0555B; --ng-bg:#F4DADB; --on:#E4E9EE; --on-text:#151A20; --choice:#E2E5E1; color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box}
+html{min-height:100%}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--text);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-tap-highlight-color:transparent}
+.app{max-width:560px;margin:0 auto;padding:14px 16px 28px}
+h1{font-size:18px;margin:6px 0 4px}
+.lead{font-size:13px;color:var(--sub);margin:0 0 16px}
+.label{font-size:13px;font-weight:700;margin:16px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--text);font:inherit;font-size:13px;padding:7px 12px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--on);color:var(--on-text);border-color:var(--on)}
+.chip small{opacity:.7}
+.big{display:block;width:100%;font:inherit;font-size:16px;font-weight:700;padding:14px;border-radius:12px;border:0;background:var(--ok);color:#fff;cursor:pointer;margin-top:22px}
+.big:disabled{opacity:.45;cursor:default}
+.sub-btn{display:block;width:100%;font:inherit;font-size:14px;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--text);cursor:pointer;margin-top:10px}
+.note{font-size:12px;color:var(--sub);margin-top:10px}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--sub);margin:4px 0 8px}
+.top button{font:inherit;font-size:13px;border:0;background:none;color:var(--sub);cursor:pointer;padding:4px 0}
+.bar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.sheet{background:var(--card);color:var(--card-ink);border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.14);padding:18px 18px 16px}
+.tag{font-size:12px;color:var(--card-sub)}
+.q{font-size:18px;line-height:1.6;font-weight:500;margin:8px 0 16px;overflow-wrap:anywhere}
+.choices{display:grid;gap:8px}
+.choice{display:flex;gap:10px;align-items:flex-start;text-align:left;font:inherit;font-size:15px;line-height:1.5;padding:12px 12px;border-radius:10px;
+  border:1.5px solid #D5DBE1;background:var(--choice);color:var(--card-ink);cursor:pointer}
+.choice span{white-space:pre-wrap;font-family:inherit}
+.choice b{flex:none;width:22px;height:22px;border-radius:50%;background:#fff;border:1px solid #C3CDD6;display:grid;place-items:center;font-size:12px}
+.choice.ok{border-color:var(--ok);background:var(--ok-bg)}
+.choice.ng{border-color:var(--ng);background:var(--ng-bg)}
+.choice:disabled{cursor:default}
+.res{margin-top:14px;padding-top:12px;border-top:1px dashed #C9CED4}
+.verdict{font-weight:700;font-size:16px}
+.verdict.ok{color:var(--ok)} .verdict.ng{color:var(--ng)}
+.ans{font-family:"Klee One","Zen Kaku Gothic New",cursive;font-weight:600;color:var(--red);font-size:19px;margin:4px 0}
+.exp{font-size:14px;line-height:1.6;color:var(--card-ink)}
+.score{text-align:center;padding:10px 0 4px}
+.score .num{font-size:44px;font-weight:700}
+.score .num small{font-size:18px;color:var(--card-sub)}
+.wrong{margin:14px 0 0;padding:0;list-style:none}
+.wrong li{padding:10px 0;border-top:1px solid #DDE2E7;font-size:14px;line-height:1.55}
+.wrong .ans{font-size:16px}
+.gw{overflow-x:auto;margin:4px 0 10px}
+.grid{border-collapse:collapse;margin:0 auto}
+.grid th{font-size:11px;font-weight:500;color:var(--card-sub);padding:2px;text-align:center}
+.grid td{padding:0}
+.cell{width:34px;height:34px;font:inherit;font-size:17px;border:1px solid #9AA6B2;background:#fff;color:var(--card-ink);cursor:pointer;padding:0;display:block}
+.cell.par{background:#DCEFD8}
+.cell:disabled{cursor:default}
+.cell.badline{box-shadow:inset 0 0 0 2px #E8A0A4}
+.cell.hit{background:var(--ok-bg);box-shadow:inset 0 0 0 3px var(--ok);font-weight:700}
+.cell.miss{background:var(--ng-bg);box-shadow:inset 0 0 0 3px var(--ng)}
+.gnote{font-size:12px;color:var(--card-sub);text-align:center;margin:4px 0 0}
+.noerr{display:block;margin:8px auto 0;font:inherit;font-size:14px;padding:9px 16px;border-radius:10px;border:1.5px solid #D5DBE1;background:var(--choice);color:var(--card-ink);cursor:pointer}
+.noerr.ok{border-color:var(--ok);background:var(--ok-bg)} .noerr.ng{border-color:var(--ng);background:var(--ng-bg)}
+@media (max-width:380px){.cell{width:30px;height:30px;font-size:15px}}
+.ft{border-collapse:collapse;margin:0 auto;min-width:min(100%,320px)}
+.ft th{background:#E9EDF1;font-size:13px;padding:6px 8px;border:1px solid #B9C3CC;white-space:nowrap}
+.ft td{border:1px solid #B9C3CC;padding:4px;text-align:center;font-size:15px;vertical-align:top}
+.ft td.fix{background:#F7F8F9;font-family:ui-monospace,Menlo,Consolas,monospace;white-space:nowrap;padding:8px}
+.fin{width:64px;font:inherit;font-size:16px;text-align:center;padding:6px 4px;border:1.5px solid #B9C3CC;border-radius:6px;background:#fff;color:var(--card-ink)}
+.tog{min-width:48px;padding:0 8px;height:38px;font:inherit;font-size:17px;font-weight:700;border:1.5px solid #B9C3CC;border-radius:6px;background:#fff;color:var(--card-ink);cursor:pointer}
+.ft td.good{background:var(--ok-bg)} .ft td.bad{background:var(--ng-bg)}
+.fix-ans{font-family:"Klee One","Zen Kaku Gothic New",cursive;font-weight:600;color:var(--red);font-size:16px;margin-top:2px}
+pre.code{margin:0 0 12px;background:#F3F5F7;border:1px solid #D5DBE1;border-radius:8px;padding:10px 12px;overflow-x:auto;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono",monospace;font-size:14px;line-height:1.6;color:var(--card-ink)}
+[hidden]{display:none!important}
+button:focus-visible{outline:3px solid #3A7BD5;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <section id="start">
+    <h1>生物基礎 練習問題</h1>
+    <p class="lead">3-1〜3-5（ヒトの体内環境の維持）から出題します。4択（一部2択）と、表を完成させる問題があります。答えるとすぐに解説が出ます。</p>
+    <div class="label">範囲（複数選べます）</div>
+    <div class="chips" id="lessons"></div>
+    <div class="label">問題数</div>
+    <div class="chips" id="counts"></div>
+    <div class="label">出題する問題</div>
+    <div class="chips" id="pool"></div>
+    <button class="big" id="go">はじめる</button>
+    <p class="note" id="info"></p>
+  </section>
+
+  <section id="quiz" hidden>
+    <div class="top"><span id="pos"></span><button id="quit">やめる</button></div>
+    <div class="bar"><i id="fill"></i></div>
+    <div class="sheet">
+      <div class="tag" id="tag"></div>
+      <div class="q" id="qtext"></div>
+      <div class="choices" id="choices"></div>
+      <div class="res" id="res" hidden>
+        <div class="verdict" id="verdict"></div>
+        <div class="ans" id="right"></div>
+        <div class="exp" id="exp"></div>
+      </div>
+    </div>
+    <button class="big" id="next" hidden>次へ</button>
+  </section>
+
+  <section id="result" hidden>
+    <div class="sheet">
+      <div class="score"><div class="tag">結果</div><div class="num" id="score"></div><div class="tag" id="comment"></div></div>
+      <ul class="wrong" id="wrongList"></ul>
+    </div>
+    <button class="big" id="retry">間違えた問題をもう一度</button>
+    <button class="sub-btn" id="home">最初の画面に戻る</button>
+  </section>
+</div>
+<script>
+const Q=[
+[1,"体内環境を一定の範囲に保つ性質を何という？",["恒常性（ホメオスタシス）","体内環境","神経分泌","フィードバック"],0,"自律神経系と内分泌系によって調節されている。"],
+[1,"血しょうが毛細血管からしみ出し、組織の細胞を取り巻く体液は？",["組織液","血液","リンパ液","原尿"],0,"組織液の一部がリンパ管に入るとリンパ液になる。"],
+[1,"リンパ管が合流する血管は？",["鎖骨下静脈","大動脈","肝門脈","肺静脈"],0,"リンパ液は鎖骨下静脈で血液に戻る。"],
+[1,"中枢神経系はどれ？",["脳と脊髄","交感神経と副交感神経","感覚神経と運動神経","脳と心臓"],0,"それ以外の神経は末梢神経系。"],
+[1,"体性神経系に含まれるものは？",["感覚神経・運動神経","交感神経・副交感神経","脳・脊髄","視床下部・脳下垂体"],0,"自律神経系は交感神経・副交感神経。"],
+[1,"意識や思考などの中枢は？",["大脳","小脳","延髄","間脳"],0,"大脳の機能だけが失われた状態を植物状態という。"],
+[1,"生命維持の中枢である「脳幹」に含まれないものは？",["大脳","間脳","中脳","延髄"],0,"脳幹は間脳・中脳・延髄。"],
+[1,"自律神経系の総合的な中枢は？",["間脳の視床下部","大脳","小脳","延髄"],0,"自律神経系は意思とは無関係に働く。"],
+[1,"興奮状態で働きが優位になる神経は？",["交感神経","副交感神経","運動神経","感覚神経"],0,"リラックス状態で優位になるのは副交感神経。"],
+[1,"交感神経の中枢神経系からの出どころは？",["脊髄","中脳","延髄","大脳"],0,"副交感神経は中脳・延髄・脊髄の尾部から出る。"],
+[1,"交感神経が働くと、瞳孔はどうなる？",["拡大する","縮小する","変わらない"],0,"副交感神経では縮小する。"],
+[1,"副交感神経が働くと、消化管の運動はどうなる？",["促進される","抑制される","変わらない"],0,"交感神経では抑制される。"],
+[1,"汗腺・立毛筋・体表の血管に分布している自律神経は？",["交感神経だけ","副交感神経だけ","両方","どちらも分布していない"],0,"副交感神経は分布していない。"],
+[1,"交感神経と副交感神経の、器官での働きの関係は？",["反対で、互いに拮抗的に作用する","同じ働きをする","交感神経だけが働く","順番に働く"],0,"同じ器官に分布していることが多く、働きは反対。"],
+[1,"心臓が自発的に拍動するための部位は？",["ペースメーカー（洞房結節）","視床下部","ランゲルハンス島","ネフロン"],0,"右心房と大静脈の境界付近にある。"],
+[1,"心臓の拍動の中枢は？",["延髄","大脳","小脳","間脳"],0,"自律神経系がペースメーカーに作用して拍動を調節する。"],
+[1,"「感動して鳥肌が立つ」とき、優位に働いている神経は？",["交感神経","副交感神経","当てはまらない（×）"],0,"立毛筋の収縮は交感神経の働き。"],
+[1,"「肩をまわす」はどれに当てはまる？",["当てはまらない（×）","交感神経","副交感神経"],0,"自分の意思で動かすので、自律神経ではなく体性神経（運動神経）の働き。"],
+
+[2,"排出管を通して体外に化学物質を放出する腺は？",["外分泌腺","内分泌腺","ランゲルハンス島","副腎"],0,"汗や消化液を出す。"],
+[2,"内分泌腺から血液中に放出される物質は？",["ホルモン","消化液","汗","胆汁"],0,"血液の循環で全身に送られる。"],
+[2,"ホルモンが作用する特定の細胞を何という？",["標的細胞","腺細胞","神経分泌細胞","造血幹細胞"],0,"特定のホルモンと結合する受容体をもつ。"],
+[2,"自律神経系と比べたホルモンの特徴は？",["効果が現れるまで時間はかかるが、作用に持続性がある","すぐに効くが、すぐに終わる","全身のどの細胞にも作用する","大量に必要"],0,"ホルモンは微量で作用する。"],
+[2,"ホルモン分泌の総合的な中枢は？",["間脳の視床下部","脳下垂体後葉","甲状腺","副腎皮質"],0,"脳の神経細胞がホルモンを分泌する現象を神経分泌という。"],
+[2,"脳下垂体後葉から分泌され、腎臓の集合管で水の再吸収を促進するホルモンは？",["バソプレシン","チロキシン","成長ホルモン","パラトルモン"],0,"血圧を上げる働きもある。"],
+[2,"甲状腺から分泌され、代謝を促進するホルモンは？",["チロキシン","インスリン","アドレナリン","グルカゴン"],0,"体温を上げる調節にもかかわる。"],
+[2,"血液中のCa²⁺濃度を上昇させるホルモンと分泌する腺は？",["パラトルモン・副甲状腺","チロキシン・甲状腺","インスリン・すい臓","アドレナリン・副腎髄質"],0,"血液凝固にもかかわる。"],
+[2,"副腎髄質から分泌され、交感神経の作用を強めるホルモンは？",["アドレナリン","糖質コルチコイド","鉱質コルチコイド","グルカゴン"],0,"グリコーゲンを分解して血糖濃度を上げる。"],
+[2,"体液中のNa⁺やK⁺の濃度を調節するホルモンは？",["鉱質コルチコイド","糖質コルチコイド","バソプレシン","インスリン"],0,"副腎皮質から分泌される。"],
+[2,"血糖濃度を下げる唯一のホルモンは？",["インスリン","グルカゴン","アドレナリン","成長ホルモン"],0,"ランゲルハンス島B細胞から分泌される。"],
+[2,"グルカゴンを分泌するのは？",["ランゲルハンス島A細胞","ランゲルハンス島B細胞","副腎髄質","脳下垂体前葉"],0,"グリコーゲンを分解して血糖濃度を上げる。"],
+[2,"副腎の内側と外側の名称は？",["内側：髄質／外側：皮質","内側：皮質／外側：髄質","内側：前葉／外側：後葉"],0,"髄質からアドレナリン、皮質から糖質コルチコイド・鉱質コルチコイド。"],
+
+[3,"結果を反対の方向に進めて調節するしくみは？",["負のフィードバック","正のフィードバック","神経分泌","拮抗作用"],0,"結果が原因にさかのぼって作用することをフィードバックという。"],
+[3,"チロキシンが不足したとき、脳下垂体前葉から分泌が増えるホルモンは？",["甲状腺刺激ホルモン","バソプレシン","副腎皮質刺激ホルモン","パラトルモン"],0,"視床下部 → 甲状腺刺激ホルモン放出ホルモン → 脳下垂体前葉 → 甲状腺刺激ホルモン → 甲状腺。"],
+[3,"チロキシンが増えすぎると、視床下部や脳下垂体の分泌はどうなる？",["抑えられる","さらに増える","変わらない"],0,"負のフィードバックで一定に保たれる。"],
+[3,"空腹時の血糖濃度の正常値は？",["血液100mL中に約100mg（約0.1%）","血液100mL中に約10mg","血液100mL中に約1g","約1%"],0,"血糖とは血液中のグルコースのこと。"],
+[3,"小腸などで吸収したグルコースを含む血液を肝臓へ運ぶ血管は？",["肝門脈","肝動脈","肝静脈","大静脈"],0,"肝動脈は心臓から肝臓へ、肝静脈は肝臓から心臓へ。"],
+[3,"高血糖時、情報を伝える自律神経は？",["副交感神経","交感神経","運動神経"],0,"副交感神経 → ランゲルハンス島B細胞 → インスリン。"],
+[3,"低血糖時、情報を伝える自律神経は？",["交感神経","副交感神経","感覚神経"],0,"交感神経 → 副腎髄質（アドレナリン）・A細胞（グルカゴン）。"],
+[3,"インスリンが血糖濃度を下げる方法は？",["肝臓でグリコーゲンを合成し、細胞でグルコースの消費を促進","肝臓でグリコーゲンを分解","タンパク質から糖をつくる","尿にグルコースを出す"],0,"アドレナリン・グルカゴンはグリコーゲンを分解して血糖濃度を上げる。"],
+[3,"極度の低血糖時に副腎皮質から分泌され、タンパク質を糖に変えるホルモンは？",["糖質コルチコイド","鉱質コルチコイド","アドレナリン","チロキシン"],0,"脳下垂体前葉の副腎皮質刺激ホルモンで分泌が促進される。"],
+[3,"肝臓の基本単位は？",["肝小葉","ネフロン","腎小体","ランゲルハンス島"],0,"約50万個の肝細胞からなる。"],
+[3,"タンパク質の分解で生じる有害なアンモニアを、肝臓は何に変える？",["尿素","グルコース","胆汁","グリコーゲン"],0,"尿素は腎臓で尿の主成分となって体外へ出る。"],
+[3,"肝臓でつくられる胆汁の働きは？",["十二指腸へ分泌され、脂肪の消化を助ける","血糖濃度を下げる","血液を固める","酸素を運ぶ"],0,"胆管を通って胆のうに蓄えられる。"],
+
+[4,"すい臓のランゲルハンス島B細胞が破壊されて起こる糖尿病は？",["Ⅰ型糖尿病","Ⅱ型糖尿病"],0,"インスリンの不足による。治療はインスリンの投与。"],
+[4,"主に生活習慣が関係する糖尿病は？",["Ⅱ型糖尿病","Ⅰ型糖尿病"],0,"インスリンの分泌量の低下や、標的細胞の反応の低下による。"],
+[4,"グラフで、食後に血糖濃度が高いままで、インスリン濃度がほとんど上がらないのは？",["Ⅰ型糖尿病患者","健常者"],0,"健常者はインスリンがたくさん出て、血糖濃度がすぐ下がる。"],
+[4,"腎臓の基本単位は？",["ネフロン（腎単位）","肝小葉","糸球体","集合管"],0,"腎臓1個に約100万個ある。"],
+[4,"腎小体は何と何からなる？",["糸球体とボーマンのう","細尿管と集合管","糸球体と細尿管","ボーマンのうと腎う"],0,"腎小体は皮質側にある。"],
+[4,"血液から原尿ができる過程を何という？",["ろ過","再吸収","分泌","排出"],0,"糸球体からボーマンのうへこし出される。"],
+[4,"ろ過されない物質は？",["タンパク質・血球","グルコース・水","尿素・水","Na⁺・K⁺"],0,"大きいものはろ過されない。"],
+[4,"原尿の成分のうち、すべて再吸収される物質は？",["グルコース","尿素","水","Na⁺"],0,"健康なら尿糖は（−）。"],
+[4,"水の再吸収に関与するホルモンは？",["バソプレシン","鉱質コルチコイド","インスリン","チロキシン"],0,"Na⁺の再吸収には鉱質コルチコイドが関与する。"],
+[4,"1日の原尿の量と尿の量は？",["原尿 約180L・尿 約1.44L","原尿 約18L・尿 約1.44L","原尿 約1.44L・尿 約180L","原尿 約180L・尿 約18L"],0,"原尿の大部分が再吸収される。"],
+
+[5,"ヒトの血液の総量は体重の約何%？",["約8%","約20%","約55%","約1%"],0,"血液の重さの約55%が血しょう、約45%が血球。"],
+[5,"血しょうの約90%を占めるものは？",["水","タンパク質","グルコース","ホルモン"],0,"血しょうは養分や老廃物などを運搬する。"],
+[5,"赤血球について正しいものは？",["ヘモグロビンをもち、酸素を運ぶ。哺乳類では核がない","免疫に関与し、核がある","血液凝固に関与する細胞片","血管外にも存在する"],0,"白血球は免疫、血小板は血液凝固。"],
+[5,"免疫に関与し、血管外にも存在する血球は？",["白血球","赤血球","血小板"],0,"核をもち、さまざまな種類がある。"],
+[5,"すべての血球が作られる場所は？",["骨髄の造血幹細胞","肝臓","脾臓","腎臓"],0,"骨の内部にある。"],
+[5,"出血したとき、最初に集まって傷口をふさぐのは？",["血小板","赤血球","白血球","フィブリン"],0,"その後、カルシウムイオンや凝固因子が働く。"],
+[5,"血ぺいは何と何が絡み合ったもの？",["フィブリンと血球","血しょうと水","ヘモグロビンと酸素","グルコースとタンパク質"],0,"フィブリンは血しょう中のタンパク質からできる繊維状タンパク質。"],
+[5,"血管の修復後、血ぺいを酵素で取り除くことを何という？",["線溶（フィブリン溶解）","血液凝固","ろ過","再吸収"],0,"線溶でもとの状態に戻る。"],
+[5,"採血した血液を放置したときの上澄みは？",["血清","血しょう","血ぺい","組織液"],0,"血清は血しょうからフィブリンの元が除かれた液体。"],
+[5,"低体温のとき、放熱量と発熱量はどうなる？",["放熱量は減・発熱量は増","放熱量は増・発熱量は減","どちらも増","どちらも減"],0,"皮膚の血管を収縮させ、代謝を上げる。"],
+[5,"低体温のとき、骨格筋の収縮で起こるものは？",["ふるえ","発汗","鳥肌だけ","代謝の抑制"],0,"運動神経による。"],
+[5,"高体温のとき、副交感神経によって抑制されるものは？",["心臓の拍動と肝臓の代謝","発汗","皮膚の血管の収縮","チロキシンの分泌"],0,"発汗は交感神経で促進される。"]
+];
+
+const TITLES={1:"恒常性と神経系",2:"恒常性と内分泌系",3:"ホルモン分泌・血糖濃度①",4:"血糖濃度②・腎臓",5:"血液・体温の調節"};
+const LBL=l=>"3-"+l;
+const ITEMS=Q.map((q,i)=>({id:i,l:q[0],q:q[1],c:q[2],a:q[3],e:q[4],code:q[5]}));
+const B=v=>({a:String(v),k:"bit"}), T=v=>({a:String(v),k:"text"}), O=v=>({a:v,k:"ox"}), G=(v,o)=>({a:v,k:"tg",o});
+const PS=["促進","抑制"],KX=["交","副","×"],HM=["バソプレシン","チロキシン","パラトルモン","アドレナリン","グルカゴン","インスリン"],AN=["交感神経","副交感神経"],AB=["A細胞","B細胞"],IG=["インスリン","グルカゴン"],GS=["合成","分解"],BW=["酸素の運搬","免疫","血液凝固"],NK=["あり","なし"],ZG=["増","減"];
+const FILL=[
+ {l:1,q:"交感神経と副交感神経の働きを表にしよう。（マスをタップすると答えが切り替わる）",cols:["器官","交感神経","副交感神経"],rows:[["瞳孔",G("拡大",["拡大","縮小"]),G("縮小",["拡大","縮小"])],["心臓の拍動",G("促進",PS),G("抑制",PS)],["血圧",G("上げる",["上げる","下げる"]),G("下げる",["上げる","下げる"])],["気管支",G("拡張",["拡張","収縮"]),G("収縮",["拡張","収縮"])],["消化管の運動",G("抑制",PS),G("促進",PS)],["排尿",G("抑制",PS),G("促進",PS)]],e:"交感神経は「戦う・逃げる」体勢、副交感神経は「休む・食べる」体勢と覚えるとよい。"},
+ {l:1,q:"交感神経が優位なら「交」、副交感神経なら「副」、当てはまらなければ「×」を選ぼう。",cols:["現象","答え"],rows:[["トイレに行きたくなる",G("副",KX)],["呼吸が荒くなる",G("交",KX)],["冷汗が出てくる",G("交",KX)],["顔面が蒼白する",G("交",KX)],["肩をまわす",G("×",KX)],["心臓がドキドキする",G("交",KX)],["感動して鳥肌が立つ",G("交",KX)],["筋肉痛を感じる",G("×",KX)],["消化液が分泌され、食欲がでる",G("副",KX)]],e:"肩をまわす（運動神経）や筋肉痛を感じる（感覚神経）は、自律神経ではない。"},
+ {l:2,q:"内分泌腺から分泌されるホルモンを選ぼう。",cols:["内分泌腺","ホルモン"],rows:[["脳下垂体後葉",G("バソプレシン",HM)],["甲状腺",G("チロキシン",HM)],["副甲状腺",G("パラトルモン",HM)],["副腎髄質",G("アドレナリン",HM)],["ランゲルハンス島A細胞",G("グルカゴン",HM)],["ランゲルハンス島B細胞",G("インスリン",HM)]],e:"どの腺からどのホルモンが出るかは、セットで覚えよう。"},
+ {l:3,q:"血糖濃度の調節の表を完成させよう。",cols:["","高血糖のとき","低血糖のとき"],rows:[["伝える自律神経",G("副交感神経",AN),G("交感神経",AN)],["すい臓の細胞",G("B細胞",AB),G("A細胞",AB)],["すい臓のホルモン",G("インスリン",IG),G("グルカゴン",IG)],["肝臓のグリコーゲン",G("合成",GS),G("分解",GS)]],e:"低血糖のときは、副腎髄質のアドレナリンも血糖濃度を上げる。"},
+ {l:4,q:"腎臓の数字を入力しよう。",cols:["項目","数"],rows:[["腎臓1個のネフロンの数（約○万個）",T(100)],["1日の原尿の量（約○L）",T(180)],["1日の尿の量（約○L）",T(1.44)]],e:"原尿180Lのうち、ほとんどが再吸収されて、尿は約1.44Lになる。"},
+ {l:5,q:"血球の働きと特徴を表にしよう。",cols:["血球","働き","核"],rows:[["赤血球",G("酸素の運搬",BW),G("なし",NK)],["白血球",G("免疫",BW),G("あり",NK)],["血小板",G("血液凝固",BW),G("なし",NK)]],e:"哺乳類の赤血球は核をもたない。血小板は核をもたない細胞片。"},
+ {l:5,q:"体温調節の表を完成させよう。",cols:["","低体温のとき","高体温のとき"],rows:[["心臓の拍動",G("促進",PS),G("抑制",PS)],["肝臓の代謝",G("促進",PS),G("抑制",PS)],["放熱量",G("減",ZG),G("増",ZG)],["発熱量",G("増",ZG),G("減",ZG)]],e:"低体温では熱を逃がさず増やす、高体温では熱を逃がして減らす。"}
+];
+FILL.forEach((f,k)=>ITEMS.push(Object.assign({id:"t"+k,fill:true},f)));
+function makeGrid(par){
+  // 7文字×7bit（列が文字）＋右にパリティ列・下にパリティ行
+  const g=[];for(let r=0;r<7;r++){g.push([]);for(let c=0;c<7;c++)g[r].push(Math.random()<0.5?1:0);}
+  const fix=n=>par==="even"?n%2:(n+1)%2;
+  for(let r=0;r<7;r++)g[r].push(fix(g[r].reduce((a,b)=>a+b,0)));
+  const last=[];for(let c=0;c<8;c++){let s=0;for(let r=0;r<7;r++)s+=g[r][c];last.push(fix(s));}
+  g.push(last);
+  let err=null;
+  if(Math.random()<0.8){const r=Math.floor(Math.random()*7),c=Math.floor(Math.random()*7);g[r][c]^=1;err={r,c,orig:g[r][c]^1};}
+  return {g,err};
+}
+function badLines(g,par){
+  const want=par==="even"?0:1, rows=[],cols=[];
+  for(let r=0;r<8;r++){if(r===7)continue;const s=g[r].reduce((a,b)=>a+b,0);if(s%2!==want)rows.push(r);}
+  for(let c=0;c<8;c++){if(c===7)continue;let s=0;for(let r=0;r<8;r++)s+=g[r][c];if(s%2!==want)cols.push(c);}
+  return {rows,cols};
+}
+const $=id=>document.getElementById(id);
+const KEY="bio-quiz-v1";
+let st={lessons:[],count:10,pool:"all"}, missed=new Set();
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s){missed=new Set(s.missed||[]);Object.assign(st,s.st||{});}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({missed:[...missed],st}));}catch(e){}}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a}
+function chip(parent,label,onClick){const b=document.createElement("button");b.className="chip";b.innerHTML=label;b.onclick=onClick;parent.appendChild(b);return b;}
+
+const lessonBtns={};
+Object.keys(TITLES).forEach(l=>{lessonBtns[l]=chip($("lessons"),LBL(+l)+" <small>"+TITLES[l]+"</small>",()=>{
+  const k=+l, i=st.lessons.indexOf(k); i<0?st.lessons.push(k):st.lessons.splice(i,1); save(); syncStart();});});
+const countBtns={};
+[[10,"10問"],[20,"20問"],[0,"全部"]].forEach(([v,lab])=>{countBtns[v]=chip($("counts"),lab,()=>{st.count=v;save();syncStart();});});
+const poolBtns={};
+[["all","すべて"],["missed","間違えた問題だけ"]].forEach(([v,lab])=>{poolBtns[v]=chip($("pool"),lab,()=>{st.pool=v;save();syncStart();});});
+
+function candidates(){
+  let l=ITEMS.filter(x=>!st.lessons.length||st.lessons.includes(x.l));
+  if(st.pool==="missed")l=l.filter(x=>missed.has(x.id));
+  return l;
+}
+function syncStart(){
+  Object.keys(lessonBtns).forEach(l=>lessonBtns[l].setAttribute("aria-pressed",String(st.lessons.includes(+l))));
+  Object.keys(countBtns).forEach(v=>countBtns[v].setAttribute("aria-pressed",String(+v===st.count)));
+  Object.keys(poolBtns).forEach(v=>poolBtns[v].setAttribute("aria-pressed",String(v===st.pool)));
+  poolBtns.missed.textContent="間違えた問題だけ（"+missed.size+"）";
+  const n=candidates().length, use=st.count?Math.min(st.count,n):n;
+  $("go").disabled=n===0;
+  $("info").textContent=n===0?(st.pool==="missed"?"この範囲に間違えた問題はありません。":"問題がありません。")
+    :(st.lessons.length?"選んだ範囲":"全範囲")+"から "+use+" 問出題します（対象 "+n+" 問）。";
+}
+
+let set=[],pos=0,correct=0,wrongNow=[];
+function show(id){["start","quiz","result"].forEach(s=>$(s).hidden=s!==id);window.scrollTo(0,0);}
+function begin(list){
+  set=list;pos=0;correct=0;wrongNow=[];show("quiz");render();
+}
+$("go").onclick=()=>{let l=shuffle(candidates());if(st.count)l=l.slice(0,st.count);begin(l);};
+function render(){
+  const it=set[pos];
+  $("pos").textContent=(pos+1)+" / "+set.length+" 問";
+  $("fill").style.width=(pos/set.length*100)+"%";
+  $("tag").textContent=LBL(it.l)+"　"+TITLES[it.l];
+  $("res").hidden=true;$("next").hidden=true;
+  const box=$("choices");box.innerHTML="";
+  if(it.grid){renderGrid(it,box);return;}
+  if(it.fill){renderFill(it,box);return;}
+  $("qtext").textContent=it.q;
+  if(it.code){const pre=document.createElement("pre");pre.className="code";pre.textContent=it.code;box.appendChild(pre);}
+  const order=shuffle(it.c.map((t,i)=>i));
+  order.forEach((ci,k)=>{const b=document.createElement("button");b.className="choice";
+    b.innerHTML="<b>"+"アイウエ"[k]+"</b><span></span>";b.querySelector("span").textContent=it.c[ci];
+    b.onclick=()=>answer(ci,b);b.dataset.ci=ci;box.appendChild(b);});
+}
+function renderGrid(it,box){
+  const pz=makeGrid(it.par);it.pz=pz;
+  $("qtext").textContent="7文字の文字コード（7bit）を縦に並べ、水平方向と垂直方向に"+(it.par==="even"?"偶数":"奇数")+"パリティのビットを付けて送った。受信したビット列に誤りがあれば、その場所をタップしよう。誤りがなければ「誤りなし」を押そう。";
+  const wrap=document.createElement("div");wrap.className="gw";
+  const t=document.createElement("table");t.className="grid";
+  let hr="<tr><th></th>";for(let c=0;c<8;c++)hr+="<th>"+(c+1)+"</th>";t.innerHTML=hr+"</tr>";
+  for(let r=0;r<8;r++){const tr=document.createElement("tr");const th=document.createElement("th");th.textContent=r+1;tr.appendChild(th);
+    for(let c=0;c<8;c++){const td=document.createElement("td");const b=document.createElement("button");b.className="cell"+(r===7||c===7?" par":"");
+      b.textContent=pz.g[r][c];b.dataset.r=r;b.dataset.c=c;b.setAttribute("aria-label",(c+1)+"列目"+(r+1)+"行目 "+pz.g[r][c]);
+      if(r===7&&c===7){b.textContent="";b.disabled=true;b.style.background="transparent";b.style.border="0";}
+      else b.onclick=()=>gridAnswer(it,r,c,b);
+      td.appendChild(b);tr.appendChild(td);}
+    t.appendChild(tr);}
+  wrap.appendChild(t);box.appendChild(wrap);
+  const n=document.createElement("p");n.className="gnote";n.textContent="緑のマスがパリティビット。列の番号は左から、行の番号は上から数えるよ。";box.appendChild(n);
+  const ne=document.createElement("button");ne.className="noerr";ne.textContent="誤りなし（正しく受信できた）";ne.onclick=()=>gridAnswer(it,-1,-1,ne);box.appendChild(ne);
+}
+function norm(s){return String(s).trim().replace(/[０-９]/g,d=>String.fromCharCode(d.charCodeAt(0)-0xFEE0)).replace(/[-‐ー−―]/g,"－").replace(/\s+/g,"");}
+function renderFill(it,box){
+  $("qtext").textContent=it.q;
+  if(it.code){const pre=document.createElement("pre");pre.className="code";pre.textContent=it.code;box.appendChild(pre);}
+  const wrap=document.createElement("div");wrap.className="gw";
+  const t=document.createElement("table");t.className="ft";
+  const hr=document.createElement("tr");it.cols.forEach(c=>{const th=document.createElement("th");th.textContent=c;hr.appendChild(th);});t.appendChild(hr);
+  it.slots=[];
+  it.rows.forEach(r=>{const tr=document.createElement("tr");r.forEach(c=>{const td=document.createElement("td");
+    if(typeof c==="string"){td.textContent=c;td.className="fix";}
+    else if(c.k==="text"){const inp=document.createElement("input");inp.type="text";inp.inputMode=/^[0-9]+$/.test(c.a)?"numeric":"text";inp.className="fin";inp.setAttribute("aria-label",it.cols[r.indexOf(c)]);td.appendChild(inp);it.slots.push({c,el:inp,td});}
+    else{const b=document.createElement("button");b.className="tog";b.textContent="？";const seq=c.o||(c.k==="bit"?["0","1"]:["○","×"]);
+      b.onclick=()=>{const i=seq.indexOf(b.textContent);b.textContent=seq[(i+1)%seq.length];};td.appendChild(b);it.slots.push({c,el:b,td});}
+    tr.appendChild(td);});t.appendChild(tr);});
+  wrap.appendChild(t);box.appendChild(wrap);
+  const chk=document.createElement("button");chk.className="big";chk.id="chk";chk.textContent="答え合わせ";chk.style.marginTop="12px";
+  chk.onclick=()=>fillAnswer(it,chk);box.appendChild(chk);
+}
+function fillAnswer(it,chk){
+  let all=true;
+  it.slots.forEach(s=>{const v=s.el.tagName==="INPUT"?norm(s.el.value):s.el.textContent;const ok=v===norm(s.c.a)||v===s.c.a;
+    s.el.disabled=true;s.td.classList.add(ok?"good":"bad");if(!ok){all=false;const m=document.createElement("div");m.className="fix-ans";m.textContent=s.c.a;s.td.appendChild(m);}});
+  chk.remove();
+  if(all){correct++;missed.delete(it.id);}else{missed.add(it.id);wrongNow.push({l:it.l,q:it.q.replace(/（.*?）/g,""),c:["表の問題（もう一度解いてみよう）"],a:0});}
+  save();
+  $("verdict").textContent=all?"全部正解！":"ざんねん…（赤いマスの下が正しい答え）";
+  $("verdict").className="verdict "+(all?"ok":"ng");
+  $("right").textContent="";
+  $("exp").textContent=it.e;
+  $("res").hidden=false;$("next").hidden=false;
+  $("next").textContent=pos+1<set.length?"次へ":"結果を見る";
+  $("next").focus({preventScroll:true});
+  $("res").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+function gridAnswer(it,r,c,btn){
+  const pz=it.pz, err=pz.err, ok=err?(r===err.r&&c===err.c):(r<0);
+  const bl=badLines(pz.g,it.par);
+  document.querySelectorAll(".cell,.noerr").forEach(b=>b.disabled=true);
+  document.querySelectorAll(".cell").forEach(b=>{const rr=+b.dataset.r,cc=+b.dataset.c;
+    if(bl.rows.includes(rr)||bl.cols.includes(cc))b.classList.add("badline");
+    if(err&&rr===err.r&&cc===err.c)b.classList.add("hit");});
+  if(!err)document.querySelector(".noerr").classList.add("ok");
+  if(!ok)btn.classList.add(btn.classList.contains("noerr")?"ng":"miss");
+  if(ok){correct++;missed.delete(it.id);}else{missed.add(it.id);wrongNow.push({l:it.l,q:"水平垂直パリティチェック（"+(it.par==="even"?"偶数":"奇数")+"パリティ）",c:[err?"左から"+(err.c+1)+"列目・上から"+(err.r+1)+"行目":"誤りなし"],a:0});}
+  save();
+  const pw=it.par==="even"?"偶数":"奇数", bad=it.par==="even"?"奇数":"偶数";
+  $("verdict").textContent=ok?"正解！":"ざんねん…";
+  $("verdict").className="verdict "+(ok?"ok":"ng");
+  if(err){
+    $("right").textContent="正解：左から"+(err.c+1)+"列目・上から"+(err.r+1)+"行目（"+pz.g[err.r][err.c]+" → "+err.orig+" に訂正）";
+    $("exp").textContent=pw+"パリティなのに、"+(err.r+1)+"行目と"+(err.c+1)+"列目だけ1の数が"+bad+"になっている（ピンクの枠）。その交わるマスが誤り。1bitの誤りなので、場所を特定して訂正できる。";
+  }else{
+    $("right").textContent="正解：誤りなし";
+    $("exp").textContent="すべての行と列で、1の数が"+pw+"になっているので、正しく受信できている。";
+  }
+  $("res").hidden=false;$("next").hidden=false;
+  $("next").textContent=pos+1<set.length?"次へ":"結果を見る";
+  $("next").focus({preventScroll:true});
+  $("res").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+function answer(ci,btn){
+  const it=set[pos], ok=ci===it.a;
+  document.querySelectorAll(".choice").forEach(b=>{b.disabled=true;if(+b.dataset.ci===it.a)b.classList.add("ok");});
+  if(!ok)btn.classList.add("ng");
+  if(ok){correct++;missed.delete(it.id);}else{missed.add(it.id);wrongNow.push(it);}
+  save();
+  $("verdict").textContent=ok?"正解！":"ざんねん…";
+  $("verdict").className="verdict "+(ok?"ok":"ng");
+  $("right").textContent="正解："+it.c[it.a];
+  $("exp").textContent=it.e;
+  $("res").hidden=false;$("next").hidden=false;
+  $("next").textContent=pos+1<set.length?"次へ":"結果を見る";
+  $("next").focus({preventScroll:true});
+  $("res").scrollIntoView({block:"nearest",behavior:"smooth"});
+}
+$("next").onclick=()=>{pos++;if(pos<set.length)render();else finish();};
+$("quit").onclick=()=>{syncStart();show("start");};
+function finish(){
+  $("fill").style.width="100%";
+  show("result");
+  $("score").innerHTML=correct+"<small> / "+set.length+"</small>";
+  const r=correct/set.length;
+  $("comment").textContent=r===1?"全問正解！すごい！":r>=0.8?"よくできました！":r>=0.5?"あと少し！間違えた問題を見直そう":"まとめを見直してから、もう一度やってみよう";
+  const ul=$("wrongList");ul.innerHTML="";
+  wrongNow.forEach(it=>{const li=document.createElement("li");
+    const q=document.createElement("div");q.textContent=LBL(it.l)+"："+it.q;
+    const a=document.createElement("div");a.className="ans";a.textContent=it.c[it.a];
+    li.append(q,a);ul.appendChild(li);});
+  $("retry").hidden=wrongNow.length===0;
+}
+$("retry").onclick=()=>begin(shuffle(wrongNow));
+$("home").onclick=()=>{syncStart();show("start");};
+syncStart();
+</script>
+</body>
+</html>

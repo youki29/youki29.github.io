@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>生物基礎 まとめ｜穴埋め</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#D7DFE6; --bar:#EEF2F5; --text:#1F2A36; --sub:#5C6875; --line:#C3CDD6;
+  --paper:#FFFFFF; --ink:#1F2A36; --rule:#C9CED4; --head:#F1F2F3;
+  --red:#FF2A1A; --blank:#E7EBEF; --blank-edge:#9AA6B2; --on:#1F2A36; --on-text:#FFFFFF;
+  --sheet:rgb(205,28,40);
+  color-scheme:light; box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151A20; --bar:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --paper:#ECEBE6; --ink:#1F2A36; --rule:#BFC3C7; --head:#E0DFD9;
+  --blank:#D9DCDF; --blank-edge:#7D8791; --on:#E4E9EE; --on-text:#151A20; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#151A20; --bar:#222A33; --text:#E4E9EE; --sub:#9AA6B2; --line:#36414C;
+  --paper:#ECEBE6; --ink:#1F2A36; --rule:#BFC3C7; --head:#E0DFD9;
+  --blank:#D9DCDF; --blank-edge:#7D8791; --on:#E4E9EE; --on-text:#151A20; color-scheme:dark;}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 112px)}
+body{margin:0;background:var(--bg);color:var(--text);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bar)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bar);border-bottom:1px solid var(--line)}
+.hin{max-width:760px;margin:0 auto;padding:10px 14px 8px}
+.row1{display:flex;align-items:center;justify-content:space-between;gap:8px}
+h1{font-size:15px;margin:0;font-weight:700}
+.prog{font-size:12px;color:var(--sub);white-space:nowrap}
+.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:8px 0 6px}
+.mode{font:inherit;font-size:13px;padding:8px 4px;border:0;background:var(--bar);color:var(--text);cursor:pointer}
+.mode[aria-pressed="true"]{background:var(--on);color:var(--on-text);font-weight:700}
+.row2{display:flex;gap:6px;align-items:center}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;flex:1}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--text);text-decoration:none;background:var(--bg)}
+.tool{flex:none;font:inherit;font-size:12px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);cursor:pointer}
+.tool[hidden]{display:none}
+main{max-width:760px;margin:0 auto;padding:14px 10px 60vh}
+.paper{background:var(--paper);color:var(--ink);border-radius:4px;box-shadow:0 1px 3px rgba(0,0,0,.15);padding:18px 18px 14px;margin:0 0 16px;line-height:1.7;font-size:15px}
+.paper h2{font-size:17px;margin:0 0 10px;padding:6px 10px;border:2px solid var(--ink);background:var(--head)}
+.paper h3{font-size:15px;margin:16px 0 6px;padding-left:8px;border-left:4px solid #555}
+.paper p{margin:6px 0}
+.paper ul,.paper ol{margin:4px 0 8px;padding-left:22px}
+.paper li{margin:2px 0}
+.tw{overflow-x:auto;margin:6px 0 10px}
+.paper table{border-collapse:collapse;font-size:14px;min-width:max-content}
+.paper th,.paper td{border:1px solid var(--rule);padding:4px 9px;text-align:left;vertical-align:top}
+.paper th{background:var(--head)}
+.a{color:var(--red);font-weight:700;border-radius:3px}
+body.blank .a{color:transparent;background:var(--blank);box-shadow:inset 0 -2px 0 var(--blank-edge);cursor:pointer;user-select:none}
+body.blank .a.open{color:var(--red);background:transparent;box-shadow:inset 0 -2px 0 var(--red)}
+.hint{font-size:12px;color:var(--sub);margin:0 2px 10px}
+.paper pre{background:#F3F5F7;border:1px solid var(--rule);border-radius:6px;padding:10px 12px;overflow-x:auto;margin:6px 0 10px;font-size:14px;line-height:1.6}
+.paper code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Noto Sans Mono",monospace}
+a:focus-visible,button:focus-visible,.a:focus-visible{outline:3px solid #3A7BD5;outline-offset:2px}
+@media (max-width:420px){.paper{padding:14px 12px;font-size:14.5px}}
+</style>
+</head>
+<body>
+<header><div class="hin">
+  <div class="row1"><h1>生物基礎 まとめ（3-1〜3-5）</h1><span class="prog" id="prog"></span></div>
+  <div class="modes" role="group" aria-label="表示モード">
+    <button class="mode" data-m="show">答えを表示</button>
+    <button class="mode" data-m="blank">穴埋め</button>
+  </div>
+  <div class="row2">
+    <nav class="chips" aria-label="資料へ移動"><a class="chip" href="#s-31">3-1</a><a class="chip" href="#s-32">3-2</a><a class="chip" href="#s-33">3-3</a><a class="chip" href="#s-34">3-4</a><a class="chip" href="#s-35">3-5</a></nav>
+    <button class="tool" id="hideAll" hidden>全部隠す</button>
+    <button class="tool" id="openAll" hidden>全部見る</button>
+  </div>
+</div></header>
+<main>
+  <p class="hint" id="hint"></p>
+  <section class="paper" id="s-31"><h2>3-1　恒常性と神経系</h2>
+<h3>体内環境と恒常性</h3>
+<ul>
+<li>生物体内の細胞を取り巻く環境を<span class="a" data-i="1">体内環境</span>という。ヒトの多くの細胞は<span class="a" data-i="2">体液</span>に浸されている</li>
+<li>体内環境を一定の範囲に保つ性質を<span class="a" data-i="3">恒常性（ホメオスタシス）</span>という</li>
+<li>恒常性は、<span class="a" data-i="4">自律神経系</span>と<span class="a" data-i="5">内分泌系</span>によって情報が伝達されて調節されている</li>
+</ul>
+<h3>体液の3種類</h3>
+<table>
+<thead>
+<tr>
+<th>体液</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="6">血液</span></td>
+<td><span class="a" data-i="7">血管</span>内を流れる</td>
+</tr>
+<tr>
+<td><span class="a" data-i="8">組織液</span></td>
+<td>血しょうが<span class="a" data-i="9">毛細血管</span>からしみ出したもの。組織の細胞を取り巻く</td>
+</tr>
+<tr>
+<td><span class="a" data-i="10">リンパ液</span></td>
+<td>組織液の一部が<span class="a" data-i="11">リンパ管</span>に入ったもの。リンパ管は<span class="a" data-i="12">鎖骨下静脈</span>と合流する</td>
+</tr>
+</tbody>
+</table>
+<h3>ヒトの神経系</h3>
+<p><span class="a" data-i="13">神経細胞（ニューロン）</span>などで構成される器官のまとまり。</p>
+<ul>
+<li><span class="a" data-i="14">中枢神経系</span>：<span class="a" data-i="15">脳</span>と<span class="a" data-i="16">脊髄</span></li>
+<li><span class="a" data-i="17">末梢神経系</span><ul>
+<li><span class="a" data-i="18">体性神経系</span>：<span class="a" data-i="19">感覚神経</span>・<span class="a" data-i="20">運動神経</span></li>
+<li><span class="a" data-i="21">自律神経系</span>：<span class="a" data-i="22">交感神経</span>・<span class="a" data-i="23">副交感神経</span></li>
+</ul>
+</li>
+</ul>
+<h3>脳の各部の役割</h3>
+<ul>
+<li>脳は<span class="a" data-i="24">大脳</span>・<span class="a" data-i="25">間脳</span>・<span class="a" data-i="26">中脳</span>・<span class="a" data-i="27">小脳</span>・<span class="a" data-i="28">延髄</span>などに分かれる</li>
+<li>意識や思考などの中枢：<span class="a" data-i="29">大脳</span>。この機能だけが消失した状態を<span class="a" data-i="30">植物状態</span>という</li>
+<li>生命維持の中枢部位：<span class="a" data-i="31">脳幹</span>（<span class="a" data-i="32">間脳</span>・<span class="a" data-i="33">中脳</span>・<span class="a" data-i="34">延髄</span>）</li>
+</ul>
+<h3>自律神経系</h3>
+<ul>
+<li>自律神経系は、<span class="a" data-i="35">間脳の視床下部</span>が総合的な中枢。<span class="a" data-i="36">意思とは無関係</span>に働く</li>
+<li><span class="a" data-i="37">交感神経</span>：<span class="a" data-i="38">興奮</span>状態で働きが優位。中枢神経系からの出どころは<span class="a" data-i="39">脊髄</span></li>
+<li><span class="a" data-i="40">副交感神経</span>：<span class="a" data-i="41">リラックス</span>状態で働きが優位。出どころは<span class="a" data-i="42">中脳・延髄・脊髄の尾部</span></li>
+<li>神経（電気信号）により器官に直接作用するので、<span class="a" data-i="43">すばやく</span>働く</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>器官</th>
+<th>交感神経</th>
+<th>副交感神経</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>瞳孔</td>
+<td><span class="a" data-i="44">拡大</span></td>
+<td><span class="a" data-i="45">縮小</span></td>
+</tr>
+<tr>
+<td>汗腺（発汗）</td>
+<td><span class="a" data-i="46">促進</span></td>
+<td>分布していない</td>
+</tr>
+<tr>
+<td>立毛筋・体表の血管</td>
+<td><span class="a" data-i="47">収縮</span></td>
+<td>分布していない</td>
+</tr>
+<tr>
+<td>心臓の拍動</td>
+<td><span class="a" data-i="48">促進</span></td>
+<td><span class="a" data-i="49">抑制</span></td>
+</tr>
+<tr>
+<td>血圧</td>
+<td><span class="a" data-i="50">上げる</span></td>
+<td><span class="a" data-i="51">下げる</span></td>
+</tr>
+<tr>
+<td>気管支</td>
+<td><span class="a" data-i="52">拡張</span></td>
+<td><span class="a" data-i="53">収縮</span></td>
+</tr>
+<tr>
+<td>消化管の運動</td>
+<td><span class="a" data-i="54">抑制</span></td>
+<td><span class="a" data-i="55">促進</span></td>
+</tr>
+<tr>
+<td>排尿</td>
+<td><span class="a" data-i="56">抑制</span></td>
+<td><span class="a" data-i="57">促進</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>交感神経と副交感神経は、<span class="a" data-i="58">同じ</span>器官に分布していることが多い</li>
+<li>器官での働きは<span class="a" data-i="59">反対</span>で、互いに<span class="a" data-i="60">拮抗的</span>に作用する</li>
+</ul>
+<h3>心臓の拍動調節</h3>
+<ul>
+<li>心臓は<span class="a" data-i="61">ペースメーカー（洞房結節）</span>により自発的に拍動する。場所は<span class="a" data-i="62">右心房</span>と大静脈の境界付近</li>
+<li>自律神経系はペースメーカーに作用して拍動を調節する。拍動の中枢は<span class="a" data-i="63">延髄</span></li>
+</ul>
+<h3>演習（交感神経なら交、副交感神経なら副、当てはまらなければ×）</h3>
+<table>
+<thead>
+<tr>
+<th>現象</th>
+<th>答え</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>トイレに行きたくなる</td>
+<td><span class="a" data-i="64">副</span></td>
+</tr>
+<tr>
+<td>呼吸が荒くなる</td>
+<td><span class="a" data-i="65">交</span></td>
+</tr>
+<tr>
+<td>冷汗が出てくる</td>
+<td><span class="a" data-i="66">交</span></td>
+</tr>
+<tr>
+<td>顔面が蒼白する</td>
+<td><span class="a" data-i="67">交</span></td>
+</tr>
+<tr>
+<td>肩をまわす</td>
+<td><span class="a" data-i="68">×</span></td>
+</tr>
+<tr>
+<td>心臓がドキドキする</td>
+<td><span class="a" data-i="69">交</span></td>
+</tr>
+<tr>
+<td>感動して鳥肌が立つ</td>
+<td><span class="a" data-i="70">交</span></td>
+</tr>
+<tr>
+<td>筋肉痛を感じる</td>
+<td><span class="a" data-i="71">×</span></td>
+</tr>
+<tr>
+<td>消化液が分泌され、食欲がでる</td>
+<td><span class="a" data-i="72">副</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="paper" id="s-32"><h2>3-2　恒常性と内分泌系</h2>
+<h3>腺とホルモン</h3>
+<ul>
+<li><span class="a" data-i="73">腺</span>：化学物質を分泌する細胞（腺細胞）の集まり</li>
+<li><span class="a" data-i="74">外分泌腺</span>：<span class="a" data-i="75">排出管</span>を通して体外に化学物質を放出する（分泌物：<span class="a" data-i="76">汗</span>・<span class="a" data-i="77">消化液</span>）</li>
+<li><span class="a" data-i="78">内分泌腺</span>：<span class="a" data-i="79">血液中</span>に化学物質を放出する（分泌物：<span class="a" data-i="80">ホルモン</span>）</li>
+<li><span class="a" data-i="81">ホルモン</span>：内分泌され、細胞間の情報伝達を担う物質。<span class="a" data-i="82">血液</span>の循環で全身へ送られる</li>
+<li>特定の器官や組織の<span class="a" data-i="83">標的細胞</span>にしか作用しない。ホルモンの調節を受ける器官を<span class="a" data-i="84">標的器官</span>という</li>
+<li>標的細胞は、特定のホルモンと結合する<span class="a" data-i="85">受容体</span>をもつ</li>
+<li>ホルモンは<span class="a" data-i="86">微量</span>で作用を示す</li>
+<li>自律神経系と比べると、効果が現れるまで時間は<span class="a" data-i="87">かかる</span>が、作用には<span class="a" data-i="88">持続性</span>が見られる</li>
+</ul>
+<h3>主な内分泌腺とホルモン</h3>
+<ul>
+<li>ホルモン分泌の総合的な中枢は<span class="a" data-i="89">間脳の視床下部</span></li>
+<li>脳の神経細胞がホルモンを分泌する現象を<span class="a" data-i="90">神経分泌</span>、その細胞を<span class="a" data-i="91">神経分泌細胞</span>という</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>内分泌腺</th>
+<th>ホルモン</th>
+<th>主なはたらき</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>間脳の視床下部</td>
+<td><span class="a" data-i="92">放出ホルモン・放出抑制ホルモン</span></td>
+<td>脳下垂体前葉からのホルモンの分泌促進・抑制</td>
+</tr>
+<tr>
+<td>脳下垂体<span class="a" data-i="93">前葉</span></td>
+<td><span class="a" data-i="94">成長ホルモン</span></td>
+<td><span class="a" data-i="95">タンパク質</span>の合成促進、血糖濃度上昇促進</td>
+</tr>
+<tr>
+<td>脳下垂体前葉</td>
+<td><span class="a" data-i="96">甲状腺刺激ホルモン</span></td>
+<td>甲状腺からのホルモンの分泌促進</td>
+</tr>
+<tr>
+<td>脳下垂体前葉</td>
+<td><span class="a" data-i="97">副腎皮質刺激ホルモン</span></td>
+<td>副腎皮質からのホルモンの分泌促進</td>
+</tr>
+<tr>
+<td>脳下垂体<span class="a" data-i="98">後葉</span></td>
+<td><span class="a" data-i="99">バソプレシン</span></td>
+<td><span class="a" data-i="100">腎臓</span>の集合管で水の再吸収促進、血圧上昇</td>
+</tr>
+<tr>
+<td><span class="a" data-i="101">甲状腺</span></td>
+<td><span class="a" data-i="102">チロキシン</span></td>
+<td><span class="a" data-i="103">代謝の促進</span></td>
+</tr>
+<tr>
+<td><span class="a" data-i="104">副甲状腺</span></td>
+<td><span class="a" data-i="105">パラトルモン</span></td>
+<td>血液中のCa²⁺濃度の上昇促進</td>
+</tr>
+<tr>
+<td>副腎<span class="a" data-i="106">髄質</span>（内側）</td>
+<td><span class="a" data-i="107">アドレナリン</span></td>
+<td>交感神経の作用を強める、グリコーゲンの分解促進 → 血糖濃度<span class="a" data-i="108">上昇</span></td>
+</tr>
+<tr>
+<td>副腎<span class="a" data-i="109">皮質</span>（外側）</td>
+<td><span class="a" data-i="110">糖質コルチコイド</span></td>
+<td>タンパク質からの糖の生成促進 → 血糖濃度<span class="a" data-i="111">上昇</span></td>
+</tr>
+<tr>
+<td>副腎皮質</td>
+<td><span class="a" data-i="112">鉱質コルチコイド</span></td>
+<td>体液中のNa⁺やK⁺濃度の調節</td>
+</tr>
+<tr>
+<td>すい臓のランゲルハンス島<span class="a" data-i="113">A細胞</span></td>
+<td><span class="a" data-i="114">グルカゴン</span></td>
+<td>グリコーゲンの分解促進 → 血糖濃度<span class="a" data-i="115">上昇</span></td>
+</tr>
+<tr>
+<td>すい臓のランゲルハンス島<span class="a" data-i="116">B細胞</span></td>
+<td><span class="a" data-i="117">インスリン</span></td>
+<td>グリコーゲンの合成促進 → 血糖濃度<span class="a" data-i="118">低下</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="paper" id="s-33"><h2>3-3　ホルモン分泌の調節・血糖濃度の調節①</h2>
+<h3>フィードバック</h3>
+<ul>
+<li>結果が原因にさかのぼって作用することを<span class="a" data-i="119">フィードバック</span>という</li>
+<li>結果を反対の方向に進める作用を<span class="a" data-i="120">負</span>のフィードバックという</li>
+</ul>
+<p>例1：チロキシンが不足したとき</p>
+<ol>
+<li>間脳の<span class="a" data-i="121">視床下部</span>が<span class="a" data-i="122">甲状腺刺激ホルモン放出ホルモン</span>を分泌</li>
+<li>脳下垂体<span class="a" data-i="123">前葉</span>が<span class="a" data-i="124">甲状腺刺激ホルモン</span>を分泌</li>
+<li>甲状腺から<span class="a" data-i="125">チロキシン</span>の分泌量が増加（代謝が促進）</li>
+<li>チロキシンが増えると、視床下部と脳下垂体の分泌が抑えられる（<span class="a" data-i="126">負のフィードバック</span>）</li>
+</ol>
+<p>例2：血液中の物質濃度が上昇したとき</p>
+<ol>
+<li>間脳の視床下部の<span class="a" data-i="127">神経分泌細胞</span>が<span class="a" data-i="128">バソプレシン</span>を生成</li>
+<li>脳下垂体<span class="a" data-i="129">後葉</span>からバソプレシンを分泌</li>
+<li><span class="a" data-i="130">腎臓</span>の集合管で<span class="a" data-i="131">水の再吸収</span>が促進 → 血液中の物質濃度が低下</li>
+</ol>
+<h3>血糖と肝臓の血管</h3>
+<ul>
+<li>血糖＝血液中の<span class="a" data-i="132">グルコース</span>。濃度調節にかかわる器官は<span class="a" data-i="133">肝臓</span>や筋肉</li>
+<li>正常値（空腹時）：血液100mL中に約<span class="a" data-i="134">100</span>mg（約<span class="a" data-i="135">0.1</span>%）</li>
+<li>グルコースが枝分かれして結合すると<span class="a" data-i="136">グリコーゲン</span>になる</li>
+<li><span class="a" data-i="137">高</span>血糖時：肝細胞でグルコースからグリコーゲンを<span class="a" data-i="138">合成</span> → 血糖濃度<span class="a" data-i="139">低下</span></li>
+<li><span class="a" data-i="140">低</span>血糖時：肝細胞でグリコーゲンを<span class="a" data-i="141">分解</span> → 血糖濃度<span class="a" data-i="142">上昇</span></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>血管</th>
+<th>血液の流れ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="143">肝動脈</span></td>
+<td>心臓から出た血液が肝臓<span class="a" data-i="144">へ</span>流れる</td>
+</tr>
+<tr>
+<td><span class="a" data-i="145">肝静脈</span></td>
+<td>心臓へ戻る血液が肝臓<span class="a" data-i="146">から</span>流れる</td>
+</tr>
+<tr>
+<td><span class="a" data-i="147">肝門脈</span></td>
+<td>小腸などの消化管の静脈が集合したもの。吸収したグルコースなどを含む血液が肝臓<span class="a" data-i="148">へ</span>流れる</td>
+</tr>
+</tbody>
+</table>
+<h3>高血糖時の調節</h3>
+<ol>
+<li>中枢：間脳の<span class="a" data-i="149">視床下部</span>が感知（すい臓の<span class="a" data-i="150">ランゲルハンス島</span>も感知）</li>
+<li><span class="a" data-i="151">副交感神経</span>を通じて伝達</li>
+<li>すい臓のランゲルハンス島<span class="a" data-i="152">B細胞</span> → <span class="a" data-i="153">インスリン</span>を分泌</li>
+<li>働き：主に肝臓でグリコーゲンを<span class="a" data-i="154">合成</span>、体の各細胞で<span class="a" data-i="155">グルコースの消費</span>を促進</li>
+</ol>
+<h3>低血糖時の調節</h3>
+<ol>
+<li>中枢：間脳の<span class="a" data-i="156">視床下部</span>が感知</li>
+<li><span class="a" data-i="157">交感神経</span>を通じて伝達</li>
+<li>副腎<span class="a" data-i="158">髄質</span> → <span class="a" data-i="159">アドレナリン</span>、ランゲルハンス島<span class="a" data-i="160">A細胞</span> → <span class="a" data-i="161">グルカゴン</span>を分泌</li>
+<li>働き：主に肝臓でグリコーゲンを<span class="a" data-i="162">分解</span></li>
+<li>極度の低血糖時：視床下部 → <span class="a" data-i="163">放出ホルモン</span> → 脳下垂体<span class="a" data-i="164">前葉</span> → <span class="a" data-i="165">副腎皮質刺激ホルモン</span> → 副腎<span class="a" data-i="166">皮質</span> → <span class="a" data-i="167">糖質コルチコイド</span>（<span class="a" data-i="168">タンパク質の糖化</span>）</li>
+</ol>
+<h3>肝臓</h3>
+<ul>
+<li>基本単位：<span class="a" data-i="169">肝小葉</span>（約50万個の肝細胞からなる。肝臓全体で約50万個）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>主な働き</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="a" data-i="170">尿素</span>の合成</td>
+<td><span class="a" data-i="171">タンパク質</span>の分解で生じる有害な<span class="a" data-i="172">アンモニア</span>を、害の少ない尿素に変える</td>
+</tr>
+<tr>
+<td><span class="a" data-i="173">解毒</span>作用</td>
+<td>有害な物質を無害にする</td>
+</tr>
+<tr>
+<td><span class="a" data-i="174">胆汁</span>の合成</td>
+<td><span class="a" data-i="175">胆管</span>を通って<span class="a" data-i="176">胆のう</span>に蓄えられる。十二指腸へ分泌され、脂肪の消化を助ける</td>
+</tr>
+<tr>
+<td>物質の代謝や貯蔵</td>
+<td>グリコーゲンやタンパク質の合成・分解、血液やビタミンの貯蔵</td>
+</tr>
+<tr>
+<td><span class="a" data-i="177">体温</span>保持</td>
+<td>さまざまな代謝が盛んで、熱の発生量が多い</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="paper" id="s-34"><h2>3-4　血糖濃度の調節②・腎臓</h2>
+<h3>血糖濃度調節の流れ</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>血糖濃度が高いとき</th>
+<th>血糖濃度が低いとき</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>伝える神経</td>
+<td><span class="a" data-i="178">副交感神経</span></td>
+<td><span class="a" data-i="179">交感神経</span></td>
+</tr>
+<tr>
+<td>分泌するところ</td>
+<td>すい臓のランゲルハンス島<span class="a" data-i="180">B細胞</span></td>
+<td>副腎<span class="a" data-i="181">髄質</span>・ランゲルハンス島<span class="a" data-i="182">A細胞</span>・副腎<span class="a" data-i="183">皮質</span></td>
+</tr>
+<tr>
+<td>ホルモン</td>
+<td><span class="a" data-i="184">インスリン</span></td>
+<td><span class="a" data-i="185">アドレナリン</span>・<span class="a" data-i="186">グルカゴン</span>・<span class="a" data-i="187">糖質コルチコイド</span></td>
+</tr>
+<tr>
+<td>結果</td>
+<td>細胞への吸収・分解、<span class="a" data-i="188">グリコーゲン</span>の合成 → 低下</td>
+<td>グリコーゲンの分解、<span class="a" data-i="189">タンパク質</span>から糖 → 上昇</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>結果は視床下部に戻って調節される（<span class="a" data-i="190">フィードバック</span>）</li>
+</ul>
+<h3>糖尿病</h3>
+<ul>
+<li><span class="a" data-i="191">糖尿病</span>：血糖濃度が<span class="a" data-i="192">高い</span>状態が続く病気。<span class="a" data-i="193">合併</span>症が引き起こされるほか、血糖濃度が一定以上になるとグルコースが尿中に排出される</li>
+<li><span class="a" data-i="194">Ⅰ型</span>糖尿病：何らかの原因で、すい臓のランゲルハンス島B細胞が<span class="a" data-i="195">破壊</span> → <span class="a" data-i="196">インスリン</span>の不足による（治療：インスリンの投与）</li>
+<li><span class="a" data-i="197">Ⅱ型</span>糖尿病：主に<span class="a" data-i="198">生活習慣</span>が関係することが多い → インスリンの分泌量の低下や、<span class="a" data-i="199">標的細胞の反応</span>の低下による</li>
+<li>グラフ：健常者は食後に血糖濃度が少し上がってすぐ戻り、インスリン濃度は大きく上がる。Ⅰ型糖尿病患者は血糖濃度が<span class="a" data-i="200">高いまま</span>で、インスリン濃度は<span class="a" data-i="201">ほとんど上がらない</span></li>
+</ul>
+<h3>腎臓</h3>
+<ul>
+<li>基本単位：<span class="a" data-i="202">ネフロン（腎単位）</span>。腎臓1個に約<span class="a" data-i="203">100万</span>個</li>
+<li>皮質側：<span class="a" data-i="204">腎小体</span>（<span class="a" data-i="205">糸球体</span>と<span class="a" data-i="206">ボーマンのう</span>からなる）／髄質側：<span class="a" data-i="207">細尿管</span>（集合管につながり、腎うへ）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>働き</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>①<span class="a" data-i="208">ろ過</span></td>
+<td><span class="a" data-i="209">血液</span>から<span class="a" data-i="210">原尿</span>ができる過程。糸球体からボーマンのうへこし出される</td>
+</tr>
+<tr>
+<td>②<span class="a" data-i="211">再吸収</span></td>
+<td>原尿から必要な成分を<span class="a" data-i="212">血液</span>に戻す過程。ろ過された物質の多くが細尿管や集合管から毛細血管へ再吸収される → 残りが<span class="a" data-i="213">尿</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Q1：ろ過されない物質 → <span class="a" data-i="214">タンパク質</span>・<span class="a" data-i="215">血球</span></li>
+<li>Q2：すべて再吸収される物質 → <span class="a" data-i="216">グルコース</span></li>
+<li>体液の状態に応じて再吸収される物質：<span class="a" data-i="217">水</span>（関与するホルモン：<span class="a" data-i="218">バソプレシン</span>）、無機塩類（関与するホルモン：<span class="a" data-i="219">鉱質コルチコイド</span>、Na⁺の再吸収）</li>
+<li>Q3：原尿は1日約<span class="a" data-i="220">180</span>L、尿は1日約<span class="a" data-i="221">1.44</span>L</li>
+<li>Q4：尿検査で正常なら、尿タンパク（<span class="a" data-i="222">−</span>）、尿糖（<span class="a" data-i="223">−</span>）、尿潜血（<span class="a" data-i="224">−</span>）</li>
+</ul>
+</section>
+<section class="paper" id="s-35"><h2>3-5　血液の成分と血液凝固・体温の調節</h2>
+<h3>血液の成分</h3>
+<p>ヒトの血液の総量は体重の約<span class="a" data-i="225">8</span>%。</p>
+<table>
+<thead>
+<tr>
+<th>成分</th>
+<th>名称</th>
+<th>働き</th>
+<th>特徴</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>液体成分（約<span class="a" data-i="226">55</span>%）</td>
+<td><span class="a" data-i="227">血しょう</span></td>
+<td><span class="a" data-i="228">養分や老廃物</span>などの運搬</td>
+<td>90%は<span class="a" data-i="229">水</span>。他に<span class="a" data-i="230">グルコース</span>・<span class="a" data-i="231">二酸化炭素</span>・タンパク質・ホルモンなど</td>
+</tr>
+<tr>
+<td>細胞成分（約45%）</td>
+<td><span class="a" data-i="232">赤血球</span></td>
+<td><span class="a" data-i="233">酸素</span>の運搬</td>
+<td>赤い色素タンパク質<span class="a" data-i="234">ヘモグロビン</span>をもつ。哺乳類では<span class="a" data-i="235">核</span>をもたない</td>
+</tr>
+<tr>
+<td>細胞成分</td>
+<td><span class="a" data-i="236">白血球</span></td>
+<td><span class="a" data-i="237">免疫</span>に関与</td>
+<td>核をもつ。さまざまな<span class="a" data-i="238">種類</span>がある。<span class="a" data-i="239">血管外</span>にも存在する</td>
+</tr>
+<tr>
+<td>細胞成分</td>
+<td><span class="a" data-i="240">血小板</span></td>
+<td><span class="a" data-i="241">血液凝固</span>に関与</td>
+<td>核をもたない<span class="a" data-i="242">細胞片</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>すべての血球は、骨の内部の<span class="a" data-i="243">骨髄</span>にある<span class="a" data-i="244">造血幹細胞</span>から作られる</li>
+</ul>
+<h3>血液凝固</h3>
+<ol>
+<li><span class="a" data-i="245">血小板</span>が集まり、傷口をふさぐ</li>
+<li><span class="a" data-i="246">カルシウム</span>イオンや凝固因子などが働く（関与するホルモン：<span class="a" data-i="247">パラトルモン</span>）</li>
+<li><span class="a" data-i="248">血ぺい</span>の形成により傷口をふさぐ。血ぺいは繊維状タンパク質の<span class="a" data-i="249">フィブリン</span>と<span class="a" data-i="250">血球</span>が絡み合ったもの</li>
+<li>血管の修復後、血ぺいを酵素で取り除く＝<span class="a" data-i="251">線溶</span>（<span class="a" data-i="252">フィブリン溶解</span>）</li>
+</ol>
+<ul>
+<li>採血した血液を放置すると、沈殿物として<span class="a" data-i="253">血ぺい</span>ができ、上澄みを<span class="a" data-i="254">血清</span>という（血しょうからフィブリンの元が除かれた液体）</li>
+</ul>
+<h3>体温の調節</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>低体温のとき</th>
+<th>高体温のとき</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>調節のしくみ</td>
+<td><span class="a" data-i="255">自律神経系</span>と<span class="a" data-i="256">ホルモン</span></td>
+<td><span class="a" data-i="257">自律神経系</span></td>
+</tr>
+<tr>
+<td>中枢</td>
+<td>間脳の<span class="a" data-i="258">視床下部</span></td>
+<td>間脳の<span class="a" data-i="259">視床下部</span></td>
+</tr>
+<tr>
+<td>皮膚の血管・立毛筋</td>
+<td><span class="a" data-i="260">収縮</span>（交感神経）</td>
+<td>－</td>
+</tr>
+<tr>
+<td>汗腺（発汗）</td>
+<td>－</td>
+<td><span class="a" data-i="261">促進</span>（交感神経）</td>
+</tr>
+<tr>
+<td>心臓の拍動</td>
+<td><span class="a" data-i="262">促進</span></td>
+<td><span class="a" data-i="263">抑制</span>（副交感神経）</td>
+</tr>
+<tr>
+<td>肝臓・骨格筋</td>
+<td>代謝<span class="a" data-i="264">促進</span>（<span class="a" data-i="265">アドレナリン</span>・<span class="a" data-i="266">チロキシン</span>）、骨格筋の収縮＝<span class="a" data-i="267">ふるえ</span></td>
+<td>肝臓の代謝<span class="a" data-i="268">抑制</span></td>
+</tr>
+<tr>
+<td>結果</td>
+<td>放熱量<span class="a" data-i="269">減</span>・発熱量<span class="a" data-i="270">増</span> → 体温上昇</td>
+<td>放熱量<span class="a" data-i="271">増</span>・発熱量<span class="a" data-i="272">減</span> → 体温低下</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>低体温時：副腎<span class="a" data-i="273">髄質</span>からアドレナリン、脳下垂体<span class="a" data-i="274">前葉</span> → 甲状腺刺激ホルモン → <span class="a" data-i="275">甲状腺</span>からチロキシン</li>
+<li>高体温時の副交感神経は、体表や副腎髄質には<span class="a" data-i="276">分布していない</span></li>
+</ul></section>
+</main>
+<script>
+const TOTAL=276;
+const $=id=>document.getElementById(id);
+const body=document.body;
+const HINTS={show:"赤字が答えです。",blank:"空欄をタップすると答えが出ます。もう一度タップで隠れます。"};
+let mode="show";
+try{const s=JSON.parse(localStorage.getItem("bio-matome")||"null");if(s&&(s.mode==="show"||s.mode==="blank"))mode=s.mode;}catch(e){}
+function save(){try{localStorage.setItem("bio-matome",JSON.stringify({mode}));}catch(e){}}
+// wrap tables for horizontal scroll
+document.querySelectorAll(".paper table").forEach(t=>{const w=document.createElement("div");w.className="tw";t.parentNode.insertBefore(w,t);w.appendChild(t);});
+const ans=[...document.querySelectorAll(".a")];
+ans.forEach(a=>{a.addEventListener("click",()=>{if(mode==="blank"){a.classList.toggle("open");prog();}});
+  a.addEventListener("keydown",e=>{if(mode==="blank"&&(e.key==="Enter"||e.key===" ")){e.preventDefault();a.click();}});});
+function prog(){
+  if(mode==="blank"){const o=ans.filter(a=>a.classList.contains("open")).length;$("prog").textContent="めくった "+o+" / "+TOTAL;}
+  else $("prog").textContent="答え "+TOTAL+" か所";
+}
+function setMode(m){
+  mode=m;
+  body.classList.toggle("blank",m==="blank");
+  ans.forEach(a=>{if(m==="blank"){a.setAttribute("tabindex","0");a.setAttribute("role","button");}else{a.removeAttribute("tabindex");a.removeAttribute("role");}});
+  document.querySelectorAll(".mode").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.m===m)));
+  $("hideAll").hidden=$("openAll").hidden=(m!=="blank");
+  $("hint").textContent=HINTS[m];
+  prog();save();
+}
+document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+$("hideAll").onclick=()=>{ans.forEach(a=>a.classList.remove("open"));prog();};
+$("openAll").onclick=()=>{ans.forEach(a=>a.classList.add("open"));prog();};
+setMode(mode);
+</script>
+</body>
+</html>
