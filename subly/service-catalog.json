@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updatedAt": "2026-10-22",
+ "updatedAt": "2026-10-23",
  "services": [
   {
    "id": "netflix",
@@ -28,7 +28,8 @@
     }
    ],
    "source": "https://help.netflix.com/ja/node/24926",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/86/ad/00/86ad0099-f4d2-2cca-27cf-42df5a25ab13/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "amazonprime",
@@ -70,7 +71,8 @@
     }
    ],
    "source": "https://www.amazon.co.jp/gp/help/customer/display.html?nodeId=G34EUPKVMYFW8N2U",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/2b/f0/ac/2bf0acc8-5fc6-44bf-13b6-9f85937ed415/AppIcon-0-0-1x_U007epad-0-1-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "unext",
@@ -88,7 +90,8 @@
     }
    ],
    "source": "https://help.unext.jp/guide/detail/types-of-service-plan",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1b/af/c7/1bafc79e-8820-5af1-b898-783c0ce9bbfe/AppIcon-0-0-1x_U007epad-0-1-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "disneyplus",
@@ -121,7 +124,8 @@
     }
    ],
    "source": "https://www.disneyplus.com/ja-jp",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/27/5c/3c/275c3cd1-638d-f7e6-160d-a047221f7672/AppIcon-0-0-1x_U007emarketing-0-8-0-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "hulu",
@@ -138,7 +142,8 @@
     }
    ],
    "source": "https://news.hulu.jp/hulu_svod_rev_2026/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/57/24/14/572414c5-ed0a-9232-92b2-9165a01ee3bb/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "abema",
@@ -162,7 +167,8 @@
     }
    ],
    "source": "https://help.abema.tv/hc/ja/articles/55297041707545",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/f5/90/27/f59027c3-4be8-7156-3b5e-610fc48d3499/AppIcon-0-0-1x_U007epad-0-1-85-220.png/100x100bb.jpg"
   },
   {
    "id": "dazn",
@@ -200,7 +206,8 @@
     }
    ],
    "source": "https://help.dazn.com/hc/ja-jp/articles/16308524311581",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/62/ee/ba/62eebada-e7e6-81d7-1a3a-9da6faa68026/AppIcon-0-0-1x_U007emarketing-0-8-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "lemino",
@@ -219,7 +226,8 @@
     }
    ],
    "source": "https://lemino.docomo.ne.jp/leminonews/articles/lemino-price-revision-news-release",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/8b/54/1f/8b541f7a-3bcf-76e3-eb5e-d86ce8d83245/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "youtubepremium",
@@ -258,7 +266,8 @@
     }
    ],
    "source": "https://www.youtube.com/premium",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/11/1f/1e/111f1e29-ab13-355b-4ed2-b1b97abc2200/logo_youtube_2024_q4_color-0-0-1x_U007emarketing-0-0-0-7-0-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "danimestore",
@@ -277,7 +286,8 @@
     }
    ],
    "source": "https://animestore.docomo.ne.jp/animestore/CQ/notice-12397",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b8/f9/5b/b8f95b04-a534-f834-c38a-86114b459c53/AppIcon-0-0-1x_U007emarketing-0-7-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "telasa",
@@ -294,7 +304,8 @@
     }
    ],
    "source": "https://navi.telasa.jp/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e7/d8/ea/e7d8ea8a-b7eb-d306-f537-62321e0778f4/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "dmmtv",
@@ -313,7 +324,8 @@
     }
    ],
    "source": "https://support.dmm.com/premium/article/47489",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/74/63/ba/7463ba1d-f626-d2d2-1c37-12c70cc84541/AppIcon-0-0-1x_U007epad-0-1-sRGB-85-220.png/100x100bb.jpg"
   },
   {
    "id": "spotify",
@@ -348,7 +360,8 @@
     }
    ],
    "source": "https://www.spotify.com/jp/premium/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b7/ed/61/b7ed610e-a3ef-4684-4862-935158e58f07/AppIcon-0-0-1x_U007epad-0-1-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "applemusic",
@@ -376,7 +389,8 @@
     }
    ],
    "source": "https://www.apple.com/jp/apple-music/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/c2/74/89/c27489c2-2c63-2e32-efee-b0f59b3184ef/musicCalistoga-0-0-1x_U007epad-0-1-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "amazonmusicunlimited",
@@ -425,7 +439,8 @@
     }
    ],
    "source": "https://www.amazon.co.jp/music/i/faq",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/9f/17/74/9f17746f-bf69-3f66-96d5-d7dd2e6fa58a/AppIcon-0-0-1x_U007epad-0-1-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "linemusic",
@@ -468,7 +483,8 @@
     }
    ],
    "source": "https://music.line.me/top/plan/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/ed/1e/69/ed1e69b4-4c68-4001-2e0a-0915ac4e40bd/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "youtubemusic",
@@ -502,7 +518,8 @@
     }
    ],
    "source": "https://www.youtube.com/musicpremium",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/70/a5/45/70a54567-d6d2-8f53-67bd-fcb175327044/logo_youtube_music_2024_q4_color-0-0-1x_U007emarketing-0-0-0-7-0-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "awa",
@@ -529,7 +546,8 @@
     }
    ],
    "source": "https://awa.fm/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bc/5c/74/bc5c74fb-a094-34f4-bece-86981675bd3c/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "icloud",
@@ -600,7 +618,8 @@
     }
    ],
    "source": "https://one.google.com/about/plans?hl=ja",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/dc/2e/e5/dc2ee5ef-a9fe-5e46-c268-08152216c862/logo_one_color-0-0-1x_U007emarketing-0-0-0-7-0-0-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "dropbox",
@@ -622,7 +641,8 @@
     }
    ],
    "source": "https://www.dropbox.com/ja/plans",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/be/26/61/be266170-f3df-5c8e-6fd1-84c782cf520e/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "microsoft365",
@@ -667,7 +687,8 @@
     }
    ],
    "source": "https://www.microsoft.com/ja-jp/microsoft-365/buy/compare-all-microsoft-365-products",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fc/fd/44/fcfd442d-8da6-b12c-604a-f45830e14ad2/AppIcon-0-0-1x_U007epad-0-1-0-0-sRGB-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "adobe",
@@ -747,7 +768,8 @@
     }
    ],
    "source": "https://www.notion.com/ja/pricing",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/83/03/f4/8303f427-bb23-875e-e79d-a37bb55513f0/AppIconProd-0-0-1x_U007epad-0-0-0-1-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "canva",
@@ -766,7 +788,8 @@
     }
    ],
    "source": "https://www.canva.com/ja_jp/pricing/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/54/f2/7b/54f27b60-a3a3-62bc-8bc7-2cf1ce516731/AppIcon-0-0-1x_U007epad-0-11-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "nintendoswitchonline",
@@ -811,7 +834,8 @@
     }
    ],
    "source": "https://www.nintendo.com/jp/nintendo-switch-online/plan/index.html",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b5/59/33/b55933e1-949c-4a34-a00c-a02f35df610b/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/100x100bb.jpg"
   },
   {
    "id": "xboxgamepass",
@@ -835,7 +859,8 @@
     }
    ],
    "source": "https://news.xbox.com/ja-jp/2026/04/22/xbox-game-pass-update/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/87/06/f3/8706f39a-b42b-4fb7-edf7-af835aeee7e0/AppIcon-1x_U007epad-0-1-85-220-0.png/100x100bb.jpg"
   },
   {
    "id": "applearcade",
@@ -898,7 +923,8 @@
     }
    ],
    "source": "https://www.amazon.co.jp/kindle-dbs/hz/subscribe/ku",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/58/40/e1/5840e157-a998-d207-e2b0-5298295ba1cf/AppIcon-0-0-1x_U007emarketing-0-7-0-sRGB-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "audible",
@@ -915,7 +941,8 @@
     }
    ],
    "source": "https://www.audible.co.jp/ep/audible",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/fc/29/3f/fc293f0b-947a-3f5c-12f1-23dce5d9c592/AppIcon-0-0-1x_U007emarketing-0-0-0-8-0-0-0-85-220.png/100x100bb.jpg"
   },
   {
    "id": "lypp",
@@ -935,7 +962,8 @@
     }
    ],
    "source": "https://premium.yahoo.co.jp/",
-   "checkedAt": "2026-10-22"
+   "checkedAt": "2026-10-22",
+   "icon": "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/4f/eb/a0/4feba029-502d-5230-fd99-ba1dd502de1e/AppIcon-0-0-1x_U007epad-0-1-0-sRGB-85-220.png/100x100bb.jpg"
   }
  ]
 }
