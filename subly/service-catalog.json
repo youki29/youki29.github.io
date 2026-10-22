@@ -1,0 +1,941 @@
+{
+ "version": 1,
+ "updatedAt": "2026-10-22",
+ "services": [
+  {
+   "id": "netflix",
+   "name": "Netflix",
+   "aliases": [
+    "ネットフリックス",
+    "ネトフリ"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "広告つきスタンダード",
+     "price": 890,
+     "cycle": "monthly"
+    },
+    {
+     "name": "スタンダード",
+     "price": 1590,
+     "cycle": "monthly"
+    },
+    {
+     "name": "プレミアム",
+     "price": 2290,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://help.netflix.com/ja/node/24926",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "amazonprime",
+   "name": "Amazonプライム",
+   "aliases": [
+    "アマゾンプライム",
+    "Amazon Prime",
+    "プライム",
+    "プライムビデオ",
+    "Prime Video",
+    "アマプラ"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "プライム（月間）",
+     "price": 600,
+     "cycle": "monthly"
+    },
+    {
+     "name": "プライム（年間）",
+     "price": 5900,
+     "cycle": "yearly"
+    },
+    {
+     "name": "プライム年間（月々払い）",
+     "price": 491,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Prime Student（月間）",
+     "price": 300,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Prime Student（年間）",
+     "price": 2950,
+     "cycle": "yearly"
+    }
+   ],
+   "source": "https://www.amazon.co.jp/gp/help/customer/display.html?nodeId=G34EUPKVMYFW8N2U",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "unext",
+   "name": "U-NEXT",
+   "aliases": [
+    "ユーネクスト",
+    "ユーネク"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "月額プラン",
+     "price": 2189,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://help.unext.jp/guide/detail/types-of-service-plan",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "disneyplus",
+   "name": "Disney+",
+   "aliases": [
+    "ディズニープラス",
+    "ディズニー+"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "スタンダード",
+     "price": 1250,
+     "cycle": "monthly"
+    },
+    {
+     "name": "スタンダード（年額）",
+     "price": 12500,
+     "cycle": "yearly"
+    },
+    {
+     "name": "プレミアム",
+     "price": 1670,
+     "cycle": "monthly"
+    },
+    {
+     "name": "プレミアム（年額）",
+     "price": 16700,
+     "cycle": "yearly"
+    }
+   ],
+   "source": "https://www.disneyplus.com/ja-jp",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "hulu",
+   "name": "Hulu",
+   "aliases": [
+    "フールー"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "月額プラン",
+     "price": 1320,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://news.hulu.jp/hulu_svod_rev_2026/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "abema",
+   "name": "ABEMAプレミアム",
+   "aliases": [
+    "アベマ",
+    "ABEMA",
+    "アベマプレミアム"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "広告つきABEMAプレミアム",
+     "price": 680,
+     "cycle": "monthly"
+    },
+    {
+     "name": "ABEMAプレミアム",
+     "price": 1180,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://help.abema.tv/hc/ja/articles/55297041707545",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "dazn",
+   "name": "DAZN",
+   "aliases": [
+    "ダゾーン",
+    "ダゾン"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "Standard 月間プラン",
+     "price": 4200,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Standard 年間プラン（月々払い）",
+     "price": 3200,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Standard 年間プラン（一括払い）",
+     "price": 32000,
+     "cycle": "yearly"
+    },
+    {
+     "name": "BASEBALL 年間プラン（月々払い）",
+     "price": 2300,
+     "cycle": "monthly"
+    },
+    {
+     "name": "DAZN Global",
+     "price": 980,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://help.dazn.com/hc/ja-jp/articles/16308524311581",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "lemino",
+   "name": "Leminoプレミアム",
+   "aliases": [
+    "レミノ",
+    "Lemino",
+    "レミノプレミアム"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "Leminoプレミアム",
+     "price": 1540,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://lemino.docomo.ne.jp/leminonews/articles/lemino-price-revision-news-release",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "youtubepremium",
+   "name": "YouTube Premium",
+   "aliases": [
+    "ユーチューブプレミアム",
+    "YouTubeプレミアム",
+    "ようつべ"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "個人",
+     "price": 1280,
+     "cycle": "monthly"
+    },
+    {
+     "name": "個人（年間プラン）",
+     "price": 12800,
+     "cycle": "yearly"
+    },
+    {
+     "name": "ファミリー",
+     "price": 2280,
+     "cycle": "monthly"
+    },
+    {
+     "name": "学生",
+     "price": 780,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Premium Lite",
+     "price": 780,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.youtube.com/premium",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "danimestore",
+   "name": "dアニメストア",
+   "aliases": [
+    "dアニメ",
+    "ディーアニメストア",
+    "dアニ"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "月額プラン",
+     "price": 660,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://animestore.docomo.ne.jp/animestore/CQ/notice-12397",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "telasa",
+   "name": "TELASA",
+   "aliases": [
+    "テラサ"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "見放題プラン",
+     "price": 990,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://navi.telasa.jp/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "dmmtv",
+   "name": "DMM TV",
+   "aliases": [
+    "DMMTV",
+    "DMMプレミアム",
+    "ディーエムエム"
+   ],
+   "category": "video",
+   "plans": [
+    {
+     "name": "DMMプレミアム",
+     "price": 550,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://support.dmm.com/premium/article/47489",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "spotify",
+   "name": "Spotify Premium",
+   "aliases": [
+    "スポティファイ",
+    "スポッティファイ",
+    "Spotify",
+    "スポティ"
+   ],
+   "category": "music",
+   "plans": [
+    {
+     "name": "Standard（個人）",
+     "price": 1080,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Duo",
+     "price": 1480,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Family",
+     "price": 1880,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Student",
+     "price": 580,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.spotify.com/jp/premium/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "applemusic",
+   "name": "Apple Music",
+   "aliases": [
+    "アップルミュージック",
+    "アポミュ"
+   ],
+   "category": "music",
+   "plans": [
+    {
+     "name": "個人",
+     "price": 1180,
+     "cycle": "monthly"
+    },
+    {
+     "name": "ファミリー",
+     "price": 1980,
+     "cycle": "monthly"
+    },
+    {
+     "name": "学生",
+     "price": 680,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.apple.com/jp/apple-music/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "amazonmusicunlimited",
+   "name": "Amazon Music Unlimited",
+   "aliases": [
+    "アマゾンミュージック",
+    "Amazon Music",
+    "アマミュ"
+   ],
+   "category": "music",
+   "plans": [
+    {
+     "name": "個人（プライム会員）",
+     "price": 1080,
+     "cycle": "monthly"
+    },
+    {
+     "name": "個人（プライム会員・年額）",
+     "price": 10800,
+     "cycle": "yearly"
+    },
+    {
+     "name": "個人（プライム会員以外）",
+     "price": 1180,
+     "cycle": "monthly"
+    },
+    {
+     "name": "ファミリー",
+     "price": 1980,
+     "cycle": "monthly"
+    },
+    {
+     "name": "ファミリー（年額・プライム会員のみ）",
+     "price": 19800,
+     "cycle": "yearly"
+    },
+    {
+     "name": "学生",
+     "price": 680,
+     "cycle": "monthly"
+    },
+    {
+     "name": "ワンデバイス（Echo）",
+     "price": 680,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.amazon.co.jp/music/i/faq",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "linemusic",
+   "name": "LINE MUSIC",
+   "aliases": [
+    "ラインミュージック",
+    "LINEミュージック"
+   ],
+   "category": "music",
+   "plans": [
+    {
+     "name": "一般（LINE STORE）",
+     "price": 980,
+     "cycle": "monthly"
+    },
+    {
+     "name": "一般（アプリ内購入）",
+     "price": 1080,
+     "cycle": "monthly"
+    },
+    {
+     "name": "一般 年間（LINE STORE）",
+     "price": 9600,
+     "cycle": "yearly"
+    },
+    {
+     "name": "学生（LINE STORE）",
+     "price": 480,
+     "cycle": "monthly"
+    },
+    {
+     "name": "学生（アプリ内購入）",
+     "price": 580,
+     "cycle": "monthly"
+    },
+    {
+     "name": "ファミリー",
+     "price": 1680,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://music.line.me/top/plan/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "youtubemusic",
+   "name": "YouTube Music Premium",
+   "aliases": [
+    "ユーチューブミュージック",
+    "YouTube Music",
+    "YouTubeミュージック"
+   ],
+   "category": "music",
+   "plans": [
+    {
+     "name": "個人",
+     "price": 1080,
+     "cycle": "monthly"
+    },
+    {
+     "name": "個人（年間プラン）",
+     "price": 10800,
+     "cycle": "yearly"
+    },
+    {
+     "name": "ファミリー",
+     "price": 1680,
+     "cycle": "monthly"
+    },
+    {
+     "name": "学生",
+     "price": 580,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.youtube.com/musicpremium",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "awa",
+   "name": "AWA",
+   "aliases": [
+    "アワ"
+   ],
+   "category": "music",
+   "plans": [
+    {
+     "name": "STANDARD",
+     "price": 980,
+     "cycle": "monthly"
+    },
+    {
+     "name": "STANDARD（年額）",
+     "price": 9800,
+     "cycle": "yearly"
+    },
+    {
+     "name": "学生",
+     "price": 480,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://awa.fm/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "icloud",
+   "name": "iCloud+",
+   "aliases": [
+    "アイクラウド",
+    "iCloud",
+    "アイクラウドプラス"
+   ],
+   "category": "cloud",
+   "plans": [
+    {
+     "name": "50GB",
+     "price": 180,
+     "cycle": "monthly"
+    },
+    {
+     "name": "200GB",
+     "price": 540,
+     "cycle": "monthly"
+    },
+    {
+     "name": "2TB",
+     "price": 1800,
+     "cycle": "monthly"
+    },
+    {
+     "name": "6TB",
+     "price": 5500,
+     "cycle": "monthly"
+    },
+    {
+     "name": "12TB",
+     "price": 11000,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://support.apple.com/ja-jp/108047",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "google",
+   "name": "Google One / Google AI",
+   "aliases": [
+    "グーグルワン",
+    "Google One",
+    "Gemini",
+    "ジェミニ",
+    "Google AI Pro",
+    "Google AI Plus"
+   ],
+   "category": "cloud",
+   "plans": [
+    {
+     "name": "ベーシック 100GB",
+     "price": 290,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Google AI Plus（400GB）",
+     "price": 725,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Google AI Pro（5TB）",
+     "price": 2900,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://one.google.com/about/plans?hl=ja",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "dropbox",
+   "name": "Dropbox",
+   "aliases": [
+    "ドロップボックス"
+   ],
+   "category": "cloud",
+   "plans": [
+    {
+     "name": "Plus（2TB）",
+     "price": 1200,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Professional",
+     "price": 2000,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.dropbox.com/ja/plans",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "microsoft365",
+   "name": "Microsoft 365",
+   "aliases": [
+    "マイクロソフト365",
+    "Office",
+    "オフィス",
+    "M365"
+   ],
+   "category": "productivity",
+   "plans": [
+    {
+     "name": "Personal",
+     "price": 2130,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Personal",
+     "price": 21300,
+     "cycle": "yearly"
+    },
+    {
+     "name": "Family",
+     "price": 2740,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Family",
+     "price": 27400,
+     "cycle": "yearly"
+    },
+    {
+     "name": "Premium",
+     "price": 3200,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Premium",
+     "price": 32000,
+     "cycle": "yearly"
+    }
+   ],
+   "source": "https://www.microsoft.com/ja-jp/microsoft-365/buy/compare-all-microsoft-365-products",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "adobe",
+   "name": "Adobe Creative Cloud / Acrobat",
+   "aliases": [
+    "アドビ",
+    "クリエイティブクラウド",
+    "フォトプラン",
+    "アクロバット",
+    "Adobe CC",
+    "Lightroom",
+    "ライトルーム"
+   ],
+   "category": "productivity",
+   "plans": [
+    {
+     "name": "フォト（年間プラン月々払い）",
+     "price": 2380,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Lightroom（年間プラン月々払い）",
+     "price": 1480,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Lightroom（年間一括）",
+     "price": 14080,
+     "cycle": "yearly"
+    },
+    {
+     "name": "Creative Cloud Pro（年間プラン月々払い）",
+     "price": 9080,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Creative Cloud Standard（年間プラン月々払い）",
+     "price": 6480,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Acrobat Standard（月々プラン）",
+     "price": 3300,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Acrobat Standard（年間一括）",
+     "price": 23760,
+     "cycle": "yearly"
+    },
+    {
+     "name": "Acrobat Pro（月々プラン）",
+     "price": 3850,
+     "cycle": "monthly"
+    },
+    {
+     "name": "Acrobat Pro（年間一括）",
+     "price": 30360,
+     "cycle": "yearly"
+    }
+   ],
+   "source": "https://www.adobe.com/jp/creativecloud/plans.html",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "notion",
+   "name": "Notion",
+   "aliases": [
+    "ノーション"
+   ],
+   "category": "productivity",
+   "plans": [
+    {
+     "name": "Plus（月払い）",
+     "price": 1650,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.notion.com/ja/pricing",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "canva",
+   "name": "Canva Pro",
+   "aliases": [
+    "キャンバ",
+    "キャンバプロ",
+    "Canva"
+   ],
+   "category": "productivity",
+   "plans": [
+    {
+     "name": "Pro（年額）",
+     "price": 11800,
+     "cycle": "yearly"
+    }
+   ],
+   "source": "https://www.canva.com/ja_jp/pricing/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "nintendoswitchonline",
+   "name": "Nintendo Switch Online",
+   "aliases": [
+    "ニンテンドースイッチオンライン",
+    "スイッチオンライン",
+    "NSO",
+    "任天堂"
+   ],
+   "category": "game",
+   "plans": [
+    {
+     "name": "個人プラン 1か月",
+     "price": 400,
+     "cycle": "monthly"
+    },
+    {
+     "name": "個人プラン 3か月",
+     "price": 1000,
+     "cycle": "quarterly"
+    },
+    {
+     "name": "個人プラン 12か月",
+     "price": 3000,
+     "cycle": "yearly"
+    },
+    {
+     "name": "ファミリープラン 12か月",
+     "price": 5800,
+     "cycle": "yearly"
+    },
+    {
+     "name": "+追加パック 個人 12か月",
+     "price": 5900,
+     "cycle": "yearly"
+    },
+    {
+     "name": "+追加パック ファミリー 12か月",
+     "price": 9900,
+     "cycle": "yearly"
+    }
+   ],
+   "source": "https://www.nintendo.com/jp/nintendo-switch-online/plan/index.html",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "xboxgamepass",
+   "name": "Xbox Game Pass",
+   "aliases": [
+    "ゲームパス",
+    "ゲーパス",
+    "Xbox"
+   ],
+   "category": "game",
+   "plans": [
+    {
+     "name": "Ultimate",
+     "price": 1550,
+     "cycle": "monthly"
+    },
+    {
+     "name": "PC Game Pass",
+     "price": 1300,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://news.xbox.com/ja-jp/2026/04/22/xbox-game-pass-update/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "applearcade",
+   "name": "Apple Arcade",
+   "aliases": [
+    "アップルアーケード"
+   ],
+   "category": "game",
+   "plans": [
+    {
+     "name": "月額",
+     "price": 900,
+     "cycle": "monthly"
+    },
+    {
+     "name": "年額",
+     "price": 6000,
+     "cycle": "yearly"
+    }
+   ],
+   "source": "https://www.apple.com/jp/apple-arcade/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "appleone",
+   "name": "Apple One",
+   "aliases": [
+    "アップルワン"
+   ],
+   "category": "other",
+   "plans": [
+    {
+     "name": "個人",
+     "price": 1350,
+     "cycle": "monthly"
+    },
+    {
+     "name": "ファミリー",
+     "price": 2500,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.apple.com/jp/apple-one/",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "kindleunlimited",
+   "name": "Kindle Unlimited",
+   "aliases": [
+    "キンドルアンリミテッド",
+    "キンドル",
+    "Kindle"
+   ],
+   "category": "other",
+   "plans": [
+    {
+     "name": "Kindle Unlimited",
+     "price": 980,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.amazon.co.jp/kindle-dbs/hz/subscribe/ku",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "audible",
+   "name": "Audible",
+   "aliases": [
+    "オーディブル"
+   ],
+   "category": "other",
+   "plans": [
+    {
+     "name": "プレミアムプラン",
+     "price": 1500,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://www.audible.co.jp/ep/audible",
+   "checkedAt": "2026-10-22"
+  },
+  {
+   "id": "lypp",
+   "name": "LYPプレミアム",
+   "aliases": [
+    "ヤフープレミアム",
+    "Yahoo!プレミアム",
+    "LINEヤフー",
+    "エルワイピー"
+   ],
+   "category": "other",
+   "plans": [
+    {
+     "name": "LYPプレミアム",
+     "price": 508,
+     "cycle": "monthly"
+    }
+   ],
+   "source": "https://premium.yahoo.co.jp/",
+   "checkedAt": "2026-10-22"
+  }
+ ]
+}
