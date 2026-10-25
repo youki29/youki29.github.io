@@ -189,3 +189,15 @@ footer.site a { color: var(--sub); }
   .cards.one .acts { grid-column: 1 / -1; flex-direction: column; }
   .cards.one .acts .btn { width: 100%; flex: none; }
 }
+
+/* 開発中などの小さめのアプリ一覧 */
+.others { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.others > li { display: flex; flex-direction: column; padding: 18px; border: 1px solid var(--line); border-radius: 16px; background: var(--bg); }
+.others .t { display: flex; gap: 12px; align-items: center; }
+.others .t img { width: 52px; height: 52px; border-radius: 12px; flex: none; }
+.others h3 { font-size: 17px; margin: 0; line-height: 1.35; overflow-wrap: normal; word-break: keep-all; }
+.others .k { font-size: 13.5px; color: var(--mute); margin: 2px 0 0; line-height: 1.45; }
+.others .tags { margin-top: 12px; }
+.others .d { font-size: 15px; color: var(--sub); margin: 10px 0 0; line-height: 1.75; }
+@media (max-width: 900px) { .others { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .others { grid-template-columns: 1fr; } }
