@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-10-25",
+  "items": [
+    {
+      "id": "n20261025-01",
+      "date": "2026-10-24",
+      "category": "スポーツ",
+      "title": "ワールドシリーズ、どちらが勝っても初優勝",
+      "level": "intermediate",
+      "english": "The Milwaukee Brewers and the Tampa Bay Rays are playing in this year's World Series. Neither team has ever won the title, so baseball will have a brand new champion.",
+      "japanese": "今年のワールドシリーズは、ミルウォーキー・ブルワーズとタンパベイ・レイズの対戦です。どちらのチームも優勝したことがないため、野球界に新しい王者が誕生します。",
+      "explanation": "Neither team は「どちらのチームも〜ない」。has ever won は has が弱く「ハゼヴァ」のようにつながります。brand new は「まったく新しい」。",
+      "hint": "アメリカのプロ野球の頂上決戦。2つのチーム名から始まります。",
+      "vocabulary": [
+        { "word": "neither", "meaning": "（2つの）どちらも〜ない" },
+        { "word": "title", "meaning": "優勝（タイトル）" },
+        { "word": "brand new", "meaning": "まったく新しい" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    },
+    {
+      "id": "n20261025-02",
+      "date": "2026-10-24",
+      "category": "日本",
+      "title": "今年の台風、31個目に",
+      "level": "intermediate",
+      "english": "Japan's weather agency says thirty-one typhoons have formed so far this year, one of the highest totals since records began. Forecasters are warning of heavy rain in parts of the country this weekend.",
+      "japanese": "気象庁によると、今年発生した台風はこれまでに31個で、統計開始以来でも多い部類です。予報士はこの週末、国内の一部で大雨になるおそれがあると注意を呼びかけています。",
+      "explanation": "so far this year は「今年これまでに」。since records began は「統計を取り始めてから」。数字は 31 と書いても thirty-one と書いても正解です。",
+      "hint": "日本の天気の話題。今年発生した台風の数が出てきます。",
+      "vocabulary": [
+        { "word": "weather agency", "meaning": "気象庁" },
+        { "word": "form", "meaning": "（台風などが）発生する" },
+        { "word": "forecaster", "meaning": "予報士" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    },
+    {
+      "id": "n20261025-03",
+      "date": "2026-10-22",
+      "category": "健康",
+      "title": "魚油サプリに記憶力改善の効果なし",
+      "level": "advanced",
+      "english": "A two-year study found that fish oil supplements did not improve memory. The omega-three fats reached the brain, but they did not slow the brain changes linked to Alzheimer's disease.",
+      "japanese": "2年間の研究で、魚油のサプリメントは記憶力を改善しないことがわかりました。オメガ3脂肪酸は脳に届いたものの、アルツハイマー病に関連する脳の変化を遅らせることはありませんでした。",
+      "explanation": "did not は「ディドゥン」と t がほぼ聞こえません。linked to は d と t が重なり「リンクトゥ」。linked to 〜 で「〜に関連した」。",
+      "hint": "健康食品の効果を調べた研究。結果は「効果なし」でした。",
+      "vocabulary": [
+        { "word": "supplement", "meaning": "サプリメント、栄養補助食品" },
+        { "word": "improve", "meaning": "改善する" },
+        { "word": "linked to", "meaning": "〜に関連した" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    },
+    {
+      "id": "n20261025-04",
+      "date": "2026-10-21",
+      "category": "宇宙",
+      "title": "火星探査車、走行距離の最長記録",
+      "level": "intermediate",
+      "english": "NASA's Perseverance rover has set a new record for the longest distance ever driven on another world. Its self driving system helped it travel just over twenty-eight miles across Mars.",
+      "japanese": "NASA の火星探査車パーサビアランスが、地球以外の天体での走行距離の最長記録を更新しました。自動運転のしくみのおかげで、火星を28マイル（約45キロ）あまり走りました。",
+      "explanation": "set a new は「セラニュー」とつながります。longest distance ever driven は「これまでに走った中で最も長い距離」。just over は「〜をわずかに超える」。",
+      "hint": "宇宙のニュース。火星を走る車が記録を作りました。",
+      "vocabulary": [
+        { "word": "rover", "meaning": "探査車" },
+        { "word": "set a record", "meaning": "記録を作る" },
+        { "word": "just over", "meaning": "〜をわずかに超える" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    },
+    {
+      "id": "n20261025-05",
+      "date": "2026-10-21",
+      "category": "環境",
+      "title": "国連「温暖化は1.5度を超える見通し」",
+      "level": "advanced",
+      "english": "A new United Nations report warns that global warming is now expected to pass the main goal of the Paris Agreement. Greenhouse gas emissions also climbed to a new record high.",
+      "japanese": "国連の新しい報告書は、地球温暖化がパリ協定の主な目標（1.5度）を超える見通しだと警告しています。温室効果ガスの排出量も過去最高を更新しました。",
+      "explanation": "is now expected to は「今では〜すると見込まれている」。climbed to a は「クライムトゥア」と続けて発音されます。record high は「過去最高」。",
+      "hint": "国連の報告書が伝える地球温暖化の見通し。",
+      "vocabulary": [
+        { "word": "warn", "meaning": "警告する" },
+        { "word": "emissions", "meaning": "排出量" },
+        { "word": "record high", "meaning": "過去最高" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    },
+    {
+      "id": "n20261025-06",
+      "date": "2026-10-16",
+      "category": "環境",
+      "title": "アマゾンの森林破壊、観測史上最少",
+      "level": "advanced",
+      "english": "Deforestation in Brazil's Amazon rainforest has fallen to its lowest level since official records began. Experts welcomed the news, but they warned that fires and drought are still serious threats.",
+      "japanese": "ブラジルのアマゾン熱帯雨林の森林破壊が、公式の統計開始以来、最も少ない水準になりました。専門家はこの知らせを歓迎しつつ、火災や干ばつは今も深刻な脅威だと注意しています。",
+      "explanation": "fallen to its は「フォーレントゥイッツ」と弱くつながります。but they warned that は「バッゼイウォーンダッ」と速く聞こえます。since records began は「統計開始以来」。",
+      "hint": "世界最大の熱帯雨林についての、よい知らせと注意点。",
+      "vocabulary": [
+        { "word": "deforestation", "meaning": "森林破壊" },
+        { "word": "drought", "meaning": "干ばつ" },
+        { "word": "threat", "meaning": "脅威" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    },
+    {
+      "id": "n20261025-07",
+      "date": "2026-10-08",
+      "category": "宇宙",
+      "title": "宇宙飛行士、約8か月ぶりに帰還",
+      "level": "intermediate",
+      "english": "A crew of NASA astronauts has splashed down safely after nearly eight months in space. During their mission, they traveled more than one hundred million miles.",
+      "japanese": "NASA の宇宙飛行士たちが、約8か月の宇宙滞在を終えて無事に海へ着水しました。任務の間に移動した距離は1億マイル以上にのぼります。",
+      "explanation": "splashed down は「スプラッシュトダウン」で、宇宙船が海に着水すること。one hundred million は「1億」。数字は 100 million と書いても正解です。",
+      "hint": "長い宇宙での任務を終えた人たちのニュース。",
+      "vocabulary": [
+        { "word": "crew", "meaning": "乗組員" },
+        { "word": "splash down", "meaning": "（宇宙船が）着水する" },
+        { "word": "mission", "meaning": "任務" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    },
+    {
+      "id": "n20261025-08",
+      "date": "2026-10-05",
+      "category": "科学",
+      "title": "ノーベル医学賞、光で脳細胞を操る研究に",
+      "level": "advanced",
+      "english": "This year's Nobel Prize in medicine went to three scientists who found a way to control brain cells with light. Their method lets researchers switch individual nerve cells on and off.",
+      "japanese": "今年のノーベル医学賞は、光で脳の細胞を操る方法を見つけた3人の科学者に贈られました。この方法を使うと、研究者は神経細胞を1つずつオンにしたりオフにしたりできます。",
+      "explanation": "went to は「ウェントゥ」と t が1回にまとまります。switch ... on and off は「オナンドーフ」とつながり、「入れたり切ったりする」。",
+      "hint": "世界的に有名な賞のニュース。光を使った研究が受賞しました。",
+      "vocabulary": [
+        { "word": "control", "meaning": "操る、制御する" },
+        { "word": "individual", "meaning": "個々の" },
+        { "word": "nerve cell", "meaning": "神経細胞" }
+      ],
+      "audio": { "kind": "speech", "voice": "en-US" }
+    }
+  ]
+}
